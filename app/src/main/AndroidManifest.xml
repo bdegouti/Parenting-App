@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ParentApp">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.ca.cmpt276.parentapp.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
