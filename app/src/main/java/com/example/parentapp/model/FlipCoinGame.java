@@ -3,7 +3,7 @@ package com.example.parentapp.model;
 import java.time.LocalDateTime;
 
 public class FlipCoinGame {
-    public enum FlipOptions {HEAD, TAIL};
+    public enum FlipOptions {HEAD, TAIL}
     private LocalDateTime creationDateTime;
     private String pickerName;
     private int pickerIndex;
