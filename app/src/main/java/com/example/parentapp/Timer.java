@@ -178,6 +178,8 @@ public class Timer extends AppCompatActivity {
     }
 
     private void cancelTimer() {
+        countDownTimer.cancel();
+        isRunning = false;
         timeLeft = timeManager.getMinuteInMillis();
         updateTimer(timeLeft);
     }
