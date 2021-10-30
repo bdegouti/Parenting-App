@@ -79,4 +79,9 @@ public class ChildrenManager {
         }
         return result;
     }
+
+    public int getNumberOfChildren()
+    {
+        return childrenList.size();
+    }
 }
