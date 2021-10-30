@@ -14,6 +14,9 @@
             android:exported="true"
             android:launchMode="singleTop"/>
         <activity
+            android:name=".FlipCoinActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainMenuActivity"
             android:exported="true">
             <intent-filter>
@@ -25,3 +28,6 @@
     </application>
 
 </manifest>
+
+
+

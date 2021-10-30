@@ -8,14 +8,19 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainMenuActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        Button btn = findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
+        setUpButtonTimer();
+        setUpButtonFlipCoin();
+    }
+
+    private void setUpButtonTimer()
+    {
+        Button btnTimer = findViewById(R.id.buttonTimer);
+        btnTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = Timer.makeLaunchIntent(MainMenuActivity.this);
@@ -23,4 +28,17 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setUpButtonFlipCoin()
+    {
+        Button btnFlipCoin = findViewById(R.id.buttonFlipCoin);
+        btnFlipCoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = FlipCoinActivity.makeIntent(MainMenuActivity.this);
+                startActivity(intent);
+            }
+        });
+    }
 }
+

@@ -29,12 +29,19 @@ public class FlipCoinGameHistory {
 
     public void addNewFlipCoinGame(FlipCoinGame game)
     {
-        gameList.add(game);
+        //always add the new game at the front of the array list
+        //so when we print out list view it lists from latest game to oldest
+        gameList.add(0, game);
     }
 
-    public void removeGameAtIndex(int index)
+    public String getNameOfChildLastPicked()
     {
-        gameList.remove(index);
+        return gameList.get(0).getPickerName();
+    }
+
+    public int getIndexOfChildLastPicked()
+    {
+        return gameList.get(0).getPickerIndex();
     }
 
 }

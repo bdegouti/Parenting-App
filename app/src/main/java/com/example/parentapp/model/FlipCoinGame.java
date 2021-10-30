@@ -3,22 +3,28 @@ package com.example.parentapp.model;
 import java.time.LocalDateTime;
 
 public class FlipCoinGame {
-    public enum FlipResult {HEAD, TAIL}; //enum is always static
+    public enum FlipOptions {HEAD, TAIL};
     private LocalDateTime creationDateTime;
     private String pickerName;
-    private FlipResult result;
+    private int pickerIndex;
+    private FlipOptions pickerChoice;
+    private FlipOptions result;
 
     public FlipCoinGame()
     {
         creationDateTime = LocalDateTime.now();
         pickerName = null;
+        pickerIndex = -1;
+        pickerChoice = null;
         result = null;
     }
 
-    public FlipCoinGame(String picker)
+    public FlipCoinGame(String picker, int pickerIndex, FlipOptions option)
     {
         this.creationDateTime = LocalDateTime.now();
         this.pickerName = picker;
+        this.pickerIndex = pickerIndex;
+        this.pickerChoice = option;
         result = null;
     }
 
@@ -30,7 +36,18 @@ public class FlipCoinGame {
         return pickerName;
     }
 
-    public FlipResult getResult() {
+    public FlipOptions getPickerChoice()
+    {
+        return pickerChoice;
+    }
+
+    public int getPickerIndex()
+    {
+        return pickerIndex;
+    }
+
+    public FlipOptions getResult()
+    {
         return result;
     }
 
@@ -39,7 +56,17 @@ public class FlipCoinGame {
         this.pickerName = name;
     }
 
-    public void setResult(FlipResult result)
+    public void setPickerIndex(int i)
+    {
+        this.pickerIndex = i;
+    }
+
+    public void setPickerChoice(FlipOptions choice)
+    {
+        this.pickerChoice = choice;
+    }
+
+    public void setResult(FlipOptions result)
     {
         this.result = result;
     }
