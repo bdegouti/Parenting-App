@@ -1,13 +1,19 @@
 package com.example.parentapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -34,12 +40,38 @@ public class FlipCoinActivity extends AppCompatActivity {
         childrenManager = ChildrenManager.getInstance();
         flipGame = new FlipCoinGame();
 
+        setUpToolBarUpButton();
+
         setUpCoinFlipOnClick();
         if(childrenManager.getNumberOfChildren() > 0)
         {
             setUpNewFlipCoinGame();
             displayDialogToAskForHeadTailChoice();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_flip_coin, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if(itemId == android.R.id.home)
+        {
+            finish();
+        }
+        else if(itemId == R.id.action_save)
+        {
+            if(childrenManager.getNumberOfChildren() > 0)
+            {
+                gameHistory.addNewFlipCoinGame(flipGame);
+            }
+            finish();
+        }
+        return true;
     }
 
     private void displayDialogToAskForHeadTailChoice()
@@ -65,7 +97,6 @@ public class FlipCoinActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
     public static Intent makeIntent(Context c)
     {
@@ -133,5 +164,14 @@ public class FlipCoinActivity extends AppCompatActivity {
 
         imvCoin.startAnimation(flip_coin_anim);
         medPlayer.start();
+    }
+
+    private void setUpToolBarUpButton()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbarFlippingCoin);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 }
