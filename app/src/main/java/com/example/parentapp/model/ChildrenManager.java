@@ -60,12 +60,6 @@ public class ChildrenManager implements Iterable<Child>{
         childrenList.remove(childIndex);
     }
 
-    public void editChildName(int childIndex, String newName)
-    {
-        Child child = childrenList.get(childIndex);
-        child.setName(newName);
-    }
-
     public String getNameNextChildToPick(String lastPickChildName, int lastPickChildIndex)
     {
         int indexOfNextChild = -1;

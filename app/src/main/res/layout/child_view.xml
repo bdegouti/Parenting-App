@@ -24,7 +24,7 @@
         android:layout_toEndOf="@+id/childVIew_imageViewChildIcon"
         android:fontFamily="@font/flavors_regular"
         android:gravity="center_vertical"
-        android:text="TextView"
+        android:text=""
         android:textColor="#FB8C00"
         android:textSize="34sp" />
 </RelativeLayout>

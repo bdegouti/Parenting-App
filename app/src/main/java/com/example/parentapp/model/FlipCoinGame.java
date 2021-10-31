@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class FlipCoinGame {
     public enum FlipOptions {HEAD, TAIL}
-    private LocalDateTime creationDateTime;
+    private final LocalDateTime creationDateTime;
     private String pickerName;
     private int pickerIndex;
     private FlipOptions pickerChoice;
