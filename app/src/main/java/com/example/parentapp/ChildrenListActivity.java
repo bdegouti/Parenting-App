@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,8 +29,15 @@ public class ChildrenListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_children_list);
 
         childrenManager = ChildrenManager.getInstance();
-        populateListView();
         registerCallBackListenerForChildrenListView();
+
+        setUpButtonAddNewChild();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        populateListView();
     }
 
     public static Intent makeIntent(Context c)
@@ -75,9 +83,21 @@ public class ChildrenListActivity extends AppCompatActivity {
         childrenListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View viewClicked, int index, long id) {
-                //launch edit child activity from here
-                //pass on index as extra
+                Intent intent = ChildrenAddEditActivity.makeIntent(ChildrenListActivity.this, index);
+                startActivity(intent);
             }
         });
+    }
+
+    private void setUpButtonAddNewChild() {
+        Button btn = findViewById(R.id.buttonAddChild);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = ChildrenAddEditActivity.makeIntent(ChildrenListActivity.this);
+                startActivity(intent);
+            }
+        });
+
     }
 }

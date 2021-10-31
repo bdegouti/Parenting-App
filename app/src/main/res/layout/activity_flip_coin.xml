@@ -18,7 +18,7 @@
         tools:visibility="visible">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarFlippingCoin"
+            android:id="@+id/toolbarFlipCoin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary"

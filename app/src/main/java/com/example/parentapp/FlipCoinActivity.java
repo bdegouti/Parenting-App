@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -168,7 +167,7 @@ public class FlipCoinActivity extends AppCompatActivity {
 
     private void setUpToolBarUpButton()
     {
-        Toolbar toolbar = findViewById(R.id.toolbarFlippingCoin);
+        Toolbar toolbar = findViewById(R.id.toolbarFlipCoin);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();

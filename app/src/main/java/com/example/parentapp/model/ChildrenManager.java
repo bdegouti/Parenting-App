@@ -33,6 +33,13 @@ public class ChildrenManager implements Iterable<Child>{
 
     public void addChild(Child newChild)
     {
+        //make sure child primary ky is not duplicated
+        //in this case, primary key is child name
+        int temp = getIndexOfChildName(newChild.getName());
+        if(temp > -1)
+        {
+            throw new IllegalArgumentException("This name has already ben taken!");
+        }
         childrenList.add(newChild);
     }
 
