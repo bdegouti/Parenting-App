@@ -22,8 +22,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/childVIew_imageViewChildIcon"
+        android:fontFamily="@font/flavors_regular"
         android:gravity="center_vertical"
         android:text="TextView"
-        android:textSize="34sp"
-        android:textStyle="italic" />
+        android:textColor="#FB8C00"
+        android:textSize="34sp" />
 </RelativeLayout>
