@@ -2,7 +2,9 @@ package com.example.parentapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,9 +30,11 @@ public class ChildrenListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_children_list);
 
+
         childrenManager = ChildrenManager.getInstance();
         registerCallBackListenerForChildrenListView();
 
+        setUpToolbar();
         setUpButtonAddNewChild();
     }
 
@@ -99,5 +103,14 @@ public class ChildrenListActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setUpToolbar()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbarChildrenList);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
     }
 }
