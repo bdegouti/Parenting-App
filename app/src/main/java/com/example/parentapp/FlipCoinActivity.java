@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.FlipCoinGame;
@@ -99,8 +100,7 @@ public class FlipCoinActivity extends AppCompatActivity {
 
     public static Intent makeIntent(Context c)
     {
-        Intent intent = new Intent(c, FlipCoinActivity.class);
-        return intent;
+        return new Intent(c, FlipCoinActivity.class);
     }
 
     private void setUpNewFlipCoinGame()
@@ -116,7 +116,11 @@ public class FlipCoinActivity extends AppCompatActivity {
         imageViewCoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getApplicationContext(), "You are tossing the coin!", Toast.LENGTH_SHORT).show();
+                //clean up result text view
+                TextView tvResult = findViewById(R.id.textViewFlipResult);
+                tvResult.setText(R.string.three_dots);
+
+                //generate random flip
                 Random rand = new Random();
                 int randomNum = rand.nextInt(100);
                 if(randomNum % 2 == 0) //if head
@@ -127,6 +131,7 @@ public class FlipCoinActivity extends AppCompatActivity {
                 {
                     flipGame.setResult(FlipCoinGame.FlipOptions.TAIL);
                 }
+
                 performFlipCoin();
             }
         });
@@ -154,6 +159,7 @@ public class FlipCoinActivity extends AppCompatActivity {
                 {
                     coin.setImageResource(R.drawable.coin_tail);
                 }
+                displayFlipResult();
             }
 
             @Override
@@ -165,12 +171,19 @@ public class FlipCoinActivity extends AppCompatActivity {
         medPlayer.start();
     }
 
+    private void displayFlipResult()
+    {
+        TextView tvResult = findViewById(R.id.textViewFlipResult);
+        tvResult.setText(getString(R.string.its_head_tail, flipGame.getResult().toString()));
+    }
+
     private void setUpToolBarUpButton()
     {
         Toolbar toolbar = findViewById(R.id.toolbarFlipCoin);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 }
