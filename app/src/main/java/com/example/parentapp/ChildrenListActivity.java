@@ -20,8 +20,6 @@ import android.widget.TextView;
 import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
 
-import java.util.List;
-
 public class ChildrenListActivity extends AppCompatActivity {
     private ChildrenManager childrenManager;
 
@@ -46,8 +44,7 @@ public class ChildrenListActivity extends AppCompatActivity {
 
     public static Intent makeIntent(Context c)
     {
-        Intent intent = new Intent(c, ChildrenListActivity.class);
-        return intent;
+        return new Intent(c, ChildrenListActivity.class);
     }
 
     private void populateListView()
@@ -111,6 +108,7 @@ public class ChildrenListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ActionBar actionbar = getSupportActionBar();
+        assert actionbar != null;
         actionbar.setDisplayHomeAsUpEnabled(true);
     }
 }

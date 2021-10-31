@@ -2,5 +2,12 @@
     <string name="app_name">ParentApp</string>
     <string name="save">SAVE</string>
     <string name="its_head_tail">IT\'S %1$s!</string>
-    <string name="three_dots">…</string>
+    <string name="three_dots">Wait for it…</string>
+    <string name="dismiss">DISMISS</string>
+    <string name="cancel">CANCEL</string>
+    <string name="dismiss_flip_result_without_saving">Dismiss flip coin result without saving?</string>
+    <string name="head">HEAD</string>
+    <string name="tail">TAIL</string>
+    <string name="would_you_pick_head_or_tail">Would you pick head or tail?</string>
+    <string name="hi_its_someone_turn_to_pick">Hi %1$s, it\'s your turn to pick!</string>
 </resources>

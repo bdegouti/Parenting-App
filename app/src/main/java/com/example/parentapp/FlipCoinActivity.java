@@ -6,6 +6,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Dialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +20,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.FlipCoinGame;
@@ -53,6 +56,12 @@ public class FlipCoinActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_flip_coin, menu);
+
+        if(childrenManager.getNumberOfChildren() == 0)
+        {
+            MenuItem save_item = menu.findItem(R.id.action_save);
+            save_item.setVisible(false);
+        }
         return true;
     }
 
@@ -61,33 +70,68 @@ public class FlipCoinActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if(itemId == android.R.id.home)
         {
-            finish();
+            handleCancellationOfFlipResult();
         }
         else if(itemId == R.id.action_save)
         {
             if(childrenManager.getNumberOfChildren() > 0)
             {
                 gameHistory.addNewFlipCoinGame(flipGame);
+                Toast.makeText(FlipCoinActivity.this, "Flip coin result has been saved!", Toast.LENGTH_SHORT).show();
             }
             finish();
         }
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        handleCancellationOfFlipResult();
+    }
+
+    private void handleCancellationOfFlipResult(){
+        if(childrenManager.getNumberOfChildren() > 0) {
+            TextView txResult = findViewById(R.id.textViewFlipResult);
+            String flipResult = txResult.getText().toString();
+            if (!flipResult.equals("") && !flipResult.equals(getString(R.string.three_dots))) {
+                //confirm with user before quitting
+                AlertDialog.Builder builder = new AlertDialog.Builder(FlipCoinActivity.this);
+                builder.setTitle(R.string.dismiss_flip_result_without_saving);
+
+                builder.setPositiveButton(R.string.dismiss, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+
+                builder.setNegativeButton(R.string.cancel, null);
+
+                Dialog dialog = builder.create();
+                dialog.show();
+            } else {
+                finish();
+            }
+        }
+        else{
+            finish();
+        }
+    }
+
     private void displayDialogToAskForHeadTailChoice()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(FlipCoinActivity.this);
-        builder.setTitle("Hello " + flipGame.getPickerName() + "!");
-        builder.setMessage("Would you pick head or tail?");
+        builder.setTitle(getString(R.string.hi_its_someone_turn_to_pick, flipGame.getPickerName()));
+        builder.setMessage(R.string.would_you_pick_head_or_tail);
 
-        builder.setPositiveButton("HEAD", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.head, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 flipGame.setPickerChoice(FlipCoinGame.FlipOptions.HEAD);
             }
         });
 
-        builder.setNegativeButton("TAIL", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.tail, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 flipGame.setPickerChoice(FlipCoinGame.FlipOptions.TAIL);

@@ -104,6 +104,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         if(indexOfChildClicked > -1)
@@ -114,8 +115,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
 
     public static Intent makeIntent(Context c)
     {
-        Intent intent = new Intent(c, ChildrenAddEditActivity.class);
-        return intent;
+        return new Intent(c, ChildrenAddEditActivity.class);
     }
 
     public static Intent makeIntent(Context c, int childIndex)
