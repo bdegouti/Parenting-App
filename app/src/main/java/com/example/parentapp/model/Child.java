@@ -20,6 +20,10 @@ public class Child {
 
     public void setName(String name)
     {
+        if(name == null || name.equals(""))
+        {
+            throw new IllegalArgumentException("Child name cannot be empty!");
+        }
         this.name = name;
     }
 }

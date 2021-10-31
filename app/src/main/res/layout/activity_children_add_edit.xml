@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FlipCoinActivity">
+    tools:context=".ChildrenAddEditActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
@@ -18,49 +18,38 @@
         tools:visibility="visible">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarFlipCoin"
+            android:id="@+id/toolbarAddNewChild"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/colorPrimary"
+            android:background="#FFB300"
             android:visibility="visible"
             app:popupTheme="@style/Theme.ParentApp"
-            app:title="Flipping Coin"
+            app:title="Add New Child"
             app:titleTextColor="#FFFFFF" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ImageView
-        android:id="@+id/imageViewCoin"
-        android:layout_width="268dp"
-        android:layout_height="294dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:clickable="false"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/coin_head"
-        tools:visibility="visible" />
-
     <TextView
-        android:id="@+id/textViewClickCoin"
+        android:id="@+id/textViewEnterChildName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click to flip the coin when you are ready!"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewCoin"
+        android:layout_marginTop="60dp"
+        android:text="Enter child name"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
-    <TextView
-        android:id="@+id/textView"
+    <EditText
+        android:id="@+id/editTextNewChildName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEnterChildName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

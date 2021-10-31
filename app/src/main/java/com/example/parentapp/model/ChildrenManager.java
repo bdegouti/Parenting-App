@@ -1,9 +1,12 @@
 package com.example.parentapp.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class ChildrenManager {
+public class ChildrenManager implements Iterable<Child>{
     private final List<Child> childrenList;
     private static ChildrenManager instance;
 
@@ -30,12 +33,26 @@ public class ChildrenManager {
 
     public void addChild(Child newChild)
     {
+        //make sure child primary ky is not duplicated
+        //in this case, primary key is child name
+        int temp = getIndexOfChildName(newChild.getName());
+        if(temp > -1)
+        {
+            throw new IllegalArgumentException("This name has already ben taken!");
+        }
         childrenList.add(newChild);
     }
 
-    public void addChild(String name)
+    public void replaceChild(int index, Child newChild)
     {
-        childrenList.add(new Child(name));
+        int temp = getIndexOfChildName(newChild.getName());
+        if(temp != index && temp != -1)
+        {
+            throw new IllegalArgumentException("This name has already been taken!");
+        }
+
+        childrenList.remove(index);
+        childrenList.add(index, newChild);
     }
 
     public void removeChild(int childIndex)
@@ -97,5 +114,16 @@ public class ChildrenManager {
     public int getNumberOfChildren()
     {
         return childrenList.size();
+    }
+
+    @NonNull
+    @Override
+    public Iterator<Child> iterator() {
+        return childrenList.iterator();
+    }
+
+    public List<Child> getChildrenList()
+    {
+        return childrenList;
     }
 }

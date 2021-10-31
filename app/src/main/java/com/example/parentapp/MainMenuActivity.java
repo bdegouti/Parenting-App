@@ -15,6 +15,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         setUpButtonTimer();
         setUpButtonFlipCoin();
+        setUpButtonConfigureChildren();
     }
 
     private void setUpButtonTimer()
@@ -36,6 +37,18 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = FlipCoinActivity.makeIntent(MainMenuActivity.this);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setUpButtonConfigureChildren()
+    {
+        Button btn = findViewById(R.id.buttonConfigureChildren);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = ChildrenListActivity.makeIntent(MainMenuActivity.this);
                 startActivity(intent);
             }
         });
