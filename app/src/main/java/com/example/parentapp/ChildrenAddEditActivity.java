@@ -58,7 +58,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if(itemId == android.R.id.home)
         {
-            if(infoChagedDetected()) {
+            if(infoChangedDetected()) {
                 displayConfirmDialogOnUpButtonPressed();
             }
             else {
@@ -67,7 +67,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         }
         else if(itemId == R.id.action_delete)
         {
-            if(indexOfChildClicked == -1 && !infoChagedDetected())
+            if(indexOfChildClicked == -1 && !infoChangedDetected())
             {
                 finish();
             }
@@ -91,7 +91,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(infoChagedDetected()) {
+        if(infoChangedDetected()) {
             displayConfirmDialogOnUpButtonPressed();
         }
         else {
@@ -188,7 +188,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private boolean infoChagedDetected()
+    private boolean infoChangedDetected()
     {
         boolean changeDetected = false;
         EditText et = findViewById(R.id.editTextNewChildName);
