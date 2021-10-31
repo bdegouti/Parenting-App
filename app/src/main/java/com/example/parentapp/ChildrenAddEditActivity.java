@@ -2,10 +2,12 @@ package com.example.parentapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,18 +30,26 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_children_add_edit);
 
         childrenManager = ChildrenManager.getInstance();
-        child = new Child();
 
         //extract all extras
         Intent intentLeadingToMe = getIntent();
         indexOfChildClicked = intentLeadingToMe.getIntExtra(EXTRA_CHILD_INDEX, -1);
 
+        if(indexOfChildClicked == -1)
+        {
+            child = new Child();
+        }
+        else
+        {
+            child = childrenManager.getChildAtIndex(indexOfChildClicked);
+            prefillChildInfo();
+        }
         setUpToolBar();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_flip_coin, menu);
+        getMenuInflater().inflate(R.menu.menu_edit_child, menu);
         return true;
     }
 
@@ -48,13 +58,16 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if(itemId == android.R.id.home)
         {
-            //make dialog
-            finish();
+            displayConfirmDialogOnUpButtonPressed();
+        }
+        else if(itemId == R.id.action_delete)
+        {
+            displayConfirmDialogOnDeletion();
         }
         else if(itemId == R.id.action_save)
         {
             try{
-                validateChildInfo();
+                validateAndSaveChildInfo();
                 finish();
             }
             catch(IllegalArgumentException e)
@@ -86,12 +99,69 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         return intent;
     }
 
-    private void validateChildInfo()
+    private void prefillChildInfo()
+    {
+        EditText etName = findViewById(R.id.editTextNewChildName);
+        etName.setText(childrenManager.getChildAtIndex(indexOfChildClicked).getName());
+    }
+
+    private void validateAndSaveChildInfo()
     {
         EditText et = findViewById(R.id.editTextNewChildName);
         String newChildName = et.getText().toString();
 
         child.setName(newChildName);
-        childrenManager.addChild(child);
+
+        if(indexOfChildClicked == -1)
+        {
+            childrenManager.addChild(child);
+        }
+        else
+        {
+            childrenManager.replaceChild(indexOfChildClicked, child);
+        }
     }
+
+    private void displayConfirmDialogOnDeletion()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ChildrenAddEditActivity.this);
+        builder.setTitle("Are you sure you want to delete this child?");
+
+        builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(indexOfChildClicked > -1)
+                {
+                    childrenManager.removeChild(indexOfChildClicked);
+                }
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void displayConfirmDialogOnUpButtonPressed()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ChildrenAddEditActivity.this);
+        builder.setTitle("Cancel all changes?");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("No", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
+
 }

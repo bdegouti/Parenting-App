@@ -43,9 +43,16 @@ public class ChildrenManager implements Iterable<Child>{
         childrenList.add(newChild);
     }
 
-    public void addChild(String name)
+    public void replaceChild(int index, Child newChild)
     {
-        childrenList.add(new Child(name));
+        int temp = getIndexOfChildName(newChild.getName());
+        if(temp != index && temp != -1)
+        {
+            throw new IllegalArgumentException("This name has already been taken!");
+        }
+
+        childrenList.remove(index);
+        childrenList.add(index, newChild);
     }
 
     public void removeChild(int childIndex)
