@@ -58,11 +58,22 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if(itemId == android.R.id.home)
         {
-            displayConfirmDialogOnUpButtonPressed();
+            if(infoChagedDetected()) {
+                displayConfirmDialogOnUpButtonPressed();
+            }
+            else {
+                finish();
+            }
         }
         else if(itemId == R.id.action_delete)
         {
-            displayConfirmDialogOnDeletion();
+            if(indexOfChildClicked == -1 && !infoChagedDetected())
+            {
+                finish();
+            }
+            else {
+                displayConfirmDialogOnDeletion();
+            }
         }
         else if(itemId == R.id.action_save)
         {
@@ -76,6 +87,16 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(infoChagedDetected()) {
+            displayConfirmDialogOnUpButtonPressed();
+        }
+        else {
+            finish();
+        }
     }
 
     private void setUpToolBar() {
@@ -162,6 +183,29 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private boolean infoChagedDetected()
+    {
+        boolean changeDetected = false;
+        EditText et = findViewById(R.id.editTextNewChildName);
+        String newName = et.getText().toString();
 
+        if(indexOfChildClicked == -1)
+        {
+            if(!newName.equals(""))
+            {
+                changeDetected = true;
+            }
+        }
+        else
+        {
+            String oldName = childrenManager.getChildAtIndex(indexOfChildClicked).getName();
+            if(!newName.equals(oldName))
+            {
+                changeDetected = true;
+            }
+        }
+
+        return changeDetected;
+    }
 
 }
