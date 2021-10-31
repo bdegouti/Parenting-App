@@ -12,13 +12,19 @@ public class GameRotationManager {
 
     public String getNameNextChildToPickHeadTail()
     {
+        //this function is only called when the children list has at least 1 child
         String lastChildName = gameHistory.getNameOfChildLastPicked();
+        if(lastChildName == null) //no history saved
+        {
+            return childrenManager.getChildAtIndex(0).getName();
+        }
         int lastChildIndex = gameHistory.getIndexOfChildLastPicked();
         return childrenManager.getNameNextChildToPick(lastChildName, lastChildIndex);
     }
 
     public int getIndexNextChildToPickHeadTail()
     {
+        //this function is only called when the children list has at least 1 child
         int result;
         String nextChildName = getNameNextChildToPickHeadTail();
         result = childrenManager.getIndexOfChildName(nextChildName);

@@ -36,12 +36,18 @@ public class FlipCoinGameHistory {
 
     public String getNameOfChildLastPicked()
     {
-        return gameList.get(0).getPickerName();
+        if(gameList.size() > 0) {
+            return gameList.get(0).getPickerName();
+        }
+        return null;
     }
 
     public int getIndexOfChildLastPicked()
     {
-        return gameList.get(0).getPickerIndex();
+        if(gameList.size() > 0) {
+            return gameList.get(0).getPickerIndex();
+        }
+        return -1;
     }
 
 }

@@ -51,19 +51,33 @@ public class ChildrenManager {
 
     public String getNameNextChildToPick(String lastPickChildName, int lastPickChildIndex)
     {
-        int indexLastChild = getIndexOfChildName(lastPickChildName);
+        int indexOfNextChild = -1;
 
-        int indexOfNextChild;
-        if(indexLastChild != -1) //if last child is still on the children list
+        int lastChildFound = getIndexOfChildName(lastPickChildName);
+        if(lastChildFound != -1) //if last child is still on the children list
         {
-            indexOfNextChild = (lastPickChildIndex + 1) % (childrenList.size());
+            indexOfNextChild = (lastChildFound + 1) % (childrenList.size());
         }
         else
         {
-            indexOfNextChild = lastPickChildIndex % (childrenList.size());
+            if(childrenList.size() > 0)
+            {
+                if(lastPickChildIndex <= childrenList.size()) {
+                    indexOfNextChild = lastPickChildIndex % (childrenList.size());
+                }
+                else
+                {
+                    indexOfNextChild = 0;
+                }
+            }
         }
 
-        return childrenList.get(indexOfNextChild).getName();
+        if(indexOfNextChild > -1)
+        {
+            return childrenList.get(indexOfNextChild).getName();
+        }
+        else
+            return null;
     }
 
     public int getIndexOfChildName(String name)

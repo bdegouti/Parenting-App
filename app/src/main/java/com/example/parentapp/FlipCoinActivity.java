@@ -41,8 +41,8 @@ public class FlipCoinActivity extends AppCompatActivity {
         flipGame = new FlipCoinGame();
 
         setUpToolBarUpButton();
-
         setUpCoinFlipOnClick();
+
         if(childrenManager.getNumberOfChildren() > 0)
         {
             setUpNewFlipCoinGame();
