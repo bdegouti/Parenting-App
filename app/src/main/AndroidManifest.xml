@@ -10,9 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".ChildrenAddEditActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ChildrenListActivity"
+            android:exported="true" />
+        <activity
             android:name=".Timer"
             android:exported="true"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
         <activity
             android:name=".FlipCoinActivity"
             android:exported="true" />
@@ -28,6 +34,3 @@
     </application>
 
 </manifest>
-
-
-

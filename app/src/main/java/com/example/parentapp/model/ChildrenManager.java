@@ -1,9 +1,12 @@
 package com.example.parentapp.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class ChildrenManager {
+public class ChildrenManager implements Iterable<Child>{
     private final List<Child> childrenList;
     private static ChildrenManager instance;
 
@@ -97,5 +100,16 @@ public class ChildrenManager {
     public int getNumberOfChildren()
     {
         return childrenList.size();
+    }
+
+    @NonNull
+    @Override
+    public Iterator<Child> iterator() {
+        return childrenList.iterator();
+    }
+
+    public List<Child> getChildrenList()
+    {
+        return childrenList;
     }
 }

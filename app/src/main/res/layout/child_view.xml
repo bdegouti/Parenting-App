@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/childVIew_imageViewChildIcon"
+        android:layout_width="97dp"
+        android:layout_height="68dp"
+        android:maxWidth="80dp"
+        android:maxHeight="80dp"
+        app:srcCompat="@drawable/ice_cream" />
+
+    <TextView
+        android:id="@+id/childView_textViewChildName"
+        android:layout_width="102dp"
+        android:layout_height="26dp"
+        android:layout_alignBottom="@+id/childVIew_imageViewChildIcon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/childVIew_imageViewChildIcon"
+        android:gravity="center_vertical"
+        android:text="TextView"
+        android:textSize="20sp" />
+</RelativeLayout>
