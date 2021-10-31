@@ -105,6 +105,11 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        if(indexOfChildClicked > -1)
+        {
+            toolbar.setTitle("Edit Child Information");
+        }
     }
 
     public static Intent makeIntent(Context c)
