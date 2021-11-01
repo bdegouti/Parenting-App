@@ -38,7 +38,7 @@ public class ChildrenManager implements Iterable<Child>{
         int temp = getIndexOfChildName(newChild.getName());
         if(temp > -1)
         {
-            throw new IllegalArgumentException("This name has already ben taken!");
+            throw new IllegalArgumentException("This name has already been taken!");
         }
         childrenList.add(newChild);
     }

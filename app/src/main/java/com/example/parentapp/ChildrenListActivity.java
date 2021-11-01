@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -57,9 +59,13 @@ public class ChildrenListActivity extends AppCompatActivity {
             ivBigIceCream.setVisibility(View.VISIBLE);
             tvNoChild.setVisibility(View.VISIBLE);
             tvInstruction.setVisibility(View.VISIBLE);
+
+            Animation bounce = AnimationUtils.loadAnimation(ChildrenListActivity.this, R.anim.bounce);
+            ivBigIceCream.startAnimation(bounce);
         }
         else
         {
+            ivBigIceCream.clearAnimation();
             ivBigIceCream.setVisibility(View.INVISIBLE);
             tvNoChild.setVisibility(View.INVISIBLE);
             tvInstruction.setVisibility(View.INVISIBLE);
