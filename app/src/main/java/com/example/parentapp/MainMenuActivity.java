@@ -14,8 +14,21 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         setUpButtonTimer();
+        setUpButtonGameHistory();
         setUpButtonFlipCoin();
         setUpButtonConfigureChildren();
+
+    }
+
+    private void setUpButtonGameHistory() {
+        Button btnGH = findViewById(R.id.buttonFlipCoinHistory);
+        btnGH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = GameHistoryActivity.makeLaunchIntent(MainMenuActivity.this);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setUpButtonTimer()

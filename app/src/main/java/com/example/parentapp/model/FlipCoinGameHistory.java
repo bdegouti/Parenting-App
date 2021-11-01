@@ -27,6 +27,8 @@ public class FlipCoinGameHistory {
         return this.gameList.get(index);
     }
 
+    public List<FlipCoinGame> getGameHistoryList(){ return gameList; }
+
     public void addNewFlipCoinGame(FlipCoinGame game)
     {
         //always add the new game at the front of the array list

@@ -20,4 +20,5 @@
     <string name="start">START</string>
     <string name="choose_duration">Choose Duration</string>
     <string name="flip_coin_result_has_been_saved">Result of your coin flip has been saved!</string>
+    <string name="reset_game_history">Reset Game History</string>
 </resources>
