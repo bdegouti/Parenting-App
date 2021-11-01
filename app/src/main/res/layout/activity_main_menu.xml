@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pastel_wallpaper"
+    android:background="@drawable/rainbow_wallpaper"
     tools:context=".MainMenuActivity">
 
     <Button
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#FFB300"
         android:text="@string/countdown_timer"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +27,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="#FFB300"
         android:text="@string/flip_coin"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonFlipCoinHistory"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +40,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="#FFB300"
         android:text="@string/history_of_coin_flips"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonTimer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +53,7 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="#FFB300"
         android:text="@string/configure_my_children"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -6,14 +6,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.Dialog;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -54,31 +51,11 @@ public class FlipCoinActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_flip_coin, menu);
-
-        if(childrenManager.getNumberOfChildren() == 0)
-        {
-            MenuItem save_item = menu.findItem(R.id.action_save);
-            save_item.setVisible(false);
-        }
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         if(itemId == android.R.id.home)
         {
-            handleCancellationOfFlipResult();
-        }
-        else if(itemId == R.id.action_save)
-        {
-            if(childrenManager.getNumberOfChildren() > 0)
-            {
-                gameHistory.addNewFlipCoinGame(flipGame);
-                Toast.makeText(FlipCoinActivity.this, "Flip coin result has been saved!", Toast.LENGTH_SHORT).show();
-            }
+            performAutoSaveFlipGame();
             finish();
         }
         return true;
@@ -86,35 +63,20 @@ public class FlipCoinActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        handleCancellationOfFlipResult();
+        performAutoSaveFlipGame();
+        finish();
     }
 
-    private void handleCancellationOfFlipResult(){
-        if(childrenManager.getNumberOfChildren() > 0) {
-            TextView txResult = findViewById(R.id.textViewFlipResult);
-            String flipResult = txResult.getText().toString();
-            if (!flipResult.equals("") && !flipResult.equals(getString(R.string.three_dots))) {
-                //confirm with user before quitting
-                AlertDialog.Builder builder = new AlertDialog.Builder(FlipCoinActivity.this);
-                builder.setTitle(R.string.dismiss_flip_result_without_saving);
-
-                builder.setPositiveButton(R.string.dismiss, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-                    }
-                });
-
-                builder.setNegativeButton(R.string.cancel, null);
-
-                Dialog dialog = builder.create();
-                dialog.show();
-            } else {
-                finish();
+    private void performAutoSaveFlipGame() {
+        if(childrenManager.getNumberOfChildren() > 0)
+        {
+            TextView tvResult = findViewById(R.id.textViewFlipResult);
+            String result = tvResult.getText().toString();
+            if(!result.equals("") && !result.equals(getString(R.string.three_dots)))
+            {
+                gameHistory.addNewFlipCoinGame(flipGame);
+                Toast.makeText(FlipCoinActivity.this, getString(R.string.flip_coin_result_has_been_saved), Toast.LENGTH_SHORT).show();
             }
-        }
-        else{
-            finish();
         }
     }
 
