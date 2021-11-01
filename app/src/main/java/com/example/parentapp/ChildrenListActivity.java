@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,18 +29,41 @@ public class ChildrenListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_children_list);
 
-
         childrenManager = ChildrenManager.getInstance();
+
+        populateListView();
         registerCallBackListenerForChildrenListView();
 
         setUpToolbar();
         setUpButtonAddNewChild();
+
+        handleEmptyState();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         populateListView();
+        handleEmptyState();
+    }
+
+    private void handleEmptyState()
+    {
+        ImageView ivBigIceCream = findViewById(R.id.imageViewEmptyStateBigIceCream);
+        TextView tvNoChild = findViewById(R.id.textViewNoChildrenToShow);
+        TextView tvInstruction = findViewById(R.id.textViewAddChildInstruction);
+        if(childrenManager.getNumberOfChildren() == 0)
+        {
+            ivBigIceCream.setVisibility(View.VISIBLE);
+            tvNoChild.setVisibility(View.VISIBLE);
+            tvInstruction.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            ivBigIceCream.setVisibility(View.INVISIBLE);
+            tvNoChild.setVisibility(View.INVISIBLE);
+            tvInstruction.setVisibility(View.INVISIBLE);
+        }
     }
 
     public static Intent makeIntent(Context c)
