@@ -101,6 +101,7 @@ public class FlipCoinActivity extends AppCompatActivity {
         });
 
         AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
     }
 

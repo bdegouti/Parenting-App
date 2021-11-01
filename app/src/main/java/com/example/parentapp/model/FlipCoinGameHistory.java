@@ -27,6 +27,8 @@ public class FlipCoinGameHistory {
         return this.gameList.get(index);
     }
 
+    public List<FlipCoinGame> getGameHistoryList(){ return gameList; }
+
     public void addNewFlipCoinGame(FlipCoinGame game)
     {
         //always add the new game at the front of the array list
@@ -48,6 +50,15 @@ public class FlipCoinGameHistory {
             return gameList.get(0).getPickerIndex();
         }
         return -1;
+    }
+
+    public void clearHistory(){
+        gameList.clear();
+    }
+
+    public int getNumberOfGames()
+    {
+        return this.gameList.size();
     }
 
 }
