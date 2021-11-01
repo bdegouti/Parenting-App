@@ -38,7 +38,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonResetGameHistory"
+        app:layout_constraintBottom_toTopOf="@+id/buttonClearGameHistory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" >
@@ -46,12 +46,12 @@
     </ListView>
 
     <Button
-        android:id="@+id/buttonResetGameHistory"
+        android:id="@+id/buttonClearGameHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:backgroundTint="#FFB300"
-        android:text="@string/reset_game_history"
+        android:text="@string/clear_game_history"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/buttonResetGameHistory"
+        app:layout_constraintBottom_toTopOf="@+id/buttonClearGameHistory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />

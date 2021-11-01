@@ -2,14 +2,18 @@ package com.example.parentapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,6 +37,48 @@ public class GameHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_history);
 
         populateGameHistoryListView();
+        setupClearHistoryButton();
+        setClickableStatusForClearHistoryButton();
+    }
+
+    private void setClickableStatusForClearHistoryButton()
+    {
+        Button btnClearHist = findViewById(R.id.buttonClearGameHistory);
+        if(flipCoinGameHistory.getNumberOfGames() == 0)
+        {
+            btnClearHist.setClickable(false);
+            btnClearHist.setAlpha(0.4f);
+        }
+    }
+
+    private void setupClearHistoryButton() {
+        Button clearGameButton = findViewById(R.id.buttonClearGameHistory);
+        clearGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               displayDialogToConfirmClearHistory();
+            }
+        });
+    }
+
+    private void displayDialogToConfirmClearHistory()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(GameHistoryActivity.this);
+        builder.setTitle(R.string.clear_all_coin_flip_history);
+
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                flipCoinGameHistory.clearHistory();
+                populateGameHistoryListView();
+                setClickableStatusForClearHistoryButton();
+            }
+        });
+
+        builder.setNegativeButton(R.string.cancel, null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     /*

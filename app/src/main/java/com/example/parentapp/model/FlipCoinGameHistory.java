@@ -52,4 +52,13 @@ public class FlipCoinGameHistory {
         return -1;
     }
 
+    public void clearHistory(){
+        gameList.clear();
+    }
+
+    public int getNumberOfGames()
+    {
+        return this.gameList.size();
+    }
+
 }
