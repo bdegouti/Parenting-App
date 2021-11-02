@@ -2,15 +2,12 @@ package com.example.parentapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -24,7 +21,6 @@ import android.widget.TextView;
 
 import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
-import com.google.gson.Gson;
 
 public class ChildrenListActivity extends AppCompatActivity {
     private ChildrenManager childrenManager;
@@ -46,7 +42,6 @@ public class ChildrenListActivity extends AppCompatActivity {
         handleEmptyState();
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -56,9 +51,7 @@ public class ChildrenListActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        childrenManager.print();
         saveChildrenListToSharedPreferences();
-        childrenManager.print();
         super.onStop();
     }
 

@@ -19,15 +19,6 @@ public class FlipCoinGame {
         result = null;
     }
 
-    public FlipCoinGame(String picker, int pickerIndex, FlipOptions option)
-    {
-        this.creationDateTime = LocalDateTime.now();
-        this.pickerName = picker;
-        this.pickerIndex = pickerIndex;
-        this.pickerChoice = option;
-        result = null;
-    }
-
     public LocalDateTime getCreationDateTime() {
         return creationDateTime;
     }

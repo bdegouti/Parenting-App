@@ -141,12 +141,4 @@ public class ChildrenManager implements Iterable<Child>{
             childrenList = gson.fromJson(childrenListJson, type);
         }
     }
-
-    public void print()
-    {
-        for(Child child: childrenList)
-        {
-            System.out.println(child.getName());
-        }
-    }
 }

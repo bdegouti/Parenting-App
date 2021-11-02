@@ -23,4 +23,5 @@
     <string name="clear_game_history">Clear Game History</string>
     <string name="clear_all_coin_flip_history">Clear all coin flip history?</string>
     <string name="ok">OK</string>
+    <string name="picked_vs_result">Picked: %1$s | Result: %2$s</string>
 </resources>

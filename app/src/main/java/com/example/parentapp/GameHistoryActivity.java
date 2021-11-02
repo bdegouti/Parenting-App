@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -134,21 +133,25 @@ public class GameHistoryActivity extends AppCompatActivity {
             TextView tvResult = gameView.findViewById(R.id.gameView_textviewFlipResult);
             ImageView resultIcon = gameView.findViewById(R.id.gameView_imageviewResultIcon);
 
-
-
+            //set up icon
             if(currentGame.getPickerChoice() == currentGame.getResult()){
                 resultIcon.setBackgroundResource(R.drawable.win_icon);
             }
             else{
                 resultIcon.setBackgroundResource(R.drawable.lose_icon);
             }
-            StringBuilder resultString = new StringBuilder();
-            resultString.append("Picked: " + currentGame.getPickerChoice().toString()
-            + " | Result: " + currentGame.getResult().toString());
+
+            //display datetime creation
             DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM);
-            tvName.setText(currentGame.getPickerName());
             tvDaT.setText(currentGame.getCreationDateTime().format(dtf));
-            tvResult.setText(resultString);
+
+            //display picker name
+            tvName.setText(currentGame.getPickerName());
+
+            //display flip result
+            tvResult.setText(getString(R.string.picked_vs_result,
+                    currentGame.getPickerChoice().toString(),
+                    currentGame.getResult().toString()));
 
             return gameView;
         }
