@@ -1,34 +1,33 @@
 package com.example.parentapp.model;
 
 public class GameRotationManager {
-    private final ChildrenManager childrenManager;
-    private final FlipCoinGameHistory gameHistory;
+    private int indexOfChildLastPicked;
+    private String nameOfChildLastPicked;
 
-    public GameRotationManager(ChildrenManager child_manager, FlipCoinGameHistory game_history)
+    public GameRotationManager()
     {
-        this.childrenManager = child_manager;
-        this.gameHistory = game_history;
+        indexOfChildLastPicked = -1;
+        nameOfChildLastPicked = null;
     }
 
-    public String getNameNextChildToPickHeadTail()
+    public String getNameNextChildToPickHeadTail(ChildrenManager childrenManager)
     {
         //this function is only called when the children list has at least 1 child
-        String lastChildName = gameHistory.getNameOfChildLastPicked();
-        if(lastChildName == null) //no history saved
+        if(nameOfChildLastPicked == null) //no history saved
         {
             return childrenManager.getChildAtIndex(0).getName();
         }
-        int lastChildIndex = gameHistory.getIndexOfChildLastPicked();
-        return childrenManager.getNameNextChildToPick(lastChildName, lastChildIndex);
+        return childrenManager.getNameNextChildToPick(nameOfChildLastPicked, indexOfChildLastPicked);
     }
 
-    public int getIndexNextChildToPickHeadTail()
+    public void setIndexOfChildLastPicked(int i)
     {
-        //this function is only called when the children list has at least 1 child
-        int result;
-        String nextChildName = getNameNextChildToPickHeadTail();
-        result = childrenManager.getIndexOfChildName(nextChildName);
-        return result;
+        indexOfChildLastPicked = i;
+    }
+
+    public void setNameOfChildLastPicked(String name)
+    {
+        nameOfChildLastPicked = name;
     }
 
 }
