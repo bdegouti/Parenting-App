@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.FlipCoinGameHistory;
@@ -23,9 +26,10 @@ public class MainMenuActivity extends AppCompatActivity {
         loadChildrenListFromSharedPreferences();
         loadGameListFromSharedPreferences();
 
-        setUpButtonTimer();
-        setUpButtonGameHistory();
+        setUpAnimationForMainMenuTitle();
         setUpButtonFlipCoin();
+        setUpButtonGameHistory();
+        setUpButtonTimer();
         setUpButtonConfigureChildren();
     }
 
@@ -38,6 +42,13 @@ public class MainMenuActivity extends AppCompatActivity {
     private void loadChildrenListFromSharedPreferences(){
         String childrenListJson = ChildrenListActivity.getChildrenListFromSharedPreferences(MainMenuActivity.this);
         this.childrenManager.convertChildrenListFromJson(childrenListJson);
+    }
+
+    private void setUpAnimationForMainMenuTitle()
+    {
+        Animation floating_anim = AnimationUtils.loadAnimation(MainMenuActivity.this, R.anim.floating);
+        TextView tv = findViewById(R.id.textViewMainMenu);
+        tv.startAnimation(floating_anim);
     }
 
     private void setUpButtonGameHistory() {

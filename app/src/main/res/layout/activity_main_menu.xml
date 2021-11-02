@@ -11,14 +11,14 @@
         android:id="@+id/buttonTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#FFB300"
         android:text="@string/countdown_timer"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonFlipCoinHistory" />
 
     <Button
         android:id="@+id/buttonFlipCoin"
@@ -37,14 +37,14 @@
         android:id="@+id/buttonFlipCoinHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:backgroundTint="#FFB300"
         android:text="@string/history_of_coin_flips"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonTimer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonConfigureChildren"
@@ -58,5 +58,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonTimer" />
+
+    <TextView
+        android:id="@+id/textViewMainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/flavors_regular"
+        android:text="@string/main_menu"
+        android:textAlignment="center"
+        android:textColor="#FB8C00"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonFlipCoin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
