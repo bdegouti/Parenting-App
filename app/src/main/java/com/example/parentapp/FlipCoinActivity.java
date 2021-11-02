@@ -20,6 +20,7 @@ import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.FlipCoinGame;
 import com.example.parentapp.model.FlipCoinGameHistory;
 import com.example.parentapp.model.GameRotationManager;
+import com.google.gson.Gson;
 
 import java.util.Random;
 
@@ -27,8 +28,10 @@ public class FlipCoinActivity extends AppCompatActivity {
     private FlipCoinGameHistory gameHistory;
     private ChildrenManager childrenManager;
     private FlipCoinGame flipGame;
+    private GameRotationManager rotationManager;
     private static final String APP_PREFERENCES = "app preferences";
     private static final String GAME_LIST = "game list";
+    private static final String ROTATION_MANAGER = "rotation manager";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,9 @@ public class FlipCoinActivity extends AppCompatActivity {
         gameHistory = FlipCoinGameHistory.getInstance();
         childrenManager = ChildrenManager.getInstance();
         flipGame = new FlipCoinGame();
+
+        rotationManager = new GameRotationManager();
+        loadLastPickerDataToGameRotationManagerFromSharedPrefs();
 
         setUpCoinFlipOnClick();
 
@@ -50,14 +56,33 @@ public class FlipCoinActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        performAutoSaveFlipGame();
         saveGameHistoryToSharedPreferences();
+        saveLastPickerDataFromGameRotationManagerToSharedPrefs();
         super.onStop();
     }
 
-    @Override
-    public void onBackPressed() {
-        performAutoSaveFlipGame();
-        finish();
+    private void saveLastPickerDataFromGameRotationManagerToSharedPrefs()
+    {
+        Gson gson = new Gson();
+        String rotationJson = gson.toJson(this.rotationManager);
+
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(ROTATION_MANAGER, rotationJson);
+        editor.apply();
+    }
+
+    private void loadLastPickerDataToGameRotationManagerFromSharedPrefs()
+    {
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        String rotation_manager_json = prefs.getString(ROTATION_MANAGER, null);
+
+        if(rotation_manager_json != null)
+        {
+            Gson gson = new Gson();
+            this.rotationManager = gson.fromJson(rotation_manager_json, GameRotationManager.class);
+        }
     }
 
     private void performAutoSaveFlipGame() {
@@ -69,6 +94,10 @@ public class FlipCoinActivity extends AppCompatActivity {
             {
                 gameHistory.addNewFlipCoinGame(flipGame);
                 Toast.makeText(FlipCoinActivity.this, getString(R.string.flip_coin_result_has_been_saved), Toast.LENGTH_SHORT).show();
+
+                //only when this coin flip is saved can we officially save this child as a last picker
+                rotationManager.setNameOfChildLastPicked(flipGame.getPickerName());
+                rotationManager.setIndexOfChildLastPicked(flipGame.getPickerIndex());
             }
         }
     }
@@ -105,9 +134,9 @@ public class FlipCoinActivity extends AppCompatActivity {
 
     private void setUpNewFlipCoinGame()
     {
-        GameRotationManager rotation_man = new GameRotationManager(childrenManager, gameHistory);
-        flipGame.setPickerName(rotation_man.getNameNextChildToPickHeadTail());
-        flipGame.setPickerIndex(rotation_man.getIndexNextChildToPickHeadTail());
+        String nameCurrentChildWhoIsPicking = rotationManager.getNameNextChildToPickHeadTail(this.childrenManager);
+        flipGame.setPickerName(nameCurrentChildWhoIsPicking);
+        flipGame.setPickerIndex(childrenManager.getIndexOfChildName(nameCurrentChildWhoIsPicking));
     }
 
     private void setUpCoinFlipOnClick()
