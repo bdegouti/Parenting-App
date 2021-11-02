@@ -8,7 +8,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -22,9 +24,12 @@ import android.widget.TextView;
 
 import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
+import com.google.gson.Gson;
 
 public class ChildrenListActivity extends AppCompatActivity {
     private ChildrenManager childrenManager;
+    private static final String APP_PREFERENCES = "app preferences";
+    private static final String CHILDREN_LIST = "children list";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +41,41 @@ public class ChildrenListActivity extends AppCompatActivity {
         populateListView();
         registerCallBackListenerForChildrenListView();
 
-        setUpToolbar();
         setUpButtonAddNewChild();
 
         handleEmptyState();
     }
+
 
     @Override
     protected void onStart() {
         super.onStart();
         populateListView();
         handleEmptyState();
+    }
+
+    @Override
+    protected void onStop() {
+        childrenManager.print();
+        saveChildrenListToSharedPreferences();
+        childrenManager.print();
+        super.onStop();
+    }
+
+    private void saveChildrenListToSharedPreferences()
+    {
+        String listJson = this.childrenManager.convertChildrenListToJson();
+
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(CHILDREN_LIST, listJson);
+        editor.apply();
+    }
+
+    public static String getChildrenListFromSharedPreferences(Context context)
+    {
+        SharedPreferences prefs = context.getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        return prefs.getString(CHILDREN_LIST, null);
     }
 
     private void handleEmptyState()
@@ -129,16 +158,5 @@ public class ChildrenListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-    }
-
-    private void setUpToolbar()
-    {
-        Toolbar toolbar = findViewById(R.id.toolbarChildrenList);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionbar = getSupportActionBar();
-        assert actionbar != null;
-        actionbar.setDisplayHomeAsUpEnabled(true);
     }
 }

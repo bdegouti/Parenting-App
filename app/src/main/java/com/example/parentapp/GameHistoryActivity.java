@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -25,20 +26,36 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class GameHistoryActivity extends AppCompatActivity {
-
     FlipCoinGameHistory flipCoinGameHistory;
+    private static final String APP_PREFERENCES = "app preferences";
+    private static final String GAME_LIST = "game list";
 
     public static Intent makeLaunchIntent(Context c) { return new Intent(c, GameHistoryActivity.class); }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        flipCoinGameHistory = FlipCoinGameHistory.getInstance();
         setContentView(R.layout.activity_game_history);
 
+        flipCoinGameHistory = FlipCoinGameHistory.getInstance();
         populateGameHistoryListView();
         setupClearHistoryButton();
         setClickableStatusForClearHistoryButton();
+    }
+
+    @Override
+    protected void onStop() {
+        saveGameListToSharedPreferences();
+        super.onStop();
+    }
+
+    private void saveGameListToSharedPreferences()
+    {
+        String listJson = this.flipCoinGameHistory.convertHistoryToJson();
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(GAME_LIST, listJson);
+        editor.apply();
     }
 
     private void setClickableStatusForClearHistoryButton()

@@ -7,17 +7,37 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.parentapp.model.ChildrenManager;
+import com.example.parentapp.model.FlipCoinGameHistory;
+
 public class MainMenuActivity extends AppCompatActivity {
+    private ChildrenManager childrenManager;
+    private FlipCoinGameHistory flipCoinGameHistory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        childrenManager = ChildrenManager.getInstance();
+        flipCoinGameHistory = FlipCoinGameHistory.getInstance();
+        loadChildrenListFromSharedPreferences();
+        loadGameListFromSharedPreferences();
+
         setUpButtonTimer();
         setUpButtonGameHistory();
         setUpButtonFlipCoin();
         setUpButtonConfigureChildren();
+    }
 
+    private void loadGameListFromSharedPreferences()
+    {
+        String gameListJson = FlipCoinActivity.getGameHistoryFromSharedPreferences(MainMenuActivity.this);
+        this.flipCoinGameHistory.convertSaveHistoryFromJson(gameListJson);
+    }
+
+    private void loadChildrenListFromSharedPreferences(){
+        String childrenListJson = ChildrenListActivity.getChildrenListFromSharedPreferences(MainMenuActivity.this);
+        this.childrenManager.convertChildrenListFromJson(childrenListJson);
     }
 
     private void setUpButtonGameHistory() {

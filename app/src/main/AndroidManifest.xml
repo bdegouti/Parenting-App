@@ -17,8 +17,7 @@
             android:exported="true" />
         <activity
             android:name=".ChildrenListActivity"
-            android:exported="true"
-            android:parentActivityName=".MainMenuActivity" />
+            android:exported="true"/>
         <activity
             android:name=".Timer"
             android:exported="true"
