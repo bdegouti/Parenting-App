@@ -1,8 +1,8 @@
 package com.example.parentapp.model;
 
 public class GameRotationManager {
-    private ChildrenManager childrenManager;
-    private FlipCoinGameHistory gameHistory;
+    private final ChildrenManager childrenManager;
+    private final FlipCoinGameHistory gameHistory;
 
     public GameRotationManager(ChildrenManager child_manager, FlipCoinGameHistory game_history)
     {

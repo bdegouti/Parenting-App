@@ -1,17 +1,14 @@
 package com.example.parentapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -30,6 +27,8 @@ public class FlipCoinActivity extends AppCompatActivity {
     private FlipCoinGameHistory gameHistory;
     private ChildrenManager childrenManager;
     private FlipCoinGame flipGame;
+    private static final String APP_PREFERENCES = "app preferences";
+    private static final String GAME_LIST = "game list";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class FlipCoinActivity extends AppCompatActivity {
         childrenManager = ChildrenManager.getInstance();
         flipGame = new FlipCoinGame();
 
-        setUpToolBarUpButton();
         setUpCoinFlipOnClick();
 
         if(childrenManager.getNumberOfChildren() > 0)
@@ -51,14 +49,9 @@ public class FlipCoinActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
-        if(itemId == android.R.id.home)
-        {
-            performAutoSaveFlipGame();
-            finish();
-        }
-        return true;
+    protected void onStop() {
+        saveGameHistoryToSharedPreferences();
+        super.onStop();
     }
 
     @Override
@@ -184,13 +177,20 @@ public class FlipCoinActivity extends AppCompatActivity {
         tvResult.setText(getString(R.string.its_head_tail, flipGame.getResult().toString()));
     }
 
-    private void setUpToolBarUpButton()
-    {
-        Toolbar toolbar = findViewById(R.id.toolbarFlipCoin);
-        setSupportActionBar(toolbar);
 
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+    private void saveGameHistoryToSharedPreferences()
+    {
+        String gameListJson = this.gameHistory.convertHistoryToJson();
+
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(GAME_LIST, gameListJson);
+        editor.apply();
+    }
+
+    public static String getGameHistoryFromSharedPreferences(Context context)
+    {
+        SharedPreferences prefs = context.getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        return prefs.getString(GAME_LIST, null);
     }
 }

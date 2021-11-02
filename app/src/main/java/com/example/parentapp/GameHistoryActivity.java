@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,20 +25,36 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class GameHistoryActivity extends AppCompatActivity {
-
     FlipCoinGameHistory flipCoinGameHistory;
+    private static final String APP_PREFERENCES = "app preferences";
+    private static final String GAME_LIST = "game list";
 
     public static Intent makeLaunchIntent(Context c) { return new Intent(c, GameHistoryActivity.class); }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        flipCoinGameHistory = FlipCoinGameHistory.getInstance();
         setContentView(R.layout.activity_game_history);
 
+        flipCoinGameHistory = FlipCoinGameHistory.getInstance();
         populateGameHistoryListView();
         setupClearHistoryButton();
         setClickableStatusForClearHistoryButton();
+    }
+
+    @Override
+    protected void onStop() {
+        saveGameListToSharedPreferences();
+        super.onStop();
+    }
+
+    private void saveGameListToSharedPreferences()
+    {
+        String listJson = this.flipCoinGameHistory.convertHistoryToJson();
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(GAME_LIST, listJson);
+        editor.apply();
     }
 
     private void setClickableStatusForClearHistoryButton()
@@ -117,21 +133,25 @@ public class GameHistoryActivity extends AppCompatActivity {
             TextView tvResult = gameView.findViewById(R.id.gameView_textviewFlipResult);
             ImageView resultIcon = gameView.findViewById(R.id.gameView_imageviewResultIcon);
 
-
-
+            //set up icon
             if(currentGame.getPickerChoice() == currentGame.getResult()){
                 resultIcon.setBackgroundResource(R.drawable.win_icon);
             }
             else{
                 resultIcon.setBackgroundResource(R.drawable.lose_icon);
             }
-            StringBuilder resultString = new StringBuilder();
-            resultString.append("Picked: " + currentGame.getPickerChoice().toString()
-            + " | Result: " + currentGame.getResult().toString());
+
+            //display datetime creation
             DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM);
-            tvName.setText(currentGame.getPickerName());
             tvDaT.setText(currentGame.getCreationDateTime().format(dtf));
-            tvResult.setText(resultString);
+
+            //display picker name
+            tvName.setText(currentGame.getPickerName());
+
+            //display flip result
+            tvResult.setText(getString(R.string.picked_vs_result,
+                    currentGame.getPickerChoice().toString(),
+                    currentGame.getResult().toString()));
 
             return gameView;
         }

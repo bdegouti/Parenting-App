@@ -2,12 +2,16 @@ package com.example.parentapp.model;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class ChildrenManager implements Iterable<Child>{
-    private final List<Child> childrenList;
+    private ArrayList<Child> childrenList;
     private static ChildrenManager instance;
 
     //singleton implementation
@@ -41,6 +45,7 @@ public class ChildrenManager implements Iterable<Child>{
             throw new IllegalArgumentException("This name has already been taken!");
         }
         childrenList.add(newChild);
+        System.out.println(childrenList.size());
     }
 
     public void replaceChild(int index, Child newChild)
@@ -119,5 +124,21 @@ public class ChildrenManager implements Iterable<Child>{
     public List<Child> getChildrenList()
     {
         return childrenList;
+    }
+
+    public String convertChildrenListToJson()
+    {
+        Gson gson = new Gson();
+        return gson.toJson(childrenList);
+    }
+
+    public void convertChildrenListFromJson(String childrenListJson)
+    {
+        if(childrenListJson != null)
+        {
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<Child>>() {}.getType();
+            childrenList = gson.fromJson(childrenListJson, type);
+        }
     }
 }

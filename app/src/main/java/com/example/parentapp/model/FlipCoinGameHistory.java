@@ -1,10 +1,14 @@
 package com.example.parentapp.model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FlipCoinGameHistory {
-    private final List<FlipCoinGame> gameList;
+    private ArrayList<FlipCoinGame> gameList;
     //singleton implementation
     private static FlipCoinGameHistory instance;
     private FlipCoinGameHistory()
@@ -59,6 +63,22 @@ public class FlipCoinGameHistory {
     public int getNumberOfGames()
     {
         return this.gameList.size();
+    }
+
+    public String convertHistoryToJson()
+    {
+        Gson gson = new Gson();
+        return gson.toJson(this.gameList);
+    }
+
+    public void convertSaveHistoryFromJson(String listAsJson)
+    {
+        if(listAsJson != null && !listAsJson.equals(""))
+        {
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<FlipCoinGame>>() {}.getType();
+            this.gameList = gson.fromJson(listAsJson, type);
+        }
     }
 
 }
