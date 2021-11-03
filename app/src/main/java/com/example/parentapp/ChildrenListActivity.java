@@ -104,6 +104,7 @@ public class ChildrenListActivity extends AppCompatActivity {
         ArrayAdapter<Child> childrenListAdapter = new ChildrenListAdapter();
         ListView listview = findViewById(R.id.listVIewChildrenList);
         listview.setAdapter(childrenListAdapter);
+        listview.setDivider(null);
     }
 
     private class ChildrenListAdapter extends ArrayAdapter<Child>{

@@ -97,16 +97,12 @@ public class GameHistoryActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    /*
-    get date and time, who got to pick, result (as check or X f/example)
-    */
-
-
     private void populateGameHistoryListView()
     {
         ArrayAdapter<FlipCoinGame> gameHistoryListAdapter = new GameHistoryListAdapter();
         ListView listview = findViewById(R.id.listViewGameList);
         listview.setAdapter(gameHistoryListAdapter);
+        listview.setDivider(null);
     }
 
     private class GameHistoryListAdapter extends ArrayAdapter<FlipCoinGame>{

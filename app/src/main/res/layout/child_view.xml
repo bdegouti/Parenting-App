@@ -5,11 +5,18 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/rectangle" />
+
+    <ImageView
         android:id="@+id/childVIew_imageViewChildIcon"
         android:layout_width="97dp"
         android:layout_height="68dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
+        android:alpha="1.0"
         android:maxWidth="80dp"
         android:maxHeight="80dp"
         app:srcCompat="@drawable/ice_cream" />
