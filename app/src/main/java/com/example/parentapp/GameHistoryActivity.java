@@ -42,15 +42,31 @@ public class GameHistoryActivity extends AppCompatActivity {
 
         flipCoinGameHistory = FlipCoinGameHistory.getInstance();
         populateGameHistoryListView();
-        handleEmptyState();
         setupClearHistoryButton();
         setClickableStatusForClearHistoryButton();
+
+        handleEmptyGameHistory();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        handleEmptyState();
+    private void handleEmptyGameHistory() {
+        ImageView ivNoGamesIcon = findViewById(R.id.imageViewEmptyStateNoGamesIcon);
+        TextView tvNoGamesText = findViewById(R.id.textEmptyStateViewNoGames);
+        if(flipCoinGameHistory.getNumberOfGames() == 0){
+            ivNoGamesIcon.setVisibility(View.VISIBLE);
+            tvNoGamesText.setVisibility(View.VISIBLE);
+
+            Animation empty_box_bounce = AnimationUtils.loadAnimation(GameHistoryActivity.this, R.anim.empty_box_jump);
+            Animation text_shudder = AnimationUtils.loadAnimation(GameHistoryActivity.this, R.anim.text_shudder);
+
+            ivNoGamesIcon.startAnimation(empty_box_bounce);
+            tvNoGamesText.startAnimation(text_shudder);
+        }
+        else{
+            ivNoGamesIcon.clearAnimation();
+            tvNoGamesText.clearAnimation();
+            ivNoGamesIcon.setVisibility(View.INVISIBLE);
+            tvNoGamesText.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -98,7 +114,6 @@ public class GameHistoryActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 flipCoinGameHistory.clearHistory();
                 populateGameHistoryListView();
-                handleEmptyState();
                 setClickableStatusForClearHistoryButton();
             }
         });
@@ -162,29 +177,6 @@ public class GameHistoryActivity extends AppCompatActivity {
                     currentGame.getResult().toString()));
 
             return gameView;
-        }
-    }
-
-    private void handleEmptyState()
-    {
-        ImageView ivCoin = findViewById(R.id.imageViewCoinHistory);
-        TextView tvNoGames = findViewById(R.id.textViewNoGamesToDisplay);
-        TextView tvInstruction = findViewById(R.id.textViewGameHistoryInstruction);
-        if(flipCoinGameHistory.getNumberOfGames() == 0)
-        {
-            ivCoin.setVisibility(View.VISIBLE);
-            Animation floating = AnimationUtils.loadAnimation(GameHistoryActivity.this, R.anim.floating);
-            ivCoin.startAnimation(floating);
-
-            tvNoGames.setVisibility(View.VISIBLE);
-            tvInstruction.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            ivCoin.clearAnimation();
-            ivCoin.setVisibility(View.INVISIBLE);
-            tvNoGames.setVisibility(View.INVISIBLE);
-            tvInstruction.setVisibility(View.INVISIBLE);
         }
     }
 }

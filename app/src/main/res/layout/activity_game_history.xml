@@ -7,6 +7,29 @@
     android:background="@drawable/rainbow_wallpaper"
     tools:context=".ChildrenListActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.ParentApp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"
+        tools:visibility="visible">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarGameHistory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFB300"
+            android:visibility="visible"
+            app:popupTheme="@style/Theme.ParentApp"
+            app:title="Game History"
+            app:titleTextColor="#FFFFFF" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <ListView
         android:id="@+id/listViewGameList"
         android:layout_width="0dp"
@@ -14,11 +37,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonClearGameHistory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" >
+
+    </ListView>
 
     <Button
         android:id="@+id/buttonClearGameHistory"
@@ -32,50 +57,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageViewCoinHistory"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="32dp"
-        android:src="@drawable/coin_tail"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/textViewNoGamesToDisplay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:id="@+id/textViewNoGamesToDisplay"
-        android:layout_width="0dp"
+        android:id="@+id/textEmptyStateViewNoGames"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:text="No coin flip history has been made."
-        android:textAlignment="center"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/no_games_played"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/buttonClearGameHistory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
+
+    <ImageView
+        android:id="@+id/imageViewEmptyStateNoGamesIcon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="300dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewGameHistoryInstruction"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:text="You can make history now by clicking the Flip Coin button at the main menu!"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNoGamesToDisplay" />
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout2"
+        app:srcCompat="@drawable/empty_box" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
