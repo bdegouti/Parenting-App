@@ -6,5 +6,6 @@
         <item>3 minutes</item>
         <item>5 minutes</item>
         <item>10 minutes</item>
+        <item>Others</item>
     </string-array>
 </resources>

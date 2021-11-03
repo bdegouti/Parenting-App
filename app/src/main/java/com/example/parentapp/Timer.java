@@ -5,12 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.InputType;
+import android.text.Layout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,15 +72,17 @@ public class Timer extends AppCompatActivity {
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog dialog;
-                AlertDialog.Builder builder = new AlertDialog.Builder(Timer.this);
+                AlertDialog durationDialog;
+                AlertDialog.Builder durationBuilder = new AlertDialog.Builder(Timer.this);
 
-                builder.setTitle("Choose your duration:");
+                durationBuilder.setTitle("Choose your duration:");
 
-                builder.setSingleChoiceItems(durations, -1,
-                        ((dialogInterface, position) -> results = durations[position]));
+                durationBuilder.setSingleChoiceItems(durations, -1,
+                        ((dialogInterface, position) -> {
+                            results = durations[position];
+                        }));
 
-                builder.setPositiveButton("OK", ((dialogInterface, i) -> {
+                durationBuilder.setPositiveButton("OK", ((dialogInterface, i) -> {
                     switch (results) {
                         case "1 minute":
                             timeManager.setMinuteInMillis(MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
@@ -93,19 +100,55 @@ public class Timer extends AppCompatActivity {
                             timeManager.setMinuteInMillis(5 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
                             timeLeft = 5 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
                             break;
-                        default:
+                        case "10 minutes":
                             timeManager.setMinuteInMillis(10 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
                             timeLeft = 10 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
+                            break;
+
+                        case "Others":
+                            EditText customDuration = new EditText(Timer.this);
+                            AlertDialog customDurationDialog;
+                            AlertDialog.Builder customDurationBuilder = new AlertDialog.Builder(Timer.this);
+
+                            customDuration.setInputType(InputType.TYPE_CLASS_DATETIME);
+                            customDurationBuilder.setTitle("Customize your duration in minutes:").setView(customDuration);
+
+                            customDurationBuilder.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    try {
+                                        int duration = Integer.parseInt(customDuration.getText().toString());
+                                        timeManager.setMinuteInMillis((long) duration * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
+                                        timeLeft = (long) duration * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
+                                    } catch (Exception e) {
+                                        Toast.makeText(Timer.this, "Please enter a valid number for minutes.", Toast.LENGTH_LONG).show();
+                                    }
+                                    updateTimer(timeManager.getMinuteInMillis());
+                                }
+                            });
+
+                            customDurationBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(Timer.this, "CANCELED", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            customDurationDialog = customDurationBuilder.create();
+                            customDurationDialog.show();
+
                             break;
                     }
                     updateTimer(timeManager.getMinuteInMillis());
                 }));
 
-                builder.setNegativeButton("CANCEL", ((dialogInterface, i) -> Toast.makeText(
-                        Timer.this, "CANCELED", Toast.LENGTH_SHORT).show()));
+                durationBuilder.setNegativeButton("CANCEL", ((dialogInterface, i) -> {
+                    Toast.makeText(
+                            Timer.this, "CANCELED", Toast.LENGTH_SHORT).show();
+                }));
 
-                dialog = builder.create();
-                dialog.show();
+                durationDialog = durationBuilder.create();
+                durationDialog.show();
             }
         });
     }
@@ -178,10 +221,13 @@ public class Timer extends AppCompatActivity {
     }
 
     private void cancelTimer() {
-        countDownTimer.cancel();
+        if (isRunning) {
+            countDownTimer.cancel();
+        }
         isRunning = false;
         timeLeft = timeManager.getMinuteInMillis();
         updateTimer(timeLeft);
+        startCount.setText("Start");
     }
 
     private void updateTimer(long time) {
