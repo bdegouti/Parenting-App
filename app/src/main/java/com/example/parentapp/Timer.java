@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.InputType;
 import android.text.Layout;
 import android.util.Log;
@@ -110,20 +112,25 @@ public class Timer extends AppCompatActivity {
                             AlertDialog customDurationDialog;
                             AlertDialog.Builder customDurationBuilder = new AlertDialog.Builder(Timer.this);
 
-                            customDuration.setInputType(InputType.TYPE_CLASS_DATETIME);
-                            customDurationBuilder.setTitle("Customize your duration in minutes:").setView(customDuration);
+                            customDuration.setHint("Minutes");
+
+                            customDurationBuilder.setTitle("Customize your duration in minutes:");
+                            customDurationBuilder.setView(customDuration);
 
                             customDurationBuilder.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     try {
                                         int duration = Integer.parseInt(customDuration.getText().toString());
+                                        if (duration <= 0) {
+                                            throw new IllegalArgumentException();
+                                        }
                                         timeManager.setMinuteInMillis((long) duration * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
                                         timeLeft = (long) duration * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
+                                        updateTimer(timeManager.getMinuteInMillis());
                                     } catch (Exception e) {
                                         Toast.makeText(Timer.this, "Please enter a valid number for minutes.", Toast.LENGTH_LONG).show();
                                     }
-                                    updateTimer(timeManager.getMinuteInMillis());
                                 }
                             });
 
@@ -180,6 +187,8 @@ public class Timer extends AppCompatActivity {
     // Some of the code below was adapted from the Youtube video linked:
     // https://www.youtube.com/watch?v=MDuGwI6P-X8
     private void startTimer() {
+        final Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
         countDownTimer = new CountDownTimer(timeLeft, MINUTES_TO_SECONDS) {
             @Override
             public void onTick(long milliSecUntilFinished) {
@@ -189,6 +198,9 @@ public class Timer extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                long[] pattern = {0, 100, 1000};
+                //v.vibrate(pattern, 0);
+
                 isRunning = false;
                 timeLeft = timeManager.getMinuteInMillis();
                 updateTimer(timeLeft);
@@ -256,6 +268,14 @@ public class Timer extends AppCompatActivity {
             musicPlayer.release();
             musicPlayer = null;
         }
+    }
+
+    private void startVibration() {
+
+    }
+
+    private void stopVibration() {
+
     }
 
     private void sendNotification() {
