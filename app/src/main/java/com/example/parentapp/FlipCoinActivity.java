@@ -55,11 +55,11 @@ public class FlipCoinActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
         performAutoSaveFlipGame();
-        saveGameHistoryToSharedPreferences();
         saveLastPickerDataFromGameRotationManagerToSharedPrefs();
-        super.onStop();
+        saveGameHistoryToSharedPreferences();
+        super.onPause();
     }
 
     private void saveLastPickerDataFromGameRotationManagerToSharedPrefs()
