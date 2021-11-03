@@ -12,9 +12,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.text.InputType;
-import android.text.Layout;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,8 +48,10 @@ public class Timer extends AppCompatActivity {
     private long timeLeft = timeManager.getMinuteInMillis();
 
     private MediaPlayer musicPlayer;
+    private Vibrator vibrator;
 
     private NotificationHelper notificationHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,8 +186,6 @@ public class Timer extends AppCompatActivity {
     // Some of the code below was adapted from the Youtube video linked:
     // https://www.youtube.com/watch?v=MDuGwI6P-X8
     private void startTimer() {
-        final Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
         countDownTimer = new CountDownTimer(timeLeft, MINUTES_TO_SECONDS) {
             @Override
             public void onTick(long milliSecUntilFinished) {
@@ -198,14 +195,12 @@ public class Timer extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                long[] pattern = {0, 100, 1000};
-                //v.vibrate(pattern, 0);
-
                 isRunning = false;
                 timeLeft = timeManager.getMinuteInMillis();
                 updateTimer(timeLeft);
-                startCount.setText("Start");
+                startCount.setText(R.string.start);
 
+                startVibration();
                 playMusic();
 
                 sendNotification();
@@ -215,7 +210,13 @@ public class Timer extends AppCompatActivity {
 
                 builder.setTitle("Times up!");
 
-                builder.setPositiveButton("OK", (((dialogInterface, i) -> stopMusic())));
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        stopMusic();
+                        stopVibration();
+                    }
+                });
 
                 dialog = builder.create();
                 dialog.show();
@@ -223,13 +224,13 @@ public class Timer extends AppCompatActivity {
         }.start();
 
         isRunning = true;
-        startCount.setText("Pause");
+        startCount.setText(R.string.pause);
     }
 
     private void pauseTimer() {
         countDownTimer.cancel();
         isRunning = false;
-        startCount.setText("Start");
+        startCount.setText(R.string.start);
     }
 
     private void cancelTimer() {
@@ -239,7 +240,7 @@ public class Timer extends AppCompatActivity {
         isRunning = false;
         timeLeft = timeManager.getMinuteInMillis();
         updateTimer(timeLeft);
-        startCount.setText("Start");
+        startCount.setText(R.string.start);
     }
 
     private void updateTimer(long time) {
@@ -271,11 +272,14 @@ public class Timer extends AppCompatActivity {
     }
 
     private void startVibration() {
-
+        long[] pattern = {100, 500, 100, 200, 100, 200, 100, 500, 100};
+        VibrationEffect effect = VibrationEffect.createWaveform(pattern, 0);
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(effect);
     }
 
     private void stopVibration() {
-
+        this.vibrator.cancel();
     }
 
     private void sendNotification() {

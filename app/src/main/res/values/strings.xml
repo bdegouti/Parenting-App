@@ -18,6 +18,7 @@
     <string name="history_of_coin_flips">History of Coin Flips</string>
     <string name="configure_my_children">Configure my children</string>
     <string name="start">START</string>
+    <string name="pause">PAUSE</string>
     <string name="choose_duration">Choose Duration</string>
     <string name="flip_coin_result_has_been_saved">Result of your coin flip has been saved!</string>
     <string name="clear_game_history">Clear Game History</string>
