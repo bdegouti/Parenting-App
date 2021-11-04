@@ -15,7 +15,7 @@ public class FlipCoinGame {
         creationDateTime = LocalDateTime.now();
         pickerName = null;
         pickerIndex = -1;
-        pickerChoice = null;
+        pickerChoice = FlipOptions.HEAD;
         result = null;
     }
 
