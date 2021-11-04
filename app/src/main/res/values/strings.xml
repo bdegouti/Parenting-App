@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ParentApp</string>
+    <string name="app_name">Parent App</string>
     <string name="save">SAVE</string>
     <string name="its_head_tail">IT\'S %1$s!</string>
     <string name="three_dots">Wait for it…</string>
