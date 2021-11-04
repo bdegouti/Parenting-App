@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/rectangle_white"
+        android:background="@drawable/rectangle_coral_pink"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:text="@string/clear_game_history"
