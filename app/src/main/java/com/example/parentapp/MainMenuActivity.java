@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -51,6 +52,19 @@ public class MainMenuActivity extends AppCompatActivity {
         tv.startAnimation(floating_anim);
     }
 
+    private void setUpButtonFlipCoin()
+    {
+        Button btnFlipCoin = findViewById(R.id.buttonFlipCoin);
+        btnFlipCoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = FlipCoinActivity.makeIntent(MainMenuActivity.this);
+                startActivity(intent);
+            }
+        });
+        startAnimationOnButton(R.id.buttonFlipCoin, 100);
+    }
+
     private void setUpButtonGameHistory() {
         Button btnGH = findViewById(R.id.buttonFlipCoinHistory);
         btnGH.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +74,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        startAnimationOnButton(R.id.buttonFlipCoinHistory, 300);
     }
 
     private void setUpButtonTimer()
@@ -72,18 +87,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
-
-    private void setUpButtonFlipCoin()
-    {
-        Button btnFlipCoin = findViewById(R.id.buttonFlipCoin);
-        btnFlipCoin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = FlipCoinActivity.makeIntent(MainMenuActivity.this);
-                startActivity(intent);
-            }
-        });
+        startAnimationOnButton(R.id.buttonTimer, 500);
     }
 
     private void setUpButtonConfigureChildren()
@@ -96,6 +100,22 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        startAnimationOnButton(R.id.buttonConfigureChildren, 700);
+    }
+
+    private void startAnimationOnButton(int resId, int delayedTime)
+    {
+        Button btn = findViewById(resId);
+        Animation anim = AnimationUtils.loadAnimation(MainMenuActivity.this, R.anim.drift_from_bottom);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                btn.setVisibility(View.VISIBLE);
+                btn.startAnimation(anim);
+            }
+        }, delayedTime);
     }
 }
 

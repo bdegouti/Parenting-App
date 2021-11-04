@@ -12,6 +12,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,7 +31,9 @@ public class GameHistoryActivity extends AppCompatActivity {
     private static final String APP_PREFERENCES = "app preferences";
     private static final String GAME_LIST = "game list";
 
-    public static Intent makeLaunchIntent(Context c) { return new Intent(c, GameHistoryActivity.class); }
+    public static Intent makeLaunchIntent(Context c) {
+        return new Intent(c, GameHistoryActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,15 @@ public class GameHistoryActivity extends AppCompatActivity {
 
         flipCoinGameHistory = FlipCoinGameHistory.getInstance();
         populateGameHistoryListView();
+        handleEmptyState();
         setupClearHistoryButton();
         setClickableStatusForClearHistoryButton();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        handleEmptyState();
     }
 
     @Override
@@ -87,6 +98,7 @@ public class GameHistoryActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 flipCoinGameHistory.clearHistory();
                 populateGameHistoryListView();
+                handleEmptyState();
                 setClickableStatusForClearHistoryButton();
             }
         });
@@ -116,7 +128,7 @@ public class GameHistoryActivity extends AppCompatActivity {
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            View gameView= convertView;
+            View gameView = convertView;
             if(gameView == null)
             {
                 gameView = getLayoutInflater().inflate(R.layout.game_view, parent, false);
@@ -150,6 +162,29 @@ public class GameHistoryActivity extends AppCompatActivity {
                     currentGame.getResult().toString()));
 
             return gameView;
+        }
+    }
+
+    private void handleEmptyState()
+    {
+        ImageView ivCoin = findViewById(R.id.imageViewCoinHistory);
+        TextView tvNoGames = findViewById(R.id.textViewNoGamesToDisplay);
+        TextView tvInstruction = findViewById(R.id.textViewGameHistoryInstruction);
+        if(flipCoinGameHistory.getNumberOfGames() == 0)
+        {
+            ivCoin.setVisibility(View.VISIBLE);
+            Animation floating = AnimationUtils.loadAnimation(GameHistoryActivity.this, R.anim.floating);
+            ivCoin.startAnimation(floating);
+
+            tvNoGames.setVisibility(View.VISIBLE);
+            tvInstruction.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            ivCoin.clearAnimation();
+            ivCoin.setVisibility(View.INVISIBLE);
+            tvNoGames.setVisibility(View.INVISIBLE);
+            tvInstruction.setVisibility(View.INVISIBLE);
         }
     }
 }

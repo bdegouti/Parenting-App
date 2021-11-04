@@ -25,7 +25,7 @@
             android:background="#FFB300"
             android:visibility="visible"
             app:popupTheme="@style/Theme.ParentApp"
-            app:title="List of all children"
+            app:title="All my children"
             app:titleTextColor="#FFFFFF" />
 
     </com.google.android.material.appbar.AppBarLayout>
