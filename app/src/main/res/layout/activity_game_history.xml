@@ -15,17 +15,21 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonClearGameHistory"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/buttonClearGameHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#FFB300"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rectangle_green"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:text="@string/clear_game_history"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

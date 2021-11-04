@@ -11,6 +11,7 @@
         android:id="@+id/appBarLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="#2F5233"
         android:theme="@style/Theme.ParentApp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +23,7 @@
             android:id="@+id/toolbarChildrenList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFB300"
+            android:backgroundTint="#2F5233"
             android:visibility="visible"
             app:popupTheme="@style/Theme.ParentApp"
             app:title="All my children"
@@ -37,11 +38,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAddChild"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" >
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2">
 
     </ListView>
 
@@ -49,8 +50,10 @@
         android:id="@+id/buttonAddChild"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#FFB300"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rectangle_green"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:text="@string/add_a_new_child"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

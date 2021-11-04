@@ -14,8 +14,8 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="5dp"
-        android:alpha="0.6"
-        app:srcCompat="@drawable/rectangle" />
+        android:alpha="0.5"
+        app:srcCompat="@drawable/rectangle_green" />
 
     <ImageView
         android:id="@+id/childVIew_imageViewChildIcon"
@@ -47,6 +47,6 @@
         android:fontFamily="@font/flavors_regular"
         android:gravity="center_vertical"
         android:text=""
-        android:textColor="#FB8C00"
+        android:textColor="@color/white"
         android:textSize="34sp" />
 </RelativeLayout>

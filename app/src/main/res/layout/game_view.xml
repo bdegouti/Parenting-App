@@ -15,8 +15,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="10dp"
-        android:alpha="0.6"
-        app:srcCompat="@drawable/rectangle" />
+        android:alpha="0.3"
+        app:srcCompat="@drawable/rectangle_green" />
 
     <ImageView
         android:id="@+id/gameView_imageviewResultIcon"
@@ -43,6 +43,7 @@
         android:layout_toEndOf="@+id/gameView_imageviewResultIcon"
         android:fontFamily="@font/aclonica"
         android:text="TextView"
+        android:textColor="@color/white"
         android:textSize="10sp" />
 
     <TextView
@@ -56,6 +57,7 @@
         android:layout_toEndOf="@+id/gameView_imageviewResultIcon"
         android:fontFamily="@font/flavors_regular"
         android:text="TextView"
+        android:textColor="@color/white"
         android:textSize="34sp" />
 
     <TextView
@@ -71,6 +73,7 @@
         android:layout_toEndOf="@+id/gameView_imageviewResultIcon"
         android:fontFamily="@font/aclonica"
         android:text="TextView"
+        android:textColor="@color/white"
         android:textSize="12sp" />
 
 </RelativeLayout>

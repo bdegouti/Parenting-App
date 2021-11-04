@@ -14,9 +14,9 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
-        android:backgroundTint="#FFB300"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:background="@drawable/rectangle_green"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="@string/countdown_timer"
         android:textAlignment="center"
         android:textAllCaps="false"
@@ -25,7 +25,8 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonFlipCoinHistory" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonFlipCoinHistory"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/buttonFlipCoin"
@@ -34,9 +35,9 @@
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#FFB300"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:background="@drawable/rectangle_green"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="@string/flip_coin"
         android:textAlignment="center"
         android:textAllCaps="false"
@@ -45,7 +46,8 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/buttonFlipCoinHistory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/buttonFlipCoinHistory"
@@ -53,9 +55,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
-        android:backgroundTint="#FFB300"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:background="@drawable/rectangle_green"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="@string/history_of_coin_flips"
         android:textAlignment="center"
         android:textAllCaps="false"
@@ -65,7 +67,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/buttonConfigureChildren"
@@ -74,9 +77,9 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
-        android:backgroundTint="#FFB300"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:background="@drawable/rectangle_green"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="@string/configure_my_children"
         android:textAlignment="center"
         android:textAllCaps="false"
@@ -85,7 +88,8 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonTimer" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonTimer"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/textViewMainMenu"
@@ -95,9 +99,13 @@
         android:fontFamily="@font/flavors_regular"
         android:text="@string/main_menu"
         android:textAlignment="center"
-        android:textColor="#FB8C00"
-        android:textSize="60sp"
         android:textAllCaps="false"
+        android:textColor="#2F5233"
+        android:textSize="60sp"
+        android:shadowColor="#A1A1A1"
+        android:shadowDx="15"
+        android:shadowDy="0"
+        android:shadowRadius="7"
         app:layout_constraintBottom_toTopOf="@+id/buttonFlipCoin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
