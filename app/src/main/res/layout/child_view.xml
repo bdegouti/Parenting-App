@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/childView_imageViewBackgroundRectangle"
         android:layout_width="406dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
@@ -14,20 +14,18 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="5dp"
-        android:alpha="0.5"
-        app:srcCompat="@drawable/rectangle_green" />
+        app:srcCompat="@drawable/rectangle_light_orange_borders" />
 
     <ImageView
         android:id="@+id/childVIew_imageViewChildIcon"
         android:layout_width="67dp"
         android:layout_height="51dp"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignStart="@+id/childView_imageViewBackgroundRectangle"
+        android:layout_alignTop="@+id/childView_imageViewBackgroundRectangle"
+        android:layout_alignBottom="@+id/childView_imageViewBackgroundRectangle"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:alpha="1.0"
         android:maxWidth="50dp"
         android:maxHeight="50dp"
         app:srcCompat="@drawable/ice_cream" />
@@ -36,17 +34,17 @@
         android:id="@+id/childView_textViewChildName"
         android:layout_width="292dp"
         android:layout_height="59dp"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_marginStart="10dp"
+        android:layout_alignTop="@+id/childView_imageViewBackgroundRectangle"
+        android:layout_alignEnd="@+id/childView_imageViewBackgroundRectangle"
+        android:layout_alignBottom="@+id/childView_imageViewBackgroundRectangle"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@+id/childVIew_imageViewChildIcon"
-        android:fontFamily="@font/flavors_regular"
+        android:fontFamily="@font/zenkurenaido_regular"
         android:gravity="center_vertical"
         android:text=""
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="34sp" />
 </RelativeLayout>

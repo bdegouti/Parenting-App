@@ -127,6 +127,13 @@ public class ChildrenListActivity extends AppCompatActivity {
             TextView textViewName = childView.findViewById(R.id.childView_textViewChildName);
             textViewName.setText(currentChild.getName());
 
+            //switch color
+            if(position % 2 != 0)
+            {
+                ImageView backgroundRect = childView.findViewById(R.id.childView_imageViewBackgroundRectangle);
+                backgroundRect.setImageResource(R.drawable.rectangle_white);
+            }
+
             return childView;
         }
     }
