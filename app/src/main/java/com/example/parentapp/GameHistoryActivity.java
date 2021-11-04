@@ -114,6 +114,7 @@ public class GameHistoryActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 flipCoinGameHistory.clearHistory();
                 populateGameHistoryListView();
+                handleEmptyGameHistory();
                 setClickableStatusForClearHistoryButton();
             }
         });
