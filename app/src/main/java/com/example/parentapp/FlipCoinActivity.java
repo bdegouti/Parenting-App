@@ -162,6 +162,7 @@ public class FlipCoinActivity extends AppCompatActivity {
                 }
 
                 performFlipCoin();
+                imageViewCoin.setOnClickListener(null);
             }
         });
     }
