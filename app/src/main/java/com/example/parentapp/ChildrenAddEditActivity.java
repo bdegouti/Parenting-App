@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -169,24 +171,36 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
 
     private void setUpSaveButton()
     {
-        try{
-            validateAndSaveChildInfo();
-            finish();
-        }
-        catch(IllegalArgumentException e)
-        {
-            Toast.makeText(ChildrenAddEditActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        Button btn = findViewById(R.id.buttonSaveAddEditChild);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    validateAndSaveChildInfo();
+                    finish();
+                }
+                catch(IllegalArgumentException e)
+                {
+                    Toast.makeText(ChildrenAddEditActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void setUpDeleteButton()
     {
-        if(indexOfChildClicked == -1 && !infoChangedDetected())
-        {
-            finish();
-        }
-        else {
-            displayConfirmDialogOnDeletion();
-        }
+        Button btn = findViewById(R.id.buttonDeleteAddEditChild);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(indexOfChildClicked == -1 && !infoChangedDetected())
+                {
+                    finish();
+                }
+                else {
+                    displayConfirmDialogOnDeletion();
+                }
+            }
+        });
     }
 }

@@ -5,7 +5,7 @@
         android:topRightRadius="35dp"
         android:bottomRightRadius="35dp"/>
     <gradient
-        android:angle="100"
+        android:angle="90"
         android:centerX="50"
         android:centerY="200"
         android:startColor="@color/coral_pink"

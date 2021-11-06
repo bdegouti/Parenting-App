@@ -109,18 +109,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 android:ems="10"
+                android:fontFamily="@font/zenkurenaido_regular"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
                 android:textColor="@color/darkk_purple"
                 android:textSize="24sp"
-                android:textStyle="bold|italic"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/consLayout_cardView"
                 app:layout_constraintStart_toStartOf="@id/consLayout_cardView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/buttoDeleteAddEditChild"
+                android:id="@+id/buttonDeleteAddEditChild"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
