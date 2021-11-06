@@ -1,5 +1,6 @@
 package com.example.parentapp;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -7,11 +8,13 @@ import androidx.core.app.NotificationCompat;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 import com.example.parentapp.helper.NotificationHelper;
 import com.example.parentapp.model.TimeManager;
 
+import java.time.LocalDateTime;
 import java.util.Locale;
 
 /* - count down for 1,2,3,5, and 10 minutes and a custom duration(always in the whole number)
@@ -51,7 +55,6 @@ public class Timer extends AppCompatActivity {
     private Vibrator vibrator;
 
     private NotificationHelper notificationHelper;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -254,6 +257,7 @@ public class Timer extends AppCompatActivity {
     private void playMusic() {
         if (musicPlayer == null) {
             musicPlayer = MediaPlayer.create(this, R.raw.alarm_sound);
+            musicPlayer.setVolume(1, 1);
             musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
@@ -289,4 +293,11 @@ public class Timer extends AppCompatActivity {
     }
 
     public static Intent makeLaunchIntent(Context c) { return new Intent(c, Timer.class); }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
 }
