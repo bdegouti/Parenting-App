@@ -1,18 +1,24 @@
 package com.example.parentapp.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class FlipCoinGame {
     public enum FlipOptions {HEAD, TAIL}
-    private final LocalDateTime creationDateTime;
+    private LocalDateTime creationDateTime;
+    private String creationDateTimeString;
     private String pickerName;
     private int pickerIndex;
     private FlipOptions pickerChoice;
     private FlipOptions result;
+    private final DateTimeFormatter formatter;
 
     public FlipCoinGame()
     {
         creationDateTime = LocalDateTime.now();
+        formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+        creationDateTimeString = creationDateTime.format(formatter);
         pickerName = null;
         pickerIndex = -1;
         pickerChoice = FlipOptions.HEAD;
@@ -21,6 +27,10 @@ public class FlipCoinGame {
 
     public LocalDateTime getCreationDateTime() {
         return creationDateTime;
+    }
+
+    public String getCreationDateTimeString() {
+        return creationDateTimeString;
     }
 
     public String getPickerName() {
@@ -40,6 +50,16 @@ public class FlipCoinGame {
     public FlipOptions getResult()
     {
         return result;
+    }
+
+    public void setCreationDateTime(String dateTimeString)
+    {
+        this.creationDateTime = LocalDateTime.parse(dateTimeString, formatter);
+    }
+
+    public void setCreationDateTime(LocalDateTime time)
+    {
+        this.creationDateTime = time;
     }
 
     public void setPickerName(String name)

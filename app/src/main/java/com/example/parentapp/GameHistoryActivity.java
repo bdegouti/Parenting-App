@@ -173,7 +173,7 @@ public class GameHistoryActivity extends AppCompatActivity {
             }
 
             //display datetime creation
-            DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM);
+            DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
             tvDaT.setText(currentGame.getCreationDateTime().format(dtf));
 
             //display picker name
