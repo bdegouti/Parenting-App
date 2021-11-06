@@ -1,6 +1,5 @@
 package com.example.parentapp;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -8,13 +7,11 @@ import androidx.core.app.NotificationCompat;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +21,6 @@ import android.widget.Toast;
 import com.example.parentapp.helper.NotificationHelper;
 import com.example.parentapp.model.TimeManager;
 
-import java.time.LocalDateTime;
 import java.util.Locale;
 
 /* - count down for 1,2,3,5, and 10 minutes and a custom duration(always in the whole number)
@@ -91,22 +87,32 @@ public class Timer extends AppCompatActivity {
                         case "1 minute":
                             timeManager.setMinuteInMillis(MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
                             timeLeft = MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
+                            cancelTimer();
+                            updateTimer(timeLeft);
                             break;
                         case "2 minutes":
                             timeManager.setMinuteInMillis(2 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
                             timeLeft = 2 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
+                            cancelTimer();
+                            updateTimer(timeLeft);
                             break;
                         case "3 minutes":
                             timeManager.setMinuteInMillis(3 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
                             timeLeft = 3 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
+                            cancelTimer();
+                            updateTimer(timeLeft);
                             break;
                         case "5 minutes":
                             timeManager.setMinuteInMillis(5 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
                             timeLeft = 5 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
+                            cancelTimer();
+                            updateTimer(timeLeft);
                             break;
                         case "10 minutes":
                             timeManager.setMinuteInMillis(10 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
                             timeLeft = 10 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
+                            cancelTimer();
+                            updateTimer(timeLeft);
                             break;
 
                         case "Others":
@@ -146,6 +152,8 @@ public class Timer extends AppCompatActivity {
                             customDurationDialog = customDurationBuilder.create();
                             customDurationDialog.show();
 
+                            cancelTimer();
+                            updateTimer(timeLeft);
                             break;
                     }
                     updateTimer(timeManager.getMinuteInMillis());
