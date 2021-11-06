@@ -54,8 +54,9 @@ public class FlipCoinGameHistory {
 
     public String convertHistoryToJson()
     {
+        Type type = new TypeToken<ArrayList<FlipCoinGame>>(){}.getType();
         Gson gson = new Gson();
-        return gson.toJson(this.gameList);
+        return gson.toJson(this.gameList, type);
     }
 
     public void convertSaveHistoryFromJson(String listAsJson)
@@ -63,7 +64,7 @@ public class FlipCoinGameHistory {
         if(listAsJson != null && !listAsJson.equals(""))
         {
             Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<FlipCoinGame>>() {}.getType();
+            Type type = new TypeToken<ArrayList<FlipCoinGame>>(){}.getType();
             this.gameList = gson.fromJson(listAsJson, type);
 
             for(FlipCoinGame game: this.gameList)
@@ -74,5 +75,4 @@ public class FlipCoinGameHistory {
             }
         }
     }
-
 }

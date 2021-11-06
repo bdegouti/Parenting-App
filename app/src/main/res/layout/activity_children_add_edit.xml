@@ -110,6 +110,7 @@
                 android:layout_marginHorizontal="24dp"
                 android:ems="10"
                 android:fontFamily="@font/zenkurenaido_regular"
+                android:hint="Scandium"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
                 android:textColor="@color/darkk_purple"

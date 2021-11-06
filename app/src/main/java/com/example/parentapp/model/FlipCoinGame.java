@@ -12,12 +12,11 @@ public class FlipCoinGame {
     private int pickerIndex;
     private FlipOptions pickerChoice;
     private FlipOptions result;
-    private final DateTimeFormatter formatter;
 
     public FlipCoinGame()
     {
         creationDateTime = LocalDateTime.now();
-        formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
         creationDateTimeString = creationDateTime.format(formatter);
         pickerName = null;
         pickerIndex = -1;
@@ -54,6 +53,7 @@ public class FlipCoinGame {
 
     public void setCreationDateTime(String dateTimeString)
     {
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
         this.creationDateTime = LocalDateTime.parse(dateTimeString, formatter);
     }
 
