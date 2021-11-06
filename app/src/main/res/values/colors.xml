@@ -14,4 +14,7 @@
     <color name="light_orange">#fbd1d3</color>
     <color name="light_pink">#f2dcdb</color>
     <color name="darkk_purple">#6b3476</color>
+    <color name="red">#ee6969</color>
+    <color name="red_lighterx1">#f97c7c</color>
+    <color name="red_lighterx2">#fdaaaa</color>
 </resources>

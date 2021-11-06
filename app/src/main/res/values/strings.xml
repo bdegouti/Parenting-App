@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">Parent App</string>
-    <string name="save">SAVE</string>
+    <string name="save">Save</string>
     <string name="its_head_tail">IT\'S %1$s!</string>
     <string name="three_dots">Wait for it…</string>
     <string name="dismiss">DISMISS</string>
-    <string name="cancel">CANCEL</string>
+    <string name="cancel">Cancel</string>
     <string name="dismiss_flip_result_without_saving">Dismiss flip coin result without saving?</string>
     <string name="head">HEAD</string>
     <string name="tail">TAIL</string>
     <string name="would_you_pick_head_or_tail">Would you pick head or tail?</string>
     <string name="hi_its_someone_turn_to_pick">Hi %1$s, it\'s your turn to pick!</string>
-    <string name="enter_child_name">Enter child name:</string>
+    <string name="your_child_name">Your child name:</string>
     <string name="add_a_new_child">Add a new child!</string>
     <string name="click_to_flip_the_coin_when_you_are_ready">Click to flip the coin when you are ready!</string>
     <string name="countdown_timer">Countdown Timer</string>
@@ -27,4 +27,6 @@
     <string name="picked_vs_result">Picked: %1$s | Result: %2$s</string>
     <string name="main_menu">Main Menu</string>
     <string name="no_games_played">No games played yet.</string>
+    <string name="editing_your_child">Editing your child</string>
+    <string name="delete">Delete</string>
 </resources>

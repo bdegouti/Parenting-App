@@ -4,56 +4,158 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rainbow_wallpaper"
+    android:background="@drawable/rectangle_sharp_white"
     tools:context=".ChildrenAddEditActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout2"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizonal20_editChild"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#2F5233"
-        android:theme="@style/Theme.ParentApp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal30_editChild"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal30_editChild"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark"
-        tools:visibility="visible">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarAddNewChild"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="#2F5233"
-            android:visibility="visible"
-            app:popupTheme="@style/Theme.ParentApp"
-            app:title="Add New Child"
-            app:titleTextColor="#FFFFFF" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/rectangle_sharp_dark_purple" />
 
     <TextView
-        android:id="@+id/textViewEnterChildName"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewTitleAddEditChild"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/enter_child_name"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNewChildName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextNewChildName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:fontFamily="@font/zenkurenaido_regular"
+        android:text="Adding your new kid"
         android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/white"
+        android:textSize="43sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/horizonal20_editChild"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal80_editChild"
+        app:layout_constraintEnd_toStartOf="@+id/vertical30_editChild"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizonal20_editChild"
+        app:srcCompat="@drawable/rectangle_right_curve_pink_to_purple" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical30_editChild"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal80_editChild"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="286dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="70dp"
+        app:cardCornerRadius="35dp"
+        app:cardElevation="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal80_editChild"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizonal20_editChild">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/consLayout_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewEnterChildName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/zenkurenaido_regular"
+                android:text="@string/your_child_name"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/editTextNewChildName"
+                app:layout_constraintEnd_toEndOf="@id/consLayout_cardView"
+                app:layout_constraintStart_toStartOf="@id/consLayout_cardView" />
+
+            <EditText
+                android:id="@+id/editTextNewChildName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                android:textColor="@color/darkk_purple"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/consLayout_cardView"
+                app:layout_constraintStart_toStartOf="@id/consLayout_cardView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/buttoDeleteAddEditChild"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/rectangle_red_to_lighter_red"
+                android:fontFamily="@font/zenkurenaido_regular"
+                android:text="@string/delete"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/vertial50_cardView_editChild"
+                app:layout_constraintStart_toStartOf="@+id/editTextNewChildName"
+                app:layout_constraintTop_toBottomOf="@+id/editTextNewChildName" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vertial50_cardView_editChild"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <Button
+                android:id="@+id/buttonSaveAddEditChild"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/rectangle_purple_gradient"
+                android:fontFamily="@font/zenkurenaido_regular"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/editTextNewChildName"
+                app:layout_constraintStart_toStartOf="@+id/vertial50_cardView_editChild"
+                app:layout_constraintTop_toBottomOf="@+id/editTextNewChildName" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

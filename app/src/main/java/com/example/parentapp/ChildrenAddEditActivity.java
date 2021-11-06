@@ -1,10 +1,8 @@
 package com.example.parentapp;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.parentapp.model.Child;
@@ -44,49 +43,10 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
             child = childrenManager.getChildAtIndex(indexOfChildClicked);
             prefillChildInfo();
         }
-        setUpToolBar();
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edit_child, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
-        if(itemId == android.R.id.home)
-        {
-            if(infoChangedDetected()) {
-                displayConfirmDialogOnUpButtonPressed();
-            }
-            else {
-                finish();
-            }
-        }
-        else if(itemId == R.id.action_delete)
-        {
-            if(indexOfChildClicked == -1 && !infoChangedDetected())
-            {
-                finish();
-            }
-            else {
-                displayConfirmDialogOnDeletion();
-            }
-        }
-        else if(itemId == R.id.action_save)
-        {
-            try{
-                validateAndSaveChildInfo();
-                finish();
-            }
-            catch(IllegalArgumentException e)
-            {
-                Toast.makeText(ChildrenAddEditActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        return true;
+        setUpScreenTitle();
+        setUpSaveButton();
+        setUpDeleteButton();
     }
 
     @Override
@@ -96,20 +56,6 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         }
         else {
             finish();
-        }
-    }
-
-    private void setUpToolBar() {
-        Toolbar toolbar = findViewById(R.id.toolbarAddNewChild);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
-        if(indexOfChildClicked > -1)
-        {
-            toolbar.setTitle("Edit Child Information");
         }
     }
 
@@ -209,8 +155,38 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
                 changeDetected = true;
             }
         }
-
         return changeDetected;
     }
 
+    private void setUpScreenTitle()
+    {
+        if(indexOfChildClicked > -1)
+        {
+            TextView title = findViewById(R.id.textViewTitleAddEditChild);
+            title.setText(R.string.editing_your_child);
+        }
+    }
+
+    private void setUpSaveButton()
+    {
+        try{
+            validateAndSaveChildInfo();
+            finish();
+        }
+        catch(IllegalArgumentException e)
+        {
+            Toast.makeText(ChildrenAddEditActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setUpDeleteButton()
+    {
+        if(indexOfChildClicked == -1 && !infoChangedDetected())
+        {
+            finish();
+        }
+        else {
+            displayConfirmDialogOnDeletion();
+        }
+    }
 }

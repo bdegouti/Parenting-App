@@ -25,6 +25,9 @@
         <entry key="app/src/main/res/drawable/rectangle_light_orange_borders.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/rectangle_pink.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/rectangle_purple.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/rectangle_purple_gradient.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/rectangle_red_to_lighter_red.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/rectangle_right_curve_pink_to_purple.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/rectangle_sharp_coral_pink.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/rectangle_sharp_dark_purple.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/rectangle_sharp_light_orange.xml" value="0.371875" />
@@ -34,7 +37,7 @@
         <entry key="app/src/main/res/drawable/rectangle_top_curve_darkk_purple.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/rectangle_white.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/shadow.xml" value="0.30416666666666664" />
-        <entry key="app/src/main/res/layout/activity_children_add_edit.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_children_add_edit.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_children_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_flip_coin.xml" value="0.271286231884058" />
         <entry key="app/src/main/res/layout/activity_game_history.xml" value="0.33" />
