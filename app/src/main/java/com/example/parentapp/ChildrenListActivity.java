@@ -3,10 +3,13 @@ package com.example.parentapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,13 +129,6 @@ public class ChildrenListActivity extends AppCompatActivity {
             Child currentChild = childrenManager.getChildAtIndex(position);
             TextView textViewName = childView.findViewById(R.id.childView_textViewChildName);
             textViewName.setText(currentChild.getName());
-
-            //switch color
-            if(position % 2 != 0)
-            {
-                ImageView backgroundRect = childView.findViewById(R.id.childView_imageViewBackgroundRectangle);
-                backgroundRect.setImageResource(R.drawable.rectangle_white);
-            }
 
             return childView;
         }

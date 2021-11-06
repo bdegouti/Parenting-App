@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/childView_imageViewBackgroundRectangle"
-        android:layout_width="406dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="5dp"
-        app:srcCompat="@drawable/rectangle_light_orange_borders" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/childView_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="5dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true">
 
-    <ImageView
-        android:id="@+id/childVIew_imageViewChildIcon"
-        android:layout_width="67dp"
-        android:layout_height="51dp"
-        android:layout_alignStart="@+id/childView_imageViewBackgroundRectangle"
-        android:layout_alignTop="@+id/childView_imageViewBackgroundRectangle"
-        android:layout_alignBottom="@+id/childView_imageViewBackgroundRectangle"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:maxWidth="50dp"
-        android:maxHeight="50dp"
-        app:srcCompat="@drawable/ice_cream" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/childView_textViewChildName"
-        android:layout_width="292dp"
-        android:layout_height="59dp"
-        android:layout_alignTop="@+id/childView_imageViewBackgroundRectangle"
-        android:layout_alignEnd="@+id/childView_imageViewBackgroundRectangle"
-        android:layout_alignBottom="@+id/childView_imageViewBackgroundRectangle"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_toEndOf="@+id/childVIew_imageViewChildIcon"
-        android:fontFamily="@font/zenkurenaido_regular"
-        android:gravity="center_vertical"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="34sp" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:maxWidth="50dp"
+                android:maxHeight="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ice_cream" />
+
+            <TextView
+                android:id="@+id/childView_textViewChildName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:fontFamily="@font/zenkurenaido_regular"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

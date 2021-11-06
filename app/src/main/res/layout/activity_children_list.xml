@@ -4,27 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rectangle_sharp_dark_purple"
+    android:background="@drawable/rectangle_sharp_white"
     tools:context=".ChildrenListActivity">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/rectangle_bottom_curve_white"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal30_2"
+        android:src="@drawable/rectangle_top_curve_darkk_purple"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rectangle_bottom_curve_white" />
+        app:layout_constraintTop_toTopOf="@+id/horizontal20_2" />
 
     <ListView
         android:id="@+id/listVIewChildrenList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAddChild"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,26 +36,21 @@
         android:id="@+id/buttonAddChild"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/rectangle_white"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/rectangle_pink"
         android:fontFamily="@font/zenkurenaido_regular"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="15dp"
         android:text="@string/add_a_new_child"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/horizontal30_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/horizontal20_2"
@@ -70,13 +64,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/textViewNoChildrenToShow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/horizontal20_2"
         app:srcCompat="@drawable/ice_cream" />
 
     <TextView
@@ -84,25 +79,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
+        android:fontFamily="@font/zenkurenaido_regular"
         android:text="No children added yet. "
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/buttonAddChild"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@+id/horizontal20_2" />
 
     <TextView
         android:id="@+id/textViewAddChildInstruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/zenkurenaido_regular"
         android:text="You can add your kids by clicking the button below."
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,15 +110,15 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:fontFamily="@font/zenkurenaido_regular"
         android:text="All my children"
         android:textColor="@color/black"
-        android:textSize="48sp"
+        android:textSize="43sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/listVIewChildrenList"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal20_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

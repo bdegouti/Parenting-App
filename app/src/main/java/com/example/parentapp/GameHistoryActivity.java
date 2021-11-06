@@ -51,28 +51,35 @@ public class GameHistoryActivity extends AppCompatActivity {
     private void handleEmptyGameHistory() {
         ImageView ivNoGamesIcon = findViewById(R.id.imageViewEmptyStateNoGamesIcon);
         TextView tvNoGamesText = findViewById(R.id.textEmptyStateViewNoGames);
-        if(flipCoinGameHistory.getNumberOfGames() == 0){
+        TextView tvInstruction = findViewById(R.id.textViewNoHistoryInstruction);
+
+        if(flipCoinGameHistory.getNumberOfGames() == 0) {
             ivNoGamesIcon.setVisibility(View.VISIBLE);
             tvNoGamesText.setVisibility(View.VISIBLE);
+            tvInstruction.setVisibility(View.VISIBLE);
 
             Animation empty_box_bounce = AnimationUtils.loadAnimation(GameHistoryActivity.this, R.anim.empty_box_jump);
             Animation text_shudder = AnimationUtils.loadAnimation(GameHistoryActivity.this, R.anim.text_shudder);
 
             ivNoGamesIcon.startAnimation(empty_box_bounce);
             tvNoGamesText.startAnimation(text_shudder);
+            tvInstruction.startAnimation(text_shudder);
         }
-        else{
+        else {
             ivNoGamesIcon.clearAnimation();
             tvNoGamesText.clearAnimation();
+            tvInstruction.clearAnimation();
+
             ivNoGamesIcon.setVisibility(View.INVISIBLE);
             tvNoGamesText.setVisibility(View.INVISIBLE);
+            tvInstruction.setVisibility(View.INVISIBLE);
         }
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
         saveGameListToSharedPreferences();
-        super.onStop();
+        super.onPause();
     }
 
     private void saveGameListToSharedPreferences()
@@ -137,7 +144,7 @@ public class GameHistoryActivity extends AppCompatActivity {
         public GameHistoryListAdapter()
         {
             super(GameHistoryActivity.this,
-                    R.layout.game_view,
+                    R.layout.game_view_card,
                     flipCoinGameHistory.getGameHistoryList());
         }
 
@@ -147,15 +154,15 @@ public class GameHistoryActivity extends AppCompatActivity {
             View gameView = convertView;
             if(gameView == null)
             {
-                gameView = getLayoutInflater().inflate(R.layout.game_view, parent, false);
+                gameView = getLayoutInflater().inflate(R.layout.game_view_card, parent, false);
             }
 
             //fill up this view
             FlipCoinGame currentGame = flipCoinGameHistory.getGameAtIndex(position);
-            TextView tvName = gameView.findViewById(R.id.gameView_textviewPickerName);
-            TextView tvDaT = gameView.findViewById(R.id.gameView_textViewCreationDateTime);
-            TextView tvResult = gameView.findViewById(R.id.gameView_textviewFlipResult);
-            ImageView resultIcon = gameView.findViewById(R.id.gameView_imageviewResultIcon);
+            TextView tvName = gameView.findViewById(R.id.gameViewCard_textViewPickerName);
+            TextView tvDaT = gameView.findViewById(R.id.gameViewCard_textViewCreationTime);
+            TextView tvResult = gameView.findViewById(R.id.gameViewCard_textViewResultFlip);
+            ImageView resultIcon = gameView.findViewById(R.id.gameViewCard_imageViewWinningSymbol);
 
             //set up icon
             if(currentGame.getPickerChoice() == currentGame.getResult()){
