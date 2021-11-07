@@ -34,6 +34,10 @@ public class MainMenuActivity extends AppCompatActivity {
         setUpButtonConfigureChildren();
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     private void loadGameListFromSharedPreferences()
     {
         String gameListJson = FlipCoinActivity.getGameHistoryFromSharedPreferences(MainMenuActivity.this);
