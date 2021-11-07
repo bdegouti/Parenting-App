@@ -37,10 +37,12 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewGradientBox"
-        app:layout_constraintEnd_toEndOf="@+id/cardView2"
+        app:layout_constraintEnd_toEndOf="@+id/cardViewTimeLeft_timer"
         app:layout_constraintStart_toStartOf="@+id/vertical50_timer"
-        app:layout_constraintTop_toTopOf="@+id/horizontal70_timer" />
+        app:layout_constraintTop_toTopOf="@+id/horizontal70_timer"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btnCancelCountDown"
@@ -55,10 +57,12 @@
         android:textColor="#880E4F"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewGradientBox"
         app:layout_constraintEnd_toStartOf="@+id/vertical50_timer"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toTopOf="@+id/horizontal70_timer" />
+        app:layout_constraintStart_toStartOf="@+id/cardViewTimeLeft_timer"
+        app:layout_constraintTop_toTopOf="@+id/horizontal70_timer"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btnChooseTime"
@@ -73,10 +77,12 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/imageViewGradientBox"
         app:layout_constraintEnd_toEndOf="@id/vertical50_timer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/imageViewGradientBox" />
+        app:layout_constraintTop_toTopOf="@id/imageViewGradientBox"
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vertical50_timer"
@@ -107,11 +113,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/horizontal90_timer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/horizontal15_timer"
-        app:srcCompat="@drawable/rectangle_gradient_pink_purple" />
+        app:srcCompat="@drawable/rectangle_gradient_pink_purple"
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/horizontal20_timer"
@@ -128,19 +136,21 @@
         app:layout_constraintGuide_percent="0.70" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/cardViewTimeLeft_timer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:visibility="invisible"
         app:cardCornerRadius="35dp"
         app:cardElevation="10dp"
         app:cardMaxElevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/horizontal70_timer"
         app:layout_constraintEnd_toEndOf="@+id/imageViewGradientBox"
         app:layout_constraintStart_toStartOf="@+id/imageViewGradientBox"
-        app:layout_constraintTop_toTopOf="@+id/horizontal20_timer">
+        app:layout_constraintTop_toTopOf="@+id/horizontal20_timer"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/consLayout_cardview_timer"

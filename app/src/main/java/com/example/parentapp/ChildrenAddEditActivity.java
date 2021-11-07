@@ -2,12 +2,15 @@ package com.example.parentapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -46,6 +49,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         setUpScreenTitle();
         setUpSaveButton();
         setUpDeleteButton();
+        startAnimationInputCardView();
     }
 
     @Override
@@ -200,5 +204,13 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void startAnimationInputCardView()
+    {
+        CardView cv = findViewById(R.id.cardView_addEditChild);
+        Animation drift = AnimationUtils.loadAnimation(ChildrenAddEditActivity.this, R.anim.drift_from_bottom);
+        cv.setVisibility(View.VISIBLE);
+        cv.startAnimation(drift);
     }
 }

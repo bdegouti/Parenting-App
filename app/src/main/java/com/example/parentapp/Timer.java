@@ -2,6 +2,7 @@ package com.example.parentapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.NotificationCompat;
 
 import android.content.Context;
@@ -14,8 +15,11 @@ import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,6 +68,7 @@ public class Timer extends AppCompatActivity {
         setUpChooseTimeButton();
         setUpStartCancelButton();
         updateTimer(timeLeft);
+        startAnimationTimer();
     }
 
     private void setUpChooseTimeButton() {
@@ -308,5 +313,29 @@ public class Timer extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
+    }
+
+    private void startAnimationTimer()
+    {
+        Animation drift = AnimationUtils.loadAnimation(Timer.this, R.anim.drift_from_bottom);
+
+        startDriftAnimationForButton(R.id.btnChooseTime, drift);
+        startDriftAnimationForButton(R.id.btnCancelCountDown, drift);
+        startDriftAnimationForButton(R.id.btnStartCounting, drift);
+
+        ImageView box = findViewById(R.id.imageViewGradientBox);
+        box.setVisibility(View.VISIBLE);
+        box.startAnimation(drift);
+
+        CardView cv = findViewById(R.id.cardViewTimeLeft_timer);
+        cv.setVisibility(View.VISIBLE);
+        cv.startAnimation(drift);
+    }
+
+    private void startDriftAnimationForButton(int resId, Animation anim)
+    {
+        Button btn = findViewById(resId);
+        btn.setVisibility(View.VISIBLE);
+        btn.startAnimation(anim);
     }
 }

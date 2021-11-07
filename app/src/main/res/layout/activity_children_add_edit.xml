@@ -73,16 +73,19 @@
         app:layout_constraintGuide_percent="0.8" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_addEditChild"
         android:layout_width="286dp"
         android:layout_height="0dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="70dp"
+        android:visibility="invisible"
         app:cardCornerRadius="35dp"
         app:cardElevation="30dp"
         app:layout_constraintBottom_toTopOf="@+id/horizontal80_editChild"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizonal20_editChild">
+        app:layout_constraintTop_toTopOf="@+id/horizonal20_editChild"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/consLayout_cardView"

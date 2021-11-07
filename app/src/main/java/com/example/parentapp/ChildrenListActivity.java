@@ -46,6 +46,7 @@ public class ChildrenListActivity extends AppCompatActivity {
         super.onStart();
         populateListView();
         handleEmptyState();
+        startAnimOnAddChildButton();
     }
 
     @Override
@@ -151,5 +152,12 @@ public class ChildrenListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void startAnimOnAddChildButton(){
+        Button button = findViewById(R.id.buttonAddChild);
+        Animation drift = AnimationUtils.loadAnimation(ChildrenListActivity.this, R.anim.drift_from_bottom);
+        button.setVisibility(View.VISIBLE);
+        button.startAnimation(drift);
     }
 }

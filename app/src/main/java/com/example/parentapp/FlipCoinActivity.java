@@ -2,6 +2,7 @@ package com.example.parentapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -122,6 +123,13 @@ public class FlipCoinActivity extends AppCompatActivity {
             }
         });
 
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                startAnimationCardViewFlipResult();
+            }
+        });
+
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
@@ -223,5 +231,13 @@ public class FlipCoinActivity extends AppCompatActivity {
     {
         SharedPreferences prefs = context.getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         return prefs.getString(GAME_LIST, null);
+    }
+
+    private void startAnimationCardViewFlipResult()
+    {
+        CardView cv = findViewById(R.id.cardViewFlipResult_flipCoin);
+        Animation drift = AnimationUtils.loadAnimation(FlipCoinActivity.this, R.anim.drift_from_bottom);
+        cv.setVisibility(View.VISIBLE);
+        cv.startAnimation(drift);
     }
 }

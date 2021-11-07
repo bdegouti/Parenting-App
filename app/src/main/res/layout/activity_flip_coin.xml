@@ -87,11 +87,12 @@
         app:layout_constraintGuide_percent="0.35" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardViewFlipResult_flipCoin"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
+        android:visibility="invisible"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="25dp"
         app:cardElevation="10dp"
@@ -100,7 +101,8 @@
         app:layout_constraintBottom_toTopOf="@+id/horizontal35_flipCoin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizontal25_flipCoin">
+        app:layout_constraintTop_toTopOf="@+id/horizontal25_flipCoin"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/consLayout_cardView_flipCoin"
