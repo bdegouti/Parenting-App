@@ -53,6 +53,10 @@ public class FlipCoinActivity extends AppCompatActivity {
             setUpNewFlipCoinGame();
             displayDialogToAskForHeadTailChoice();
         }
+        else
+        {
+            startAnimationCardViewFlipResult();
+        }
     }
 
     @Override
