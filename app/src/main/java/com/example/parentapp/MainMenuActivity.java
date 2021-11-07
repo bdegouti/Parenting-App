@@ -83,9 +83,9 @@ public class MainMenuActivity extends AppCompatActivity {
         btnTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = Timer.makeLaunchIntent(MainMenuActivity.this);
-                i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
+                Intent intent = Timer.makeLaunchIntent(MainMenuActivity.this);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
             }
         });
         startAnimationOnButton(R.id.buttonTimer, 500);
