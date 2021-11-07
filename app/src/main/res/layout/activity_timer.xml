@@ -172,7 +172,7 @@
         android:fontFamily="@font/zenkurenaido_regular"
         android:text="Counting down..."
         android:textColor="@color/darkk_purple"
-        android:textSize="50sp"
+        android:textSize="46dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/horizontal15_timer"
         app:layout_constraintStart_toStartOf="parent"
