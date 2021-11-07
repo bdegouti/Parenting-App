@@ -10,6 +10,12 @@ import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * FlipCoinGameHistory class consists of a list of all coin-flips of the children.
+ * This class supports adding a new coin-flip game into the list, retrieving a game at a given index,
+ * and clearing all games in its list.
+ * This class can also convert itself to Json and from Json format.
+ */
 public class FlipCoinGameHistory {
     private ArrayList<FlipCoinGame> gameList;
     //singleton implementation

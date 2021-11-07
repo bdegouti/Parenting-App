@@ -21,6 +21,12 @@ import android.widget.TextView;
 import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
 
+/**
+ * ChildrenListActivity class represents a screen that displays a list of all children in the app.
+ * This class allows user to click on to an existing child to edit that child's information,
+ * it also provides a button for user to add a new child.
+ * This class saves and loads the list of all children to and from SharedPreferences.
+ */
 public class ChildrenListActivity extends AppCompatActivity {
     private ChildrenManager childrenManager;
     private static final String APP_PREFERENCES = "app preferences";

@@ -1,5 +1,8 @@
 package com.example.parentapp.model;
 
+/**
+ * Child class represents a child entity with a name attribute in the app
+ */
 public class Child {
     private String name;
 

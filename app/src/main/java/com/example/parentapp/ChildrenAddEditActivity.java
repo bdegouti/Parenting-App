@@ -20,6 +20,11 @@ import android.widget.Toast;
 import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
 
+/**
+ * ChildrenAddEditActivity represents the screen that support adding a new child, or editing information of an existing child.
+ * This class saves the information of the new child (or changed information of an existing child) into ChildrenManager class,
+ * which will be used throughout the app, including the FlipCoinActivity.
+ */
 public class ChildrenAddEditActivity extends AppCompatActivity {
     private static final String EXTRA_CHILD_INDEX = "child index";
     private int indexOfChildClicked;

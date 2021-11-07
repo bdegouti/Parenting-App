@@ -1,5 +1,10 @@
 package com.example.parentapp.model;
 
+/**
+ * GameRotationManager class is a auxiliary class that stores the information of the last child who gets to pick heads/tails.
+ * This class stores the name and index of that child, and it communicates with ChildrenManager class to retrieve the
+ * information of the next child that gets to pick heads/tails.
+ */
 public class GameRotationManager {
     private int indexOfChildLastPicked;
     private String nameOfChildLastPicked;

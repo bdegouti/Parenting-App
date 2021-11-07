@@ -1,0 +1,5 @@
+Scrum roles for Project Iteration 1:
+- Repo Manager: Nick (jwa337)
+- Scrum Master: Ivy (natran)
+- Product Owner: Ben (bdegouti)
+- Team member: Oliver (cza111)

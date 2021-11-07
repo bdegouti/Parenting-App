@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
@@ -28,14 +27,15 @@ import com.example.parentapp.model.TimeManager;
 
 import java.util.Locale;
 
-/* - count down for 1,2,3,5, and 10 minutes and a custom duration(always in the whole number)
-   - when the timer is running, be able to reset (stop and reset time to the last selected starting time)
-     or pause. While paused to be able to reset or resume the timer.
-   - when the timer reaches 0, plays a sound for alarm and vibrate
-   - when the timer is running, be able to still run after exiting the application
-   - when the timer expired, pops a notification that can stop the alarm sound
-*/
-public class Timer extends AppCompatActivity {
+/**
+ * TimerActivity class allows user to set up a countdown timer of a specific duration.
+ * This class provides countdown durations of 1,2,3,5 and 10 minutes, and any custom duration of a whole minute.
+ * This class allows user to pause timer when it is running, resume timer, and reset timer.
+ * When the countdown reaches 0, this class plays music and vibrates.
+ * It also pops up a notification box so user can click OK to stop the music/vibration.
+ * This class allows user to exit the screen while the timer is still running.
+ */
+public class TimerActivity extends AppCompatActivity {
     private final int MILLISECOND_TO_SECOND = 1000;
     private final int MINUTES_TO_SECONDS = 60;
 
@@ -65,8 +65,6 @@ public class Timer extends AppCompatActivity {
         setTitle("Count Down Timer");
 
         notificationHelper = new NotificationHelper(this);
-        timeManager.setMinuteInMillis(5000);
-        timeLeft = 5000;
 
         setUpChooseTimeButton();
         setUpStartCancelButton();
@@ -82,7 +80,7 @@ public class Timer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog durationDialog;
-                AlertDialog.Builder durationBuilder = new AlertDialog.Builder(Timer.this);
+                AlertDialog.Builder durationBuilder = new AlertDialog.Builder(TimerActivity.this);
 
                 durationBuilder.setTitle("Choose your duration:");
 
@@ -125,9 +123,9 @@ public class Timer extends AppCompatActivity {
                             break;
 
                         case "Others":
-                            EditText customDuration = new EditText(Timer.this);
+                            EditText customDuration = new EditText(TimerActivity.this);
                             AlertDialog customDurationDialog;
-                            AlertDialog.Builder customDurationBuilder = new AlertDialog.Builder(Timer.this);
+                            AlertDialog.Builder customDurationBuilder = new AlertDialog.Builder(TimerActivity.this);
 
                             customDuration.setHint("Minutes");
 
@@ -146,7 +144,7 @@ public class Timer extends AppCompatActivity {
                                         timeLeft = (long) duration * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
                                         updateTimer(timeManager.getMinuteInMillis());
                                     } catch (Exception e) {
-                                        Toast.makeText(Timer.this, "Please enter a valid number for minutes.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(TimerActivity.this, "Please enter a valid number for minutes.", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -154,7 +152,7 @@ public class Timer extends AppCompatActivity {
                             customDurationBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(Timer.this, "CANCELED", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TimerActivity.this, "CANCELED", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -170,7 +168,7 @@ public class Timer extends AppCompatActivity {
 
                 durationBuilder.setNegativeButton("CANCEL", ((dialogInterface, i) -> {
                     Toast.makeText(
-                            Timer.this, "CANCELED", Toast.LENGTH_SHORT).show();
+                            TimerActivity.this, "CANCELED", Toast.LENGTH_SHORT).show();
                 }));
 
                 durationDialog = durationBuilder.create();
@@ -226,7 +224,7 @@ public class Timer extends AppCompatActivity {
                 sendNotification();
 
                 AlertDialog dialog;
-                AlertDialog.Builder builder = new AlertDialog.Builder(Timer.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
 
                 builder.setTitle("Times up!");
 
@@ -311,7 +309,7 @@ public class Timer extends AppCompatActivity {
 
     private void startAnimationTimer()
     {
-        Animation drift = AnimationUtils.loadAnimation(Timer.this, R.anim.drift_from_bottom);
+        Animation drift = AnimationUtils.loadAnimation(TimerActivity.this, R.anim.drift_from_bottom);
 
         startDriftAnimationForButton(R.id.btnChooseTime, drift);
         startDriftAnimationForButton(R.id.btnCancelCountDown, drift);
@@ -333,7 +331,7 @@ public class Timer extends AppCompatActivity {
         btn.startAnimation(anim);
     }
 
-    public static Intent makeLaunchIntent(Context c) { return new Intent(c, Timer.class); }
+    public static Intent makeLaunchIntent(Context c) { return new Intent(c, TimerActivity.class); }
 
     @Override
     public void onBackPressed() {

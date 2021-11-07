@@ -20,7 +20,7 @@
             android:name=".ChildrenListActivity"
             android:exported="true"/>
         <activity
-            android:name=".Timer"
+            android:name=".TimerActivity"
             android:exported="true"
             android:launchMode="singleTop" />
         <activity

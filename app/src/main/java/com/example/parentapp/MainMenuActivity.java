@@ -14,6 +14,10 @@ import android.widget.TextView;
 import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.FlipCoinGameHistory;
 
+/**
+ * MainMenuActivity class provides a means to navigate between all other activities.
+ * It has button that leads user to a new flip coin game, to game history list, to the countdown timer, and to children list.
+ */
 public class MainMenuActivity extends AppCompatActivity {
     private ChildrenManager childrenManager;
     private FlipCoinGameHistory flipCoinGameHistory;
@@ -91,7 +95,7 @@ public class MainMenuActivity extends AppCompatActivity {
         btnTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = Timer.makeLaunchIntent(MainMenuActivity.this);
+                Intent intent = TimerActivity.makeLaunchIntent(MainMenuActivity.this);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }

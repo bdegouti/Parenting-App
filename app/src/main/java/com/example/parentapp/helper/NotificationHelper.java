@@ -10,12 +10,16 @@ import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.parentapp.MainMenuActivity;
 import com.example.parentapp.R;
-import com.example.parentapp.Timer;
+import com.example.parentapp.TimerActivity;
 
 //the code below was adapted from the Youtube video linked:
 // https://www.youtube.com/watch?v=ub4_f6ksxL0
+
+/**
+ * NotificationHelper class creates a channel that receives message from TimerActivity.
+ * This class prints the given title and message to the notification box to take user back to Timer Activity.
+ */
 public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
     public static final String channelName = "Channel";
@@ -47,7 +51,7 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification(String title, String msg) {
-        Intent resultIntent = Timer.makeLaunchIntent(NotificationHelper.this);
+        Intent resultIntent = TimerActivity.makeLaunchIntent(NotificationHelper.this);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 1,
                 resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);

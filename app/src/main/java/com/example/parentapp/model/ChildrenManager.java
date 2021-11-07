@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * ChildrenManager class contains the list of all children in the app.
+ * ChildrenManager class can add a new child, remove a child, and allows editing and retrieving information of a child.
+ * This class can also convert itself to json and from json format.
+ */
 public class ChildrenManager implements Iterable<Child>{
     private ArrayList<Child> childrenList;
     private static ChildrenManager instance;
@@ -70,7 +75,7 @@ public class ChildrenManager implements Iterable<Child>{
         int indexOfNextChild = -1;
 
         int lastChildFound = getIndexOfChildName(lastPickChildName);
-        if(lastChildFound != -1) //if last child is still on the children list
+        if(lastChildFound != -1)
         {
             indexOfNextChild = (lastChildFound + 1) % (childrenList.size());
         }
