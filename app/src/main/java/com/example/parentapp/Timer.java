@@ -45,7 +45,8 @@ public class Timer extends AppCompatActivity {
     private Button startCount;
     private TextView timeRemaining;
 
-    // storing the result of time user select and default is set to 1 minute
+    // storing the result of duration that the  user selected and
+    // the default is set to 1 minute
     private String results = "1 minute";
 
     private CountDownTimer countDownTimer;
@@ -64,6 +65,8 @@ public class Timer extends AppCompatActivity {
         setTitle("Count Down Timer");
 
         notificationHelper = new NotificationHelper(this);
+        timeManager.setMinuteInMillis(5000);
+        timeLeft = 5000;
 
         setUpChooseTimeButton();
         setUpStartCancelButton();
@@ -301,18 +304,9 @@ public class Timer extends AppCompatActivity {
     }
 
     private void sendNotification() {
-        NotificationCompat.Builder nb = notificationHelper.getChannelNotification("Times Up!",
+        NotificationCompat.Builder notificationBuilder = notificationHelper.getChannelNotification("Times Up!",
                 "Click on this message to return to that app screen and stop alarm sound.");
-        notificationHelper.getManager().notify(1, nb.build());
-    }
-
-    public static Intent makeLaunchIntent(Context c) { return new Intent(c, Timer.class); }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
+        notificationHelper.getManager().notify(1, notificationBuilder.build());
     }
 
     private void startAnimationTimer()
@@ -337,5 +331,14 @@ public class Timer extends AppCompatActivity {
         Button btn = findViewById(resId);
         btn.setVisibility(View.VISIBLE);
         btn.startAnimation(anim);
+    }
+
+    public static Intent makeLaunchIntent(Context c) { return new Intent(c, Timer.class); }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 }

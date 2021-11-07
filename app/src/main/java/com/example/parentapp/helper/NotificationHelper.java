@@ -10,6 +10,7 @@ import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
 
+import com.example.parentapp.MainMenuActivity;
 import com.example.parentapp.R;
 import com.example.parentapp.Timer;
 
@@ -46,9 +47,11 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification(String title, String msg) {
-        Intent resultIntent = Timer.makeLaunchIntent(this);
+        Intent resultIntent = Timer.makeLaunchIntent(NotificationHelper.this);
+        resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 1,
                 resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        startActivity(resultIntent);
 
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setContentTitle(title)
