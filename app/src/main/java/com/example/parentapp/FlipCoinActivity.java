@@ -148,7 +148,8 @@ public class FlipCoinActivity extends AppCompatActivity {
                 //clean up result text view
                 TextView tvResult = findViewById(R.id.textViewFlipResult);
                 tvResult.setText(R.string.three_dots);
-
+                //set datetime
+                flipGame.setLocalDateTime();
                 //generate random flip
                 Random rand = new Random();
                 int randomNum = rand.nextInt(100);

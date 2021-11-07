@@ -66,13 +66,6 @@ public class FlipCoinGameHistory {
             Gson gson = new Gson();
             Type type = new TypeToken<ArrayList<FlipCoinGame>>(){}.getType();
             this.gameList = gson.fromJson(listAsJson, type);
-
-            for(FlipCoinGame game: this.gameList)
-            {
-                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-                LocalDateTime time = LocalDateTime.parse(game.getCreationDateTimeString(), formatter);
-                game.setCreationDateTime(time);
-            }
         }
     }
 }
