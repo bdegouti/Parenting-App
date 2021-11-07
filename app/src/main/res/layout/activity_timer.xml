@@ -4,65 +4,178 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pastel_clouds"
+    android:background="@drawable/rectangle_sharp_white"
     tools:context=".Timer">
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal30_timer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rectangle_bottom_curve_light_orange" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal30_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
 
     <Button
         android:id="@+id/btnStartCounting"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_white"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rectangle_gradient_green"
+        android:fontFamily="@font/zenkurenaido_regular"
         android:text="@string/start"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/btnCancelCountDown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/btnCancelCountDown" />
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewGradientBox"
+        app:layout_constraintEnd_toEndOf="@+id/cardView2"
+        app:layout_constraintStart_toStartOf="@+id/vertical50_timer"
+        app:layout_constraintTop_toTopOf="@+id/horizontal70_timer" />
 
     <Button
         android:id="@+id/btnCancelCountDown"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rectangle_white"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rectangle_red_to_lighter_red"
+        android:fontFamily="@font/zenkurenaido_regular"
         android:text="@string/cancel"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChooseTime" />
+        android:textAllCaps="false"
+        android:textColor="#880E4F"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewGradientBox"
+        app:layout_constraintEnd_toStartOf="@+id/vertical50_timer"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/horizontal70_timer" />
 
     <Button
         android:id="@+id/btnChooseTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_white"
+        android:background="@drawable/rectangle_purple_gradient"
+        android:fontFamily="@font/zenkurenaido_regular"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:text="@string/choose_duration"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtTimeRemaining"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text=""
-        android:textSize="34sp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnChooseTime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/imageViewGradientBox"
+        app:layout_constraintEnd_toEndOf="@id/vertical50_timer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageViewGradientBox" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/vertical50_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal15_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal90_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <ImageView
+        android:id="@+id/imageViewGradientBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal90_timer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontal15_timer"
+        app:srcCompat="@drawable/rectangle_gradient_pink_purple" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal20_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal70_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="35dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal70_timer"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewGradientBox"
+        app:layout_constraintStart_toStartOf="@+id/imageViewGradientBox"
+        app:layout_constraintTop_toTopOf="@+id/horizontal20_timer">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/consLayout_cardview_timer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtTimeRemaining"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/zenkurenaido_regular"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="100sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/consLayout_cardview_timer"
+                app:layout_constraintEnd_toEndOf="@+id/consLayout_cardview_timer"
+                app:layout_constraintStart_toStartOf="@+id/consLayout_cardview_timer"
+                app:layout_constraintTop_toTopOf="@+id/consLayout_cardview_timer" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textViewTitle_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/zenkurenaido_regular"
+        android:text="Counting down..."
+        android:textColor="@color/darkk_purple"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal15_timer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

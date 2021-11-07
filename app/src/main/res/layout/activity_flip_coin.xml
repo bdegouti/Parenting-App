@@ -4,45 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pastel_clouds"
+    android:background="@drawable/rectangle_white"
     tools:context=".FlipCoinActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#2F5233"
-        android:theme="@style/Theme.ParentApp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark"
-        tools:visibility="visible">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarFlipCoin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/rectangle_white"
-            android:visibility="visible"
-            app:popupTheme="@style/Theme.ParentApp"
-            app:title="Flipping Coin"
-            app:titleTextColor="#FFFFFF" />
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
         android:id="@+id/imageViewCoin"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
         android:layout_marginBottom="32dp"
         android:clickable="false"
         app:layout_constraintBottom_toTopOf="@+id/textViewClickCoin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFlipResult"
+        app:layout_constraintTop_toTopOf="@+id/horizontal35_flipCoin"
         app:srcCompat="@drawable/coin_head"
         tools:visibility="visible" />
 
@@ -50,24 +28,99 @@
         android:id="@+id/textViewClickCoin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="76dp"
+        android:fontFamily="@font/zenkurenaido_regular"
         android:text="@string/click_to_flip_the_coin_when_you_are_ready"
         android:textAlignment="center"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal30_flipCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal30_flipCoin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/rectangle_bottom_curve_purple" />
+
     <TextView
-        android:id="@+id/textViewFlipResult"
+        android:id="@+id/textViewTitle_flipCoin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/zenkurenaido_regular"
+        android:text="Flipping Coin"
+        android:textColor="@color/white"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal25_flipCoin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal25_flipCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal35_flipCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal35_flipCoin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontal25_flipCoin">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/consLayout_cardView_flipCoin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewFlipResult"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/zenkurenaido_regular"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/consLayout_cardView_flipCoin"
+                app:layout_constraintEnd_toEndOf="@id/consLayout_cardView_flipCoin"
+                app:layout_constraintStart_toStartOf="@id/consLayout_cardView_flipCoin"
+                app:layout_constraintTop_toTopOf="@id/consLayout_cardView_flipCoin" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

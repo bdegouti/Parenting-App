@@ -130,6 +130,7 @@
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:text="@string/delete"
                 android:textAllCaps="false"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/vertial50_cardView_editChild"
