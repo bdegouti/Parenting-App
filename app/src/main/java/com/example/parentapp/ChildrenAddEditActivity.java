@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +50,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         setUpScreenTitle();
         setUpSaveButton();
         setUpDeleteButton();
-        startAnimationInputCardView();
+        startAnimationInputCardViewAndSideBar();
     }
 
     @Override
@@ -206,11 +207,17 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         });
     }
 
-    private void startAnimationInputCardView()
+    private void startAnimationInputCardViewAndSideBar()
     {
+        ImageView sideBar = findViewById(R.id.imageViewRightSideBar);
+        Animation slide = AnimationUtils.loadAnimation(ChildrenAddEditActivity.this, R.anim.slide_from_right);
+        sideBar.setVisibility(View.VISIBLE);
+        sideBar.startAnimation(slide);
+
         CardView cv = findViewById(R.id.cardView_addEditChild);
         Animation drift = AnimationUtils.loadAnimation(ChildrenAddEditActivity.this, R.anim.drift_from_bottom);
         cv.setVisibility(View.VISIBLE);
         cv.startAnimation(drift);
+
     }
 }
