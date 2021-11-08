@@ -23,9 +23,6 @@ import android.widget.TextView;
 import com.example.parentapp.model.FlipCoinGame;
 import com.example.parentapp.model.FlipCoinGameHistory;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-
 /**
  * GameHistoryActivity class represents the screen that allows user to view all coin-flip games stored in FlipCoinGameHistory.
  * This class shows the each game's information, including: date/time of the coin-flip, the picker for that flip, the choice and result of heads/tails.
@@ -179,7 +176,6 @@ public class GameHistoryActivity extends AppCompatActivity {
             }
 
             //display datetime creation
-            DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
             tvDaT.setText(currentGame.getCreationDateTimeString());
 
             //display picker name
