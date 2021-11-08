@@ -62,7 +62,7 @@ public class TimerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-        setTitle("Count Down Timer");
+        setTitle(getString(R.string.count_down_timer));
 
         notificationHelper = new NotificationHelper(this);
 
@@ -82,14 +82,14 @@ public class TimerActivity extends AppCompatActivity {
                 AlertDialog durationDialog;
                 AlertDialog.Builder durationBuilder = new AlertDialog.Builder(TimerActivity.this);
 
-                durationBuilder.setTitle("Choose your duration:");
+                durationBuilder.setTitle(R.string.choose_your_duration);
 
                 durationBuilder.setSingleChoiceItems(durations, -1,
                         ((dialogInterface, position) -> {
                             results = durations[position];
                         }));
 
-                durationBuilder.setPositiveButton("OK", ((dialogInterface, i) -> {
+                durationBuilder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {
                     switch (results) {
                         case "1 minute":
                             timeManager.setMinuteInMillis(MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
@@ -127,12 +127,12 @@ public class TimerActivity extends AppCompatActivity {
                             AlertDialog customDurationDialog;
                             AlertDialog.Builder customDurationBuilder = new AlertDialog.Builder(TimerActivity.this);
 
-                            customDuration.setHint("Minutes");
+                            customDuration.setHint(R.string.minutes);
 
-                            customDurationBuilder.setTitle("Customize your duration in minutes:");
+                            customDurationBuilder.setTitle(R.string.customize_your_duration_in_minutes);
                             customDurationBuilder.setView(customDuration);
 
-                            customDurationBuilder.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
+                            customDurationBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     try {
@@ -144,15 +144,15 @@ public class TimerActivity extends AppCompatActivity {
                                         timeLeft = (long) duration * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
                                         updateTimer(timeManager.getMinuteInMillis());
                                     } catch (Exception e) {
-                                        Toast.makeText(TimerActivity.this, "Please enter a valid number for minutes.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(TimerActivity.this, getString(R.string.please_enter_a_positive_integer_for_minutes), Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
 
-                            customDurationBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            customDurationBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(TimerActivity.this, "CANCELED", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TimerActivity.this, getString(R.string.cancelled), Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -166,9 +166,8 @@ public class TimerActivity extends AppCompatActivity {
                     updateTimer(timeManager.getMinuteInMillis());
                 }));
 
-                durationBuilder.setNegativeButton("CANCEL", ((dialogInterface, i) -> {
-                    Toast.makeText(
-                            TimerActivity.this, "CANCELED", Toast.LENGTH_SHORT).show();
+                durationBuilder.setNegativeButton(R.string.cancel, ((dialogInterface, i) -> {
+                    Toast.makeText(TimerActivity.this, getString(R.string.cancelled), Toast.LENGTH_SHORT).show();
                 }));
 
                 durationDialog = durationBuilder.create();
@@ -226,7 +225,7 @@ public class TimerActivity extends AppCompatActivity {
                 AlertDialog dialog;
                 AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
 
-                builder.setTitle("Times up!");
+                builder.setTitle(getString(R.string.times_up));
 
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -302,8 +301,8 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void sendNotification() {
-        NotificationCompat.Builder notificationBuilder = notificationHelper.getChannelNotification("Times Up!",
-                "Click on this message to return to that app screen and stop alarm sound.");
+        NotificationCompat.Builder notificationBuilder = notificationHelper.getChannelNotification(getString(R.string.times_up),
+                getString(R.string.click_on_this_message_to_return));
         notificationHelper.getManager().notify(1, notificationBuilder.build());
     }
 

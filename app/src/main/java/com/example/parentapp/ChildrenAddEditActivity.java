@@ -107,9 +107,9 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private void displayConfirmDialogOnDeletion()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(ChildrenAddEditActivity.this);
-        builder.setTitle("Are you sure you want to delete this child?");
+        builder.setTitle(R.string.are_you_sure_you_want_to_delete_this_child);
 
-        builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(indexOfChildClicked > -1)
@@ -120,7 +120,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("CANCEL", null);
+        builder.setNegativeButton(R.string.cancel, null);
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -129,16 +129,16 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private void displayConfirmDialogOnUpButtonPressed()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(ChildrenAddEditActivity.this);
-        builder.setTitle("Cancel all changes?");
+        builder.setTitle(R.string.cancel_all_changes);
 
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 finish();
             }
         });
 
-        builder.setNegativeButton("No", null);
+        builder.setNegativeButton(R.string.no, null);
 
         AlertDialog dialog = builder.create();
         dialog.show();

@@ -229,7 +229,6 @@ public class FlipCoinActivity extends AppCompatActivity {
         tvResult.setText(getString(R.string.its_head_tail, flipGame.getResult().toString()));
     }
 
-
     private void saveGameHistoryToSharedPreferences()
     {
         String gameListJson = this.gameHistory.convertHistoryToJson();
