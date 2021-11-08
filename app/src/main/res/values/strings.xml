@@ -29,4 +29,14 @@
     <string name="no_games_played">No games played yet.</string>
     <string name="editing_your_child">Editing your child</string>
     <string name="delete">Delete</string>
+    <string name="no_children_added_yet">No children added yet.</string>
+    <string name="you_can_add_your_kids_by_clicking_the_button_below">You can add your kids by clicking the button below.</string>
+    <string name="all_my_children">All my children</string>
+    <string name="adding_your_new_kid">Adding your new kid</string>
+    <string name="scandium">Scandium</string>
+    <string name="flipping_coin">Flipping Coin</string>
+    <string name="coin_flip_history">Coin Flip History</string>
+    <string name="you_can_make_history_by_flipping_a_coin">You can make history by flipping a coin!</string>
+    <string name="counting_down">Counting down…</string>
+    <string name="textview">TextView</string>
 </resources>
