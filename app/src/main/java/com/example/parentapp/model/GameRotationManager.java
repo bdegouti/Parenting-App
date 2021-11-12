@@ -54,6 +54,10 @@ public class GameRotationManager {
             Child child = childrenManager.getChildAtIndex(currentIndex);
             queue.add(child);
         }
+
+        Child nobody = new Child();
+        queue.add(nobody);
+
         return queue;
     }
 

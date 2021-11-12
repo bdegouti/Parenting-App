@@ -1,5 +1,7 @@
 package com.example.parentapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -11,18 +13,23 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.FlipCoinGame;
 import com.example.parentapp.model.FlipCoinGameHistory;
 import com.example.parentapp.model.GameRotationManager;
 import com.google.gson.Gson;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -136,16 +143,58 @@ public class FlipCoinActivity extends AppCompatActivity {
             }
         });
 
-        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+        builder.setNeutralButton(R.string.select_another_kid, new DialogInterface.OnClickListener() {
             @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                startAnimationCardViewFlipResult();
+            public void onClick(DialogInterface dialogInterface, int i) {
+//                List<Child> childrenQueue = rotationManager.getQueue(childrenManager);
+//                FragmentManager fragManager = getSupportFragmentManager();
+//                DialogFragmentSelectAnotherChild dialogFragment = new DialogFragmentSelectAnotherChild(childrenQueue);
+//                dialogFragment.show(fragManager, "DIALOG");
+
+                CardView cv_select = findViewById(R.id.cardView_selectAnotherKid_flipCoin);
+                populateChildrenQueueInsideCardView();
+                cv_select.setVisibility(View.VISIBLE);
             }
         });
+
 
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+    }
+
+    private void populateChildrenQueueInsideCardView()
+    {
+        ChildrenQueueAdapter adapter = new ChildrenQueueAdapter();
+        ListView listView = findViewById(R.id.listView_selectAnotherChild_flipCoin);
+        listView.setAdapter(adapter);
+        listView.setDivider(null);
+    }
+
+    private class ChildrenQueueAdapter extends ArrayAdapter<Child> {
+        public ChildrenQueueAdapter()
+        {
+            super(FlipCoinActivity.this, R.layout.child_view, rotationManager.getQueue(childrenManager));
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            View childView = convertView;
+            if(childView == null)
+            {
+                childView = getLayoutInflater().inflate(R.layout.child_view, parent, false);
+            }
+
+            //fill up this view
+            List<Child> queue = rotationManager.getQueue(childrenManager);
+            Child currentChild = queue.get(position);
+
+            TextView textViewName = childView.findViewById(R.id.childView_textViewChildName);
+            textViewName.setText(currentChild.getName());
+
+            return childView;
+        }
     }
 
     public static Intent makeIntent(Context c)

@@ -8,7 +8,7 @@ public class Child {
 
     public Child()
     {
-        name = "Fill your name please!";
+        name = "Nobody";
     }
 
     public String getName()
