@@ -1,0 +1,302 @@
+*** This is the Java code style guide for our group.
+
+========================================================================================================================================================================================
+======================== 1. Naming Conventions =========================================================================================================================================
+========================================================================================================================================================================================
+1.1 CamelCase
+Java class, field, method, and variable names are written in CamelCase: Words are smashed together and the first letter of each word is capitalized. No word separator, like the underscore _, is used.
+
+ex: thisIsAnExample
+
+There is one exception to CamelCase: constants. Constants are in all-caps with words separated by underscores. Constants should also have the keyword final, and they are usually static:
+
+ex: public static final double SPEED_OF_LIGHT= 299792458; // in m/s
+
+=============================================
+
+1.2 Class and interface names
+Class and interface names are generally noun or noun phrases and begin with a capital letter:
+
+interface AqueousHabitat { ... }
+class FishBowl implements AqueousHabitat { ... }
+
+=============================================
+
+1.3 Method names
+Method names generally begin with a lowercase letter. A call on a procedure is a statement to do something, so a procedure name is generally a verb phrase that is a command to do something.
+
+public void setTitle(String t) { ... }
+
+A convention in Java is that a function that yields the value of a field (say title) is the name of the field preceded by "get".
+
+public String getTitle() { ... }
+
+The name of a boolean function is often a verb phrase starting with "is", thus describing what the value means:
+
+public boolean isEquilateralTriangle(int b, int c, int d) { ... }
+
+=============================================
+
+1.4 Variable names
+Variable names generally start with a lowercase letter.
+
+hypotenuseOfTriangle= 6 * (2 + hypotenuseOfTriangle) + 7 / hypotenuseOfTriangle
+                      - hypotenuseOfTriangle;
+
+
+Use shorter names for parameters and local variables and longer names for fields and static variables. We explain why.
+
+Parameter names. The specification of a method will name all parameters and give their meanings. The body of a method is usually fairly short ---at most 30-50 lines. Therefore, when reading the method body, the meanings of parameters are available without any scrolling. So parameter names may be short --even one letter long.
+
+/** Return "lengths b, c, and d are the sides of an equilateral triangle" */
+public boolean isEquilateralTriangle(int b, int c, int d) {
+    return b == c && c == d;
+}
+
+Local variable names. A local variable is a variable that is declared in a method body. Its declaration should be placed as close to its first use as possible. The scope of a local variable is usually short, and its meaning is often obvious either from a comment on its declaration or from the short code in which it is used. Therefore, names of local variables may be short.
+
+Fields and class (i.e. static) variables. The declarations of field and class variables may be far from their uses --perhaps hundreds of lines away. Further, the meaning of fields and class variables are typically given as comments by the declarations, far from where the variables are used. Therefore, the names of field and class variables should be longer and as mnemonic as possible, giving the reader a good idea what the meaning are.
+
+=============================================
+
+1.5 Package names
+Package names are usually all lowercase and consist of nouns.
+
+
+
+========================================================================================================================================================================================
+========================= 2. Format conventions =========================================================================================================================================
+========================================================================================================================================================================================
+2.1. Indentation and braces { }
+Indentation is used to make the structure of a program clear. The basic rule is:
+
+Sub-statements of a statement or declaration should be indented.
+For example, the declarations in a class, the body of a method, and the if-part and then-part of a conditional statement should be indented.
+We prefer indentation of 4 spaces, not 2.
+
+We prefer putting an opening curly brace "{" at the end of a line, and not on a line by itself, as shown below. The closing brace "}" appears on its own line, indented as shown below.
+
+if (x < y) {
+    x= y;
+    y= 0;
+}
+else {
+    x= 0;
+    y= y/2;
+}
+
+=============================================
+
+2.2 Always use braces for control flow structures
+The following is just begging for a bug:
+
+if (flag) validate();
+
+Can you spot the bug here?
+
+if (flag) validate(); update();
+
+Always use braces:
+
+if (flag) {
+    validate();
+    update();
+}
+
+(This applies to other structures as well, like if-else statements for-loops, and while-loops)
+
+
+
+========================================================================================================================================================================================
+========================= 3. Documentation =============================================================================================================================================
+========================================================================================================================================================================================
+3.1. Kinds of comments in Java, including Javadoc comments
+Java has three kinds of comments. Comments that start with "//" are one-line comments: the comment ends at the end of the line. Comments that start with "/*" must end with "*/", but they may span many lines.
+
+A Javadoc comment starts with "/**", and therefore ends with "*/". Javadoc stands for "Java documentation".
+
+=============================================
+
+3.2 Don't over-comment
+Some people have a tendency to put a "//" comment on almost every line. This is generally just noise, making it harder to read the program. Don't do it. Refrain from commenting lines like this:
+
+i= i+1; // add one to i
+
+Assume that the reader has experience with Java and understands basic statements. Generally speaking, the only kinds of comments needed are those that are mentioned in this section 3 on comments.
+
+=============================================
+
+3.3 Class specifications
+Each public class is given in a separate file. The beginning of the file should contain a javadoc comment that explains what the class is for.
+This can be a simple, short summary.
+Inner classes and non-public classes that are defined in the same file along with a public class should be specified in a similar fashion.
+
+
+
+========================================================================================================================================================================================
+========================= 4. Code organization =============================================================================================================================================
+========================================================================================================================================================================================
+4.1 Field and class variable declarations go at the beginning of a class
+Place all field and class (static) variables at the beginning of a class, before all the methods. That is where a reader will look for them.
+
+=============================================
+
+4.2 Keep methods short
+As a general rule of thumb, if a single method is getting beyond 20-50 lines, consider lifting some of its functionality into other methods. Rarely should a method be over 50 lines.
+
+Similarly, if you find yourself pasting the exact same chunk of code into several places, consider creating a single method that does the job. The Refactor contextual menu in Eclipse can help with this.
+
+It is possible to go overboard with this. Even if two blocks of code are structurally similar, don't merge them into the same method if they do different things. Each method should have only one purpose.
+Names like  saveOrLoadAnimal()  are a clue that you really need two methods:  saveAnimal()  and  loadAnimal() .
+
+=============================================
+
+4.3 Use statement-comments to organize a method
+A long method body should generally be broken into a sequence of logical units, each performing some subtask. Each of these logical units needs a comment that describes what the unit does. The section on statement-comments discusses this.
+
+Often, the process of step-wise refinement of a program leads naturally to these logical units. For example, one might look at the specification of a method and decide that it can be implemented in three steps, each written in English:
+
+Do b;
+Do c;
+Do d
+
+They would become statement-comments, with their implementations underneath:
+
+// Do b
+implementation of "Do b"
+
+// Do c
+implementation of "Do c"
+
+// Do d
+implementation of "Do d"
+
+=============================================
+
+4.4 Use returns to simplify method structure
+You may hear from some people that a method should return only in the last statement of the method, at the end of the method body. In some cases, that can lead to a messy, incomprehensible method body. Use of return statements in several places, along with appropriate use of assertions, can lead to a far more comprehensible method. Further, this use of returns is developed naturally during stepwise refinement. However, one must be disciplined with the use of the returns and assertions.
+
+As an example, we present a method that calculates the score for a bowling frame given the two objects for the next two frames. (Understanding this requires knowledge of bowling!) Note the use of assertions. We challenge you to write this method more simply, using only one return statement, or by using nested if-else statements, each part of which ends with a return statement.
+
+/** = the score for this frame, given the two following frames f1 and f2.
+    Pre: If this is the ninth frame, f2 is null.
+         If this is the tenth frame, f1 and f2 are null*/
+public int score(Frame f1, Frame f2) {
+    if (isTenth) {
+        return firstBall + secondBall + thirdBall;
+    }
+
+    // { it's not the tenth frame }
+    // Return value if it is not a strike or spare
+    if (firstBall + secondBall < 10) {
+        return firstBall + secondBall;
+    }
+
+    // Return the value for a spare --in other than 10th frame
+    if (firstBall < 10 && firstBall + secondBall == 10) {
+        return firstBall + secondBall + f1.firstBall;
+    }
+
+    // { it's a strike and it's not the tenth frame }
+    // Return a value for a strike in the ninth frame
+    if (f2 == null) {
+        return firstBall + f1.firstBall + f1.secondBall;
+    }
+
+    // Return a value for a strike in frame in the range 1..8
+    if (f1.firstBall < 10) {
+        return 10 + f1.firstBall + f1.secondBall;
+    }
+    // { The next frame is a strike }
+    return firstBall + f1.firstBall + f2.firstBall;
+}
+
+=============================================
+
+4.5 Put the shorter of the then-part and else-part first
+One sometimes sees a segment that looks like this:
+
+if (condition) {
+   ...
+   30 lines of code
+    ...
+} else single-statement
+
+The long distance of the if-line from the else-part makes it difficult for the reader. Better is to structure it like this:
+
+if (!condition) {
+    single-statement
+} else {
+   ...
+   30 lines of code
+    ...
+}
+
+Further, if the single-statement is a return statement, simplify the structure by writing it like this:
+
+if (!condition) {
+    return ...;
+// { ! condition }
+...
+30 lines of code
+...
+
+=============================================
+
+4.6 Declare local variables close to first use
+A local variable is a variable declared within a method body.
+
+The tendency is to declare all variables at the beginning of the method body, and to start off inserting there all the variables you think you might need. Fight this tendency! It leads to a proliferation of variables that often are not needed, and it forces the reader to look at and think about variables at the wrong time.
+
+Principle: Declare a variable as close to its first use as possible.
+
+
+========================================================================================================================================================================================
+========================= 5. Public/private access modifiers ===========================================================================================================================
+========================================================================================================================================================================================
+Java has four levels of access: public, private, protected, and package (the default; what you get when no modifier is specified). Here is how we generally use them:
+
+public: public items can be used anywhere.
+Methods are public if they are part of the outward "behavior" of the class, i.e. if the user should be able to use them. Otherwise, make them private.
+Constants, i.e. static final fields, are usually public so that anyone can use them.
+
+
+private: private items can be referred to only in code within the class.
+Fields and class (i.e. static) variables should should be private unless there is a specific, good reason for them to be otherwise.
+A method should be made private if the user should not be able to call it from outside the class.
+
+
+protected: Protected components can be referenced within the class, within subclasses, and within any class defined in the same package.
+
+package (the default, i.e. what one gets when no modifier is used): package components can be referenced within the class and within any class that is in the same package.
+
+Use of access modifiers
+Modifier	Class	Package	Subclass	World
+public		yes	yes	yes		yes
+protected	yes	yes	yes		no
+package		yes	yes	no		no
+private		yes	no	no		no
+
+
+
+========================================================================================================================================================================================
+========================= 6. Code to interfaces instead of implementations =============================================================================================================
+========================================================================================================================================================================================
+In most cases, the client code doesn't care about the implementation of the list
+---it just wants to know what operations are supported. Specifying a linked list is needlessly providing a detail that makes future changes harder.
+
+List<String> users= new LinkedList<String>(); // Good
+LinkedList<String> users= new LinkedList<String>(); // Bad
+
+
+
+========================================================================================================================================================================================
+========================= 7. Avoid deprecated patterns =================================================================================================================================
+========================================================================================================================================================================================
+Java has changed over the years, and as changes have been made, some methods and classes have been deprecated. Deprecated literally means "disapproved of", but a more accurate translation would be "retired".
+A deprecated method (or class) is still usable, but it is best not to use it. It will gradually be phased out. There is a new method to do the same thing.
+So if you see that something is deprecated and you have the time, look for the better alternative and use it instead.
+
+
+Source: Java style guide by Cornell University, Department of Computer Science,
+at https://www.cs.cornell.edu/courses/JavaAndDS/JavaStyle.html
