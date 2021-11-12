@@ -52,4 +52,5 @@
     <string name="cancel_all_changes">Cancel all changes?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="select_another_kid">Select another kid</string>
 </resources>
