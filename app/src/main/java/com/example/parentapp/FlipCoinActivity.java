@@ -68,7 +68,6 @@ public class FlipCoinActivity extends AppCompatActivity {
         childrenModeOn = true;
 
         setUpCoinFlipOnClick();
-        populateChildrenQueueInsideCardView();
         registerCallBackListenerForChildrenQueue();
         setUpCancelButton();
 
@@ -157,6 +156,7 @@ public class FlipCoinActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 CardView cv_select = findViewById(R.id.cardView_selectAnotherKid_flipCoin);
+                populateChildrenQueueInsideCardView();
                 Animation drift = AnimationUtils.loadAnimation(FlipCoinActivity.this, R.anim.drift_from_bottom);
                 cv_select.setVisibility(View.VISIBLE);
                 cv_select.startAnimation(drift);
@@ -170,16 +170,18 @@ public class FlipCoinActivity extends AppCompatActivity {
 
     private void populateChildrenQueueInsideCardView()
     {
-        ChildrenQueueAdapter adapter = new ChildrenQueueAdapter();
+        List<Child> childrenQueue = rotationManager.getQueue(childrenManager, flipGame.getPickerIndex());
+        ChildrenQueueAdapter adapter = new ChildrenQueueAdapter(childrenQueue);
+
         ListView listView = findViewById(R.id.listView_selectAnotherChild_flipCoin);
         listView.setAdapter(adapter);
         listView.setDivider(null);
     }
 
     private class ChildrenQueueAdapter extends ArrayAdapter<Child> {
-        public ChildrenQueueAdapter()
+        public ChildrenQueueAdapter(List<Child> childrenQueue)
         {
-            super(FlipCoinActivity.this, R.layout.child_view, rotationManager.getQueue(childrenManager));
+            super(FlipCoinActivity.this, R.layout.child_view, childrenQueue);
         }
 
         @NonNull
@@ -192,7 +194,7 @@ public class FlipCoinActivity extends AppCompatActivity {
             }
 
             //fill up this view
-            List<Child> queue = rotationManager.getQueue(childrenManager);
+            List<Child> queue = rotationManager.getQueue(childrenManager, flipGame.getPickerIndex());
             Child currentChild = queue.get(position);
 
             TextView textViewName = childView.findViewById(R.id.childView_textViewChildName);
@@ -211,7 +213,7 @@ public class FlipCoinActivity extends AppCompatActivity {
                 CardView cv_select = findViewById(R.id.cardView_selectAnotherKid_flipCoin);
                 cv_select.setVisibility(View.INVISIBLE);
 
-                List<Child> queue = rotationManager.getQueue(childrenManager);
+                List<Child> queue = rotationManager.getQueue(childrenManager, flipGame.getPickerIndex());
                 String childName = queue.get(index).getName();
                 int childIndex = childrenManager.getIndexOfChildName(childName);
 
