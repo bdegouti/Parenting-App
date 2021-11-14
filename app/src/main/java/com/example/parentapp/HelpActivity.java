@@ -6,6 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class HelpActivity extends AppCompatActivity {
@@ -16,6 +21,8 @@ public class HelpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_help);
 
         setUpHyperLink();
+        startAnimationSideBar();
+        startAnimationScrollView();
     }
 
     public static Intent makeIntent(Context context){
@@ -26,5 +33,21 @@ public class HelpActivity extends AppCompatActivity {
     {
         TextView resourcesTv = findViewById(R.id.textViewResourceLinks);
         resourcesTv.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    private void startAnimationSideBar()
+    {
+        ImageView sideBar = findViewById(R.id.imageViewsSidebar_help);
+        Animation slide = AnimationUtils.loadAnimation(HelpActivity.this, R.anim.slide_from_left);
+        sideBar.setVisibility(View.VISIBLE);
+        sideBar.startAnimation(slide);
+    }
+
+    private void startAnimationScrollView()
+    {
+        ScrollView sv = findViewById(R.id.scrollView_help);
+        Animation drift = AnimationUtils.loadAnimation(HelpActivity.this, R.anim.drift_from_bottom);
+        sv.setVisibility(View.VISIBLE);
+        sv.startAnimation(drift);
     }
 }

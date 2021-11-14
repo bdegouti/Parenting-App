@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.RotationManager;
-import com.google.gson.Gson;
 
 /**
  * ChildrenAddEditActivity represents the screen that support adding a new child, or editing information of an existing child.
@@ -234,7 +233,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private void startAnimationInputCardViewAndSideBar()
     {
         ImageView sideBar = findViewById(R.id.imageViewRightSideBar);
-        Animation slide = AnimationUtils.loadAnimation(ChildrenAddEditActivity.this, R.anim.slide_from_right);
+        Animation slide = AnimationUtils.loadAnimation(ChildrenAddEditActivity.this, R.anim.slide_from_left);
         sideBar.setVisibility(View.VISIBLE);
         sideBar.startAnimation(slide);
 
