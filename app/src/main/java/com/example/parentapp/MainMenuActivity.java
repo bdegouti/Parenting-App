@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.parentapp.model.ChildrenManager;
@@ -36,6 +37,7 @@ public class MainMenuActivity extends AppCompatActivity {
         setUpButtonGameHistory();
         setUpButtonTimer();
         setUpButtonConfigureChildren();
+        setUpOnClickOfQuestionMark();
     }
 
     @Override
@@ -128,6 +130,18 @@ public class MainMenuActivity extends AppCompatActivity {
                 btn.startAnimation(anim);
             }
         }, delayedTime);
+    }
+
+    private void setUpOnClickOfQuestionMark()
+    {
+        ImageView icon = findViewById(R.id.imageViewQuestionMarkIcon);
+        icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = HelpActivity.makeIntent(MainMenuActivity.this);
+                startActivity(intent);
+            }
+        });
     }
 }
 

@@ -3,6 +3,7 @@
     package="com.example.parentapp">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ice_cream"
@@ -11,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".HelpActivity"
+            android:exported="true" />
+        <activity
             android:name=".GameHistoryActivity"
             android:exported="true" />
         <activity
@@ -18,7 +22,7 @@
             android:exported="true" />
         <activity
             android:name=".ChildrenListActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".TimerActivity"
             android:exported="true"
