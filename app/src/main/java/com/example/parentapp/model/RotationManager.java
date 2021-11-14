@@ -43,10 +43,40 @@ public class RotationManager {
     }
 
     public void removeChildFromQueues(Child removedKid) {
-        for(ArrayList<Child> queue : childrenQueues)
+        String name = removedKid.getName();
+        for(int i=0; i < childrenQueues.size(); i++)
         {
-            queue.remove(removedKid);
+            int targetChildIndex = getIndexOfChildName(i, name);
+            if(targetChildIndex > -1)
+            {
+                childrenQueues.get(i).remove(targetChildIndex);
+            }
         }
+    }
+
+    public void renameChildInAllQueues(String oldName, String newName)
+    {
+        for(int i=0; i < childrenQueues.size(); i++)
+        {
+            int targetChildIndex = getIndexOfChildName(i, oldName);
+            if(targetChildIndex > -1)
+            {
+                childrenQueues.get(i).get(targetChildIndex).setName(newName);
+            }
+        }
+    }
+
+    public int getIndexOfChildName(int queueIndex, String name)
+    {
+        ArrayList<Child> queue = childrenQueues.get(queueIndex);
+        int result = -1;
+        for(int i=0; i < queue.size(); i++) {
+            if(queue.get(i).getName().equals(name)) {
+                result = i;
+                break;
+            }
+        }
+        return result;
     }
 
     public void rotateQueueAtIndex(int index)

@@ -116,7 +116,9 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         else
         {
             childrenManager.testNameExistence(newChildName);
+            String oldName = child.getName();
             child.setName(newChildName);
+            rotationMan.renameChildInAllQueues(oldName, child.getName());
         }
     }
 
