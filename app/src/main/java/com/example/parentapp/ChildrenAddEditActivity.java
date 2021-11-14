@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
+import com.example.parentapp.model.RotationManager;
+import com.google.gson.Gson;
 
 /**
  * ChildrenAddEditActivity represents the screen that support adding a new child, or editing information of an existing child.
@@ -26,9 +29,12 @@ import com.example.parentapp.model.ChildrenManager;
  * which will be used throughout the app, including the FlipCoinActivity.
  */
 public class ChildrenAddEditActivity extends AppCompatActivity {
+    private static final String APP_PREFERENCES = "app preferences";
+    private static final String ROTATION_MANAGER = "rotation manager";
     private static final String EXTRA_CHILD_INDEX = "child index";
     private int indexOfChildClicked;
     private ChildrenManager childrenManager;
+    private RotationManager rotationMan;
     private Child child;
 
     @Override
@@ -37,6 +43,9 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_children_add_edit);
 
         childrenManager = ChildrenManager.getInstance();
+
+        rotationMan = RotationManager.getInstance();
+        loadRotationManagerFromSharedPreferences();
 
         //extract all extras
         Intent intentLeadingToMe = getIntent();
@@ -56,6 +65,12 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         setUpSaveButton();
         setUpDeleteButton();
         startAnimationInputCardViewAndSideBar();
+    }
+
+    @Override
+    protected void onPause() {
+        saveRotationManagerToSharedPreferences();
+        super.onPause();
     }
 
     @Override
@@ -92,15 +107,16 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         EditText et = findViewById(R.id.editTextNewChildName);
         String newChildName = et.getText().toString();
 
-        child.setName(newChildName);
-
         if(indexOfChildClicked == -1)
         {
+            child.setName(newChildName);
             childrenManager.addChild(child);
+            rotationMan.addChildToAllQueues(child);
         }
         else
         {
-            childrenManager.replaceChild(indexOfChildClicked, child);
+            childrenManager.testNameExistence(newChildName);
+            child.setName(newChildName);
         }
     }
 
@@ -114,7 +130,8 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(indexOfChildClicked > -1)
                 {
-                    childrenManager.removeChild(indexOfChildClicked);
+                    Child removedChild = childrenManager.removeChild(indexOfChildClicked);
+                    rotationMan.removeChildFromQueues(removedChild);
                 }
                 finish();
             }
@@ -223,6 +240,23 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         Animation drift = AnimationUtils.loadAnimation(ChildrenAddEditActivity.this, R.anim.drift_from_bottom);
         cv.setVisibility(View.VISIBLE);
         cv.startAnimation(drift);
-
     }
+
+    private void saveRotationManagerToSharedPreferences()
+    {
+        String rotationJson = rotationMan.convertQueuesToJson();
+
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(ROTATION_MANAGER, rotationJson);
+        editor.apply();
+    }
+
+    private void loadRotationManagerFromSharedPreferences()
+    {
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        String rotation_manager_json = prefs.getString(ROTATION_MANAGER, null);
+        rotationMan.convertQueuesFromJson(rotation_manager_json);
+    }
+
 }

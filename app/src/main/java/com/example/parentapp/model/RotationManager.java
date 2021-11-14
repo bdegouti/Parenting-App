@@ -1,5 +1,9 @@
 package com.example.parentapp.model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class RotationManager {
@@ -7,6 +11,7 @@ public class RotationManager {
     private static RotationManager instance;
     //singleton implementation
     private RotationManager() {
+        childrenQueues = new ArrayList<>();
         ArrayList<Child> gameQueue = new ArrayList<>();
         childrenQueues.add(gameQueue);
     }
@@ -27,8 +32,13 @@ public class RotationManager {
     public void addChildToAllQueues(Child newKid) {
         for(ArrayList<Child> queue : childrenQueues)
         {
-            int lastIndex = queue.size() - 1;
-            queue.add(lastIndex, newKid);
+            if(queue.isEmpty()) {
+                queue.add(newKid);
+            }
+            else {
+                int lastIndex = queue.size() - 1;
+                queue.add(lastIndex, newKid);
+            }
         }
     }
 
@@ -72,4 +82,19 @@ public class RotationManager {
         targetQ.add(0, targetChild);
     }
 
+    public String convertQueuesToJson()
+    {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<ArrayList<Child>>>(){}.getType();
+        return gson.toJson(childrenQueues, type);
+    }
+
+    public void convertQueuesFromJson(String queuesJson)
+    {
+        if(queuesJson != null) {
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<ArrayList<Child>>>() {}.getType();
+            childrenQueues = gson.fromJson(queuesJson, type);
+        }
+    }
 }

@@ -46,7 +46,7 @@ import java.util.Random;
  */
 public class FlipCoinActivity extends AppCompatActivity {
     private FlipCoinGameHistory gameHistory;
-    private ChildrenManager childrenManager;
+    //private ChildrenManager childrenManager;
     private FlipCoinGame flipGame;
     //private GameRotationManager rotationManager;
     private RotationManager rotationMan;
@@ -62,7 +62,7 @@ public class FlipCoinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flip_coin);
 
         gameHistory = FlipCoinGameHistory.getInstance();
-        childrenManager = ChildrenManager.getInstance();
+        //childrenManager = ChildrenManager.getInstance();
         flipGame = new FlipCoinGame();
 
         //rotationManager = new GameRotationManager();
@@ -98,8 +98,7 @@ public class FlipCoinActivity extends AppCompatActivity {
 
     private void saveLastPickerDataFromGameRotationManagerToSharedPrefs()
     {
-        Gson gson = new Gson();
-        String rotationJson = gson.toJson(this.rotationMan);
+        String rotationJson = rotationMan.convertQueuesToJson();
 
         SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -111,12 +110,7 @@ public class FlipCoinActivity extends AppCompatActivity {
     {
         SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         String rotation_manager_json = prefs.getString(ROTATION_MANAGER, null);
-
-        if(rotation_manager_json != null)
-        {
-            Gson gson = new Gson();
-            this.rotationMan = gson.fromJson(rotation_manager_json, RotationManager.class);
-        }
+        rotationMan.convertQueuesFromJson(rotation_manager_json);
     }
 
     private void performAutoSaveFlipGame() {
