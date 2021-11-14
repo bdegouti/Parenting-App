@@ -50,7 +50,16 @@ public class ChildrenManager implements Iterable<Child>{
             throw new IllegalArgumentException("This name has already been taken!");
         }
         childrenList.add(newChild);
-        System.out.println(childrenList.size());
+        //System.out.println(childrenList.size());
+    }
+
+    public void testNameExistence(String newName)
+    {
+        int temp = getIndexOfChildName(newName);
+        if(temp > -1)
+        {
+            throw new IllegalArgumentException("This name has already been taken!");
+        }
     }
 
     public void replaceChild(int index, Child newChild)
@@ -65,9 +74,9 @@ public class ChildrenManager implements Iterable<Child>{
         childrenList.add(index, newChild);
     }
 
-    public void removeChild(int childIndex)
+    public Child removeChild(int childIndex)
     {
-        childrenList.remove(childIndex);
+        return childrenList.remove(childIndex);
     }
 
     public String getNameNextChildToPick(String lastPickChildName, int lastPickChildIndex)
