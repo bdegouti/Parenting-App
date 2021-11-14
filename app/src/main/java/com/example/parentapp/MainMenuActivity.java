@@ -142,6 +142,17 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //set up animation
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation anim = AnimationUtils.loadAnimation(MainMenuActivity.this, R.anim.drift_from_bottom);
+                icon.setVisibility(View.VISIBLE);
+                icon.startAnimation(anim);
+            }
+        }, 950);
     }
 }
 
