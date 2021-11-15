@@ -64,12 +64,12 @@
 
     <string name="authors">Authors</string>
     <string name="authors_listing">
-        This app is created by team Scandium, our team includes:\nCheng Zhang (Oliver)\nNguyenAiVy Tran (Ivy)\nBen \nNick\n
+        This app is created by team Scandium, our team includes:\nCheng Zhang (Oliver)\nNguyenAiVy Tran (Ivy)\nBen\nNick
     </string>
 
     <string name="resources">Resources</string>
     <string name="resources_links">
         Ice cream image:\n<a href="https://www.subpng.com/png-6ih42k/">https://www.subpng.com/png-6ih42k/</a>\n
-        Question mark icon:\n<a href="https://www.flaticon.com/free-icons/question-mark">https://www.flaticon.com/free-icons/question-mark</a>\n
+        Question mark icon:\n<a href="https://www.flaticon.com/free-icons/question-mark">https://www.flaticon.com/free-icons/question-mark</a>
     </string>
 </resources>
