@@ -72,4 +72,8 @@
         Ice cream image:\n<a href="https://www.subpng.com/png-6ih42k/">https://www.subpng.com/png-6ih42k/</a>\n
         Question mark icon:\n<a href="https://www.flaticon.com/free-icons/question-mark">https://www.flaticon.com/free-icons/question-mark</a>
     </string>
+    <string name="turn_of">Turn of: %1$s</string>
+    <string name="all_my_tasks">All My Tasks</string>
+    <string name="add_new_task">Add new task!</string>
+    <string name="its_somebody_turn">It\'s %1$s\'s turn!</string>
 </resources>
