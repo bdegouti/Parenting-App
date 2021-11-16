@@ -64,7 +64,7 @@
 
     <string name="authors">Authors</string>
     <string name="authors_listing">
-        This app is created by team Scandium, our team includes:\nCheng Zhang (Oliver)\nNguyenAiVy Tran (Ivy)\nBen\nNick
+        This app is created by team Scandium, our team includes:\nCheng Zhang (Oliver)\nNguyenAiVy Tran (Ivy)\nBen de Goutiere\nNick
     </string>
 
     <string name="resources">Resources</string>
@@ -78,4 +78,5 @@
     <string name="its_somebody_turn">It\'s %1$s\'s turn!</string>
     <string name="your_task_details">Your task details</string>
     <string name="my_tasks">My Tasks</string>
+    <string name="no_kid_assigned">No kid assigned.</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.parentapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.os.TestLooperManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.RotationManager;
 import com.example.parentapp.model.Task;
 import com.example.parentapp.model.TaskManager;
+
+import java.util.ArrayList;
 
 public class TaskAddEditActivity extends AppCompatActivity {
     private static String TASK_INDEX = "task index";
@@ -52,13 +56,17 @@ public class TaskAddEditActivity extends AppCompatActivity {
         else
         {
             task = taskMan.getTaskAtIndex(indexOfTaskClicked);
+            setUpScreenTitle();
             prefillTaskInfo();
+
+            if(!rotationMan.isQueueEmpty(indexOfTaskClicked+1)) {
+                setUpCardViewWhoseTurn();
+                setUpMarkAsDoneButton();
+            }
         }
 
-        setUpScreenTitle();
         setUpSaveButton();
         setUpDeleteButton();
-        setUpMarkAsDoneButton();
     }
 
     @Override
@@ -105,10 +113,8 @@ public class TaskAddEditActivity extends AppCompatActivity {
     }
 
     private void setUpScreenTitle(){
-        if(indexOfTaskClicked > -1) {
-            TextView titleTV = findViewById(R.id.textViewTitle_addEditTask);
-            titleTV.setText(R.string.your_task_details);
-        }
+        TextView titleTV = findViewById(R.id.textViewTitle_addEditTask);
+        titleTV.setText(R.string.your_task_details);
     }
 
     private void setUpSaveButton()
@@ -144,11 +150,6 @@ public class TaskAddEditActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void setUpMarkAsDoneButton() {
-
-    }
-
 
     private void validateAndSaveTaskInfo() {
         EditText et = findViewById(R.id.editTextTaskName_taskAddEdit);
@@ -234,5 +235,30 @@ public class TaskAddEditActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void setUpCardViewWhoseTurn(){
+        CardView cv = findViewById(R.id.cardView_childTurn);
+        cv.setVisibility(View.VISIBLE);
+
+        //TODO: fill child image
+        ImageView childImage = findViewById(R.id.imageViewChildImage_taskAddEdit);
+        childImage.setImageResource(R.drawable.ice_cream);
+
+        ArrayList<Child> taskQ = rotationMan.getQueueAtIndex(indexOfTaskClicked+1);
+        Child topChild = taskQ.get(0);
+        TextView whoseTurnTv = findViewById(R.id.textViewItsSomebodysTurn_taskAddEdit);
+        whoseTurnTv.setText(getString(R.string.its_somebody_turn, topChild.getName()));
+    }
+
+    private void setUpMarkAsDoneButton() {
+        Button btn = findViewById(R.id.buttonMarkAsDone_taskAddEdit);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rotationMan.rotateQueueAtIndex(indexOfTaskClicked+1);
+                setUpCardViewWhoseTurn();
+            }
+        });
     }
 }

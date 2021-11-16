@@ -91,9 +91,6 @@ public class TaskListActivity extends AppCompatActivity {
         editor.apply();
     }
 
-
-
-
     private void populateListView()
     {
         ArrayAdapter<Task> taskListAdapter = new TaskListActivity.TaskListAdapter();
@@ -125,8 +122,13 @@ public class TaskListActivity extends AppCompatActivity {
 
             TextView textChildName = taskView.findViewById(R.id.taskView_tvChildName);
             ArrayList<Child> queueForThisTask = rotationManager.getQueueAtIndex(position+1);
-            Child topChild = queueForThisTask.get(0);
-            textChildName.setText(topChild.getName());
+            if(queueForThisTask.size() > 0) {
+                Child topChild = queueForThisTask.get(0);
+                textChildName.setText(getString(R.string.turn_of, topChild.getName()));
+            }
+            else{
+                textChildName.setText(R.string.no_kid_assigned);
+            }
 
             return taskView;
         }

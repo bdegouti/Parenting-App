@@ -36,7 +36,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
-        android:background="@drawable/rectangle_pink"
+        android:background="@drawable/rectangle_coral_pink"
         android:fontFamily="@font/zenkurenaido_regular"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
@@ -49,7 +49,7 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonFlipCoinHistory"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFlipCoin"
         tools:visibility="visible" />
 
     <Button
@@ -75,29 +75,6 @@
         tools:visibility="visible" />
 
     <Button
-        android:id="@+id/buttonFlipCoinHistory"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/rectangle_coral_pink"
-        android:fontFamily="@font/zenkurenaido_regular"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:text="@string/history_of_coin_flips"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonFlipCoin"
-        tools:visibility="visible" />
-
-    <Button
         android:id="@+id/buttonConfigureChildren"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -117,7 +94,7 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonTimer"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTaskList"
         tools:visibility="visible" />
 
     <Button
@@ -127,7 +104,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
-        android:background="@drawable/rectangle_purple"
+        android:background="@drawable/rectangle_pink"
         android:fontFamily="@font/zenkurenaido_regular"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
@@ -137,10 +114,10 @@
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonConfigureChildren"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTimer"
         tools:visibility="visible" />
 
     <TextView

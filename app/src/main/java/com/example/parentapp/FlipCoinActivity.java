@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -46,15 +47,14 @@ import java.util.Random;
  */
 public class FlipCoinActivity extends AppCompatActivity {
     private FlipCoinGameHistory gameHistory;
-    //private ChildrenManager childrenManager;
     private FlipCoinGame flipGame;
-    //private GameRotationManager rotationManager;
     private RotationManager rotationMan;
     private ArrayList<Child> gameQueue;
     private boolean childrenModeOn;
     private static final String APP_PREFERENCES = "app preferences";
     private static final String GAME_LIST = "game list";
     private static final String ROTATION_MANAGER = "rotation manager";
+    private boolean gameAlreadySaved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +62,17 @@ public class FlipCoinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flip_coin);
 
         gameHistory = FlipCoinGameHistory.getInstance();
-        //childrenManager = ChildrenManager.getInstance();
         flipGame = new FlipCoinGame();
-
-        //rotationManager = new GameRotationManager();
 
         rotationMan = RotationManager.getInstance();
         loadLastPickerDataToGameRotationManagerFromSharedPrefs();
         gameQueue = rotationMan.getQueueAtIndex(0);
 
         childrenModeOn = true;
+        gameAlreadySaved = false;
 
         setUpCoinFlipOnClick();
+        setUpOnClickImageViewHistoryFlipCoin();
 
         if(!gameQueue.isEmpty() && childrenModeOn)
         {
@@ -90,9 +89,11 @@ public class FlipCoinActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        performAutoSaveFlipGame();
-        saveLastPickerDataFromGameRotationManagerToSharedPrefs();
-        saveGameHistoryToSharedPreferences();
+        if(!gameAlreadySaved) {
+            performAutoSaveFlipGame();
+            saveLastPickerDataFromGameRotationManagerToSharedPrefs();
+            saveGameHistoryToSharedPreferences();
+        }
         super.onPause();
     }
 
@@ -122,11 +123,9 @@ public class FlipCoinActivity extends AppCompatActivity {
             {
                 gameHistory.addNewFlipCoinGame(flipGame);
                 Toast.makeText(FlipCoinActivity.this, getString(R.string.flip_coin_result_has_been_saved), Toast.LENGTH_SHORT).show();
-
                 //only when this coin flip is saved can we officially save this child as a last picker
                 rotationMan.rotateQueueAtIndex(0);
-//                rotationManager.setNameOfChildLastPicked(flipGame.getPickerName());
-//                rotationManager.setIndexOfChildLastPicked(flipGame.getPickerIndex());
+                gameAlreadySaved = true;
             }
         }
     }
@@ -214,21 +213,6 @@ public class FlipCoinActivity extends AppCompatActivity {
                 CardView cv_select = findViewById(R.id.cardView_selectAnotherKid_flipCoin);
                 cv_select.setVisibility(View.INVISIBLE);
 
-//                List<Child> queue = rotationManager.getQueue(childrenManager, flipGame.getPickerIndex());
-//                String childName = queue.get(index).getName();
-//                int childIndex = childrenManager.getIndexOfChildName(childName);
-//                if(!childName.equals("Nobody"))
-//                {
-//                    flipGame.setPickerName(childName);
-//                    flipGame.setPickerIndex(childIndex);
-//                    displayDialogToAskForHeadTailChoice();
-//                }
-//                else
-//                {
-//                    childrenModeOn = false;
-//                    startAnimationCardViewFlipResult();
-//                }
-
                 List<Child> alternateChildrenQ = rotationMan.getQueueWithNobodyAtTheEnd(0);
                 Child clickedChild = alternateChildrenQ.get(index);
 
@@ -268,9 +252,6 @@ public class FlipCoinActivity extends AppCompatActivity {
 
     private void setUpNewFlipCoinGame()
     {
-//        String nameCurrentChildWhoIsPicking = rotationManager.getNameNextChildToPickHeadTail(this.childrenManager);
-//        flipGame.setPickerName(nameCurrentChildWhoIsPicking);
-//        flipGame.setPickerIndex(childrenManager.getIndexOfChildName(nameCurrentChildWhoIsPicking));
         Child current = gameQueue.get(0);
         flipGame.setPickerName(current.getName());
     }
@@ -366,5 +347,16 @@ public class FlipCoinActivity extends AppCompatActivity {
         Animation drift = AnimationUtils.loadAnimation(FlipCoinActivity.this, R.anim.drift_from_bottom);
         cv.setVisibility(View.VISIBLE);
         cv.startAnimation(drift);
+    }
+
+    private void setUpOnClickImageViewHistoryFlipCoin(){
+        ImageView historyIV = findViewById(R.id.imageViewHistoryFlipCoin);
+        historyIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = GameHistoryActivity.makeLaunchIntent(FlipCoinActivity.this);
+                startActivity(intent);
+            }
+        });
     }
 }
