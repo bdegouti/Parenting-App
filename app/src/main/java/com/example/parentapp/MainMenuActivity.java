@@ -37,6 +37,7 @@ public class MainMenuActivity extends AppCompatActivity {
         setUpButtonGameHistory();
         setUpButtonTimer();
         setUpButtonConfigureChildren();
+        setUpButtonMyTasks();
         setUpOnClickOfQuestionMark();
     }
 
@@ -117,6 +118,19 @@ public class MainMenuActivity extends AppCompatActivity {
         startAnimationOnButton(R.id.buttonConfigureChildren, 700);
     }
 
+    private void setUpButtonMyTasks()
+    {
+        Button btn = findViewById(R.id.buttonTaskList);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = TaskListActivity.makeIntent(MainMenuActivity.this);
+                startActivity(intent);
+            }
+        });
+        startAnimationOnButton(R.id.buttonTaskList, 900);
+    }
+
     private void startAnimationOnButton(int resId, int delayedTime)
     {
         Button btn = findViewById(resId);
@@ -152,7 +166,9 @@ public class MainMenuActivity extends AppCompatActivity {
                 icon.setVisibility(View.VISIBLE);
                 icon.startAnimation(anim);
             }
-        }, 950);
+        }, 1100);
     }
+
+
 }
 

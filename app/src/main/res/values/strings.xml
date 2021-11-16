@@ -76,4 +76,6 @@
     <string name="all_my_tasks">All My Tasks</string>
     <string name="add_new_task">Add new task!</string>
     <string name="its_somebody_turn">It\'s %1$s\'s turn!</string>
+    <string name="your_task_details">Your task details</string>
+    <string name="my_tasks">My Tasks</string>
 </resources>

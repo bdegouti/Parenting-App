@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class RotationManager {
     private ArrayList<ArrayList<Child>> childrenQueues;
+
     private static RotationManager instance;
     //singleton implementation
     private RotationManager() {
@@ -126,5 +127,20 @@ public class RotationManager {
             Type type = new TypeToken<ArrayList<ArrayList<Child>>>() {}.getType();
             childrenQueues = gson.fromJson(queuesJson, type);
         }
+    }
+
+    public void addNewTaskQueue(ChildrenManager childrenManager)
+    {
+        ArrayList<Child> newQ = new ArrayList<>();
+        for(Child child : childrenManager)
+        {
+            newQ.add(child);
+        }
+        childrenQueues.add(newQ);
+    }
+
+    public void deleteTaskQueue(int queueIndex)
+    {
+        childrenQueues.remove(queueIndex);
     }
 }
