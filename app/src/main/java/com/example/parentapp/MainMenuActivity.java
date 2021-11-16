@@ -34,8 +34,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
         setUpAnimationForMainMenuTitle();
         setUpButtonFlipCoin();
-        setUpButtonGameHistory();
         setUpButtonTimer();
+        setUpButtonMyTasks();
         setUpButtonConfigureChildren();
         setUpOnClickOfQuestionMark();
     }
@@ -78,18 +78,6 @@ public class MainMenuActivity extends AppCompatActivity {
         startAnimationOnButton(R.id.buttonFlipCoin, 100);
     }
 
-    private void setUpButtonGameHistory() {
-        Button btnGH = findViewById(R.id.buttonFlipCoinHistory);
-        btnGH.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = GameHistoryActivity.makeLaunchIntent(MainMenuActivity.this);
-                startActivity(intent);
-            }
-        });
-        startAnimationOnButton(R.id.buttonFlipCoinHistory, 300);
-    }
-
     private void setUpButtonTimer()
     {
         Button btnTimer = findViewById(R.id.buttonTimer);
@@ -104,6 +92,19 @@ public class MainMenuActivity extends AppCompatActivity {
         startAnimationOnButton(R.id.buttonTimer, 500);
     }
 
+    private void setUpButtonMyTasks()
+    {
+        Button btn = findViewById(R.id.buttonTaskList);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = TaskListActivity.makeIntent(MainMenuActivity.this);
+                startActivity(intent);
+            }
+        });
+        startAnimationOnButton(R.id.buttonTaskList, 700);
+    }
+
     private void setUpButtonConfigureChildren()
     {
         Button btn = findViewById(R.id.buttonConfigureChildren);
@@ -114,7 +115,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        startAnimationOnButton(R.id.buttonConfigureChildren, 700);
+        startAnimationOnButton(R.id.buttonConfigureChildren, 900);
     }
 
     private void startAnimationOnButton(int resId, int delayedTime)

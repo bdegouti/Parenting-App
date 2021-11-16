@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rectangle_sharp_white"
+    tools:context=".TaskAddEditActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_childTurn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:visibility="invisible"
+        app:cardCornerRadius="35dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal85_taskAddEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontal50_taskAddEdit"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/buttonMarkAsDone_taskAddEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_gradient_green"
+                android:fontFamily="@font/zenkurenaido_regular"
+                android:paddingHorizontal="15dp"
+                android:text="@string/mark_as_done"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewChildImage_taskAddEdit"
+                app:layout_constraintStart_toStartOf="@+id/vertical35_cardViewChildTurn"
+                app:layout_constraintTop_toBottomOf="@+id/textViewItsSomebodysTurn_taskAddEdit" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vertical35_cardViewChildTurn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.35" />
+
+            <ImageView
+                android:id="@+id/imageViewChildImage_taskAddEdit"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical35_cardViewChildTurn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars"/>
+
+            <TextView
+                android:id="@+id/textViewItsSomebodysTurn_taskAddEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/zenkurenaido_regular"
+                android:text="@string/its_somebody_turn"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/vertical35_cardViewChildTurn"
+                app:layout_constraintTop_toTopOf="@+id/imageViewChildImage_taskAddEdit" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal50_taskAddEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal85_taskAddEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical30_taskAddEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal30_taskAddEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/rectangle_sharp_light_orange" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal20_taskAddEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal30_taskAddEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal85_taskAddEdit"
+        app:layout_constraintEnd_toStartOf="@+id/vertical30_taskAddEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontal20_taskAddEdit"
+        app:srcCompat="@drawable/rectangle_right_curve_pink_to_purple" />
+
+    <TextView
+        android:id="@+id/textViewTitle_addEditTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/zenkurenaido_regular"
+        android:text="@string/adding_you_new_task"
+        android:textColor="@color/black"
+        android:textSize="43sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal20_taskAddEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_taskInfoAddEditTask"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="35dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal50_taskAddEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontal20_taskAddEdit">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/buttonSave_cardViewTaskInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_purple_gradient"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/editTextTaskName_taskAddEdit"
+                app:layout_constraintStart_toStartOf="@+id/horizontal50_cardView_taskInfo"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTaskName_taskAddEdit" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/horizontal50_cardView_taskInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <Button
+                android:id="@+id/buttonDelete_cardViewTaskInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_red_to_lighter_red"
+                android:text="@string/delete"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/horizontal50_cardView_taskInfo"
+                app:layout_constraintStart_toStartOf="@+id/editTextTaskName_taskAddEdit"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTaskName_taskAddEdit" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/zenkurenaido_regular"
+                android:text="@string/your_task_name"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/editTextTaskName_taskAddEdit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextTaskName_taskAddEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:ems="10"
+                android:hint="@string/scandium"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

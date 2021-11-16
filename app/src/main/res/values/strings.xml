@@ -64,7 +64,7 @@
 
     <string name="authors">Authors</string>
     <string name="authors_listing">
-        This app is created by team Scandium, our team includes:\nCheng Zhang (Oliver)\nNguyenAiVy Tran (Ivy)\nBen\nNick
+        This app is created by team Scandium, our team includes:\nCheng Zhang (Oliver)\nNguyenAiVy Tran (Ivy)\nBen de Goutiere\nNick
     </string>
 
     <string name="resources">Resources</string>
@@ -72,4 +72,15 @@
         Ice cream image:\n<a href="https://www.subpng.com/png-6ih42k/">https://www.subpng.com/png-6ih42k/</a>\n
         Question mark icon:\n<a href="https://www.flaticon.com/free-icons/question-mark">https://www.flaticon.com/free-icons/question-mark</a>
     </string>
+    <string name="turn_of">Turn of: %1$s</string>
+    <string name="all_my_tasks">All My Tasks</string>
+    <string name="add_new_task">Add new task!</string>
+    <string name="its_somebody_turn">It\'s %1$s\'s turn!</string>
+    <string name="your_task_details">Your task details</string>
+    <string name="my_tasks">My Tasks</string>
+    <string name="no_kid_assigned">No kid assigned.</string>
+    <string name="mark_as_done">Mark as done</string>
+    <string name="adding_you_new_task">Adding you new task</string>
+    <string name="your_task_name">Your task name</string>
+    <string name="select_a_kid">Select a kid!</string>
 </resources>

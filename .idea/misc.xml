@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/drawable-v24/rectangle_right_curve_pink_to_purple.xml" value="0.2708333333333333" />
         <entry key="app/src/main/res/drawable/backgroud_plus_shadow.xml" value="0.36615384615384616" />
         <entry key="app/src/main/res/drawable/background_plus_shadow.xml" value="0.36615384615384616" />
+        <entry key="app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.36615384615384616" />
         <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.36615384615384616" />
         <entry key="app/src/main/res/drawable/priavte_ui_rect.xml" value="0.371875" />
@@ -42,7 +43,7 @@
         <entry key="app/src/main/res/drawable/rectangle_top_curve_darkk_purple.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/rectangle_white.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/shadow.xml" value="0.30416666666666664" />
-        <entry key="app/src/main/res/layout/activity_children_add_edit.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_children_add_edit.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_children_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_flip_coin.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_game_history.xml" value="0.33" />
@@ -50,6 +51,8 @@
         <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_private_ui.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_sample_main.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_task_add_edit.xml" value="0.3342391304347826" />
+        <entry key="app/src/main/res/layout/activity_task_list.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/activity_timer.xml" value="0.271286231884058" />
         <entry key="app/src/main/res/layout/activity_ui_main_menu.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/child_view.xml" value="0.33" />
@@ -58,6 +61,7 @@
         <entry key="app/src/main/res/layout/game_view_card.xml" value="0.67" />
         <entry key="app/src/main/res/layout/main_menu_sample.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/select_another_child_dialog_fragment.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/task_view.xml" value="0.3342391304347826" />
       </map>
     </option>
   </component>
