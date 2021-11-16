@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.TestLooperManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,10 +25,9 @@ import com.example.parentapp.model.TaskManager;
 import java.util.ArrayList;
 
 public class TaskAddEditActivity extends AppCompatActivity {
-    private static String TASK_INDEX = "task index";
+    private static final String TASK_INDEX = "task index";
     private static final String APP_PREFERENCES = "app preferences";
     private static final String ROTATION_MANAGER = "rotation manager";
-    private static final String TASK_LIST = "task list";
     private ChildrenManager childrenMan;
     private TaskManager taskMan;
     private RotationManager rotationMan;
@@ -93,13 +91,6 @@ public class TaskAddEditActivity extends AppCompatActivity {
         editor.putString(ROTATION_MANAGER, rotationManagerJSON);
         editor.apply();
     }
-
-    private void loadRotationManagerFromSharedPreferences() {
-        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
-        String rotationManagerJson = prefs.getString(ROTATION_MANAGER, null);
-        rotationMan.convertQueuesFromJson(rotationManagerJson);
-    }
-
 
     public static Intent makeIntent(Context c, int index){
         Intent intent = new Intent(c, TaskAddEditActivity.class);

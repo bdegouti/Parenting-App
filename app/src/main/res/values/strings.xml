@@ -79,4 +79,8 @@
     <string name="your_task_details">Your task details</string>
     <string name="my_tasks">My Tasks</string>
     <string name="no_kid_assigned">No kid assigned.</string>
+    <string name="mark_as_done">Mark as done</string>
+    <string name="adding_you_new_task">Adding you new task</string>
+    <string name="your_task_name">Your task name</string>
+    <string name="select_a_kid">Select a kid!</string>
 </resources>
