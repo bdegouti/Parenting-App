@@ -115,18 +115,15 @@ public class FlipCoinActivity extends AppCompatActivity {
     }
 
     private void performAutoSaveFlipGame() {
-        if(!gameQueue.isEmpty() && childrenModeOn)
+        TextView tvResult = findViewById(R.id.textViewFlipResult);
+        String result = tvResult.getText().toString();
+        if(!result.equals("") && !result.equals(getString(R.string.three_dots)))
         {
-            TextView tvResult = findViewById(R.id.textViewFlipResult);
-            String result = tvResult.getText().toString();
-            if(!result.equals("") && !result.equals(getString(R.string.three_dots)))
-            {
-                gameHistory.addNewFlipCoinGame(flipGame);
-                Toast.makeText(FlipCoinActivity.this, getString(R.string.flip_coin_result_has_been_saved), Toast.LENGTH_SHORT).show();
-                //only when this coin flip is saved can we officially save this child as a last picker
-                rotationMan.rotateQueueAtIndex(0);
-                gameAlreadySaved = true;
-            }
+            gameHistory.addNewFlipCoinGame(flipGame);
+            Toast.makeText(FlipCoinActivity.this, getString(R.string.flip_coin_result_has_been_saved), Toast.LENGTH_SHORT).show();
+            gameAlreadySaved = true;
+            //only when this coin flip is saved can we officially save this child as a last picker
+            rotationMan.rotateQueueAtIndex(0);
         }
     }
 

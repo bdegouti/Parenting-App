@@ -13,7 +13,6 @@ public class FlipCoinGame {
     public enum FlipOptions {HEAD, TAIL}
     private String creationDateTimeString;
     private String pickerName;
-    private int pickerIndex;
     private FlipOptions pickerChoice;
     private FlipOptions result;
 
@@ -21,7 +20,6 @@ public class FlipCoinGame {
     {
         creationDateTimeString = "";
         pickerName = null;
-        pickerIndex = -1;
         pickerChoice = FlipOptions.HEAD;
         result = null;
     }
@@ -39,11 +37,6 @@ public class FlipCoinGame {
         return pickerChoice;
     }
 
-    public int getPickerIndex()
-    {
-        return pickerIndex;
-    }
-
     public FlipOptions getResult()
     {
         return result;
@@ -52,11 +45,6 @@ public class FlipCoinGame {
     public void setPickerName(String name)
     {
         this.pickerName = name;
-    }
-
-    public void setPickerIndex(int i)
-    {
-        this.pickerIndex = i;
     }
 
     public void setPickerChoice(FlipOptions choice)
