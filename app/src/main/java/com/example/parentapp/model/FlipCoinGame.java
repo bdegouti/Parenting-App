@@ -19,7 +19,7 @@ public class FlipCoinGame {
     public FlipCoinGame()
     {
         creationDateTimeString = "";
-        pickerName = null;
+        pickerName = "Nobody";
         pickerChoice = FlipOptions.HEAD;
         result = null;
     }

@@ -168,24 +168,32 @@ public class GameHistoryActivity extends AppCompatActivity {
             TextView tvResult = gameView.findViewById(R.id.gameViewCard_textViewResultFlip);
             ImageView resultIcon = gameView.findViewById(R.id.gameViewCard_imageViewWinningSymbol);
 
-            //set up icon
-            if(currentGame.getPickerChoice() == currentGame.getResult()){
-                resultIcon.setBackgroundResource(R.drawable.win_icon);
-            }
-            else{
-                resultIcon.setBackgroundResource(R.drawable.lose_icon);
-            }
-
             //display datetime creation
             tvDaT.setText(currentGame.getCreationDateTimeString());
 
             //display picker name
             tvName.setText(currentGame.getPickerName());
 
-            //display flip result
-            tvResult.setText(getString(R.string.picked_vs_result,
-                    currentGame.getPickerChoice().toString(),
-                    currentGame.getResult().toString()));
+            if(currentGame.getPickerName().equals("Nobody")) {
+                //display flip result
+                tvResult.setText(getString(R.string.picked_vs_result, "N/A", currentGame.getResult().toString()));
+
+                //set up icon
+                resultIcon.setBackgroundResource(R.drawable.ic_baseline_sentiment_neutral_24);
+            }
+            else {
+                //display flip result
+                tvResult.setText(getString(R.string.picked_vs_result,
+                        currentGame.getPickerChoice().toString(),
+                        currentGame.getResult().toString()));
+
+                //set up icon
+                if (currentGame.getPickerChoice() == currentGame.getResult()) {
+                    resultIcon.setBackgroundResource(R.drawable.win_icon);
+                } else {
+                    resultIcon.setBackgroundResource(R.drawable.lose_icon);
+                }
+            }
 
             return gameView;
         }
