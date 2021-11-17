@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,7 +46,7 @@ public class TaskListActivity extends AppCompatActivity {
         populateListView();
         registerCallBackListenerForTaskListView();
         setupButtonAddNewTask();
-
+        setUpBackButton();
     }
 
     @Override
@@ -162,5 +163,14 @@ public class TaskListActivity extends AppCompatActivity {
         return new Intent(c, TaskListActivity.class);
     }
 
-
+    private void setUpBackButton()
+    {
+        ImageView back = findViewById(R.id.imageViewBackButton_tasksList);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
 }
