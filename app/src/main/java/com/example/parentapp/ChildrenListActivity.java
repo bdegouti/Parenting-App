@@ -45,6 +45,7 @@ public class ChildrenListActivity extends AppCompatActivity {
         setUpButtonAddNewChild();
 
         handleEmptyState();
+        setUpBackButton();
     }
 
     @Override
@@ -165,5 +166,16 @@ public class ChildrenListActivity extends AppCompatActivity {
         Animation drift = AnimationUtils.loadAnimation(ChildrenListActivity.this, R.anim.drift_from_bottom);
         button.setVisibility(View.VISIBLE);
         button.startAnimation(drift);
+    }
+
+    private void setUpBackButton()
+    {
+        ImageView back = findViewById(R.id.imageViewBackButton_childrenList);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }

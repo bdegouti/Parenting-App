@@ -64,6 +64,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         setUpSaveButton();
         setUpDeleteButton();
         startAnimationInputCardViewAndSideBar();
+        setUpBackButton();
     }
 
     @Override
@@ -258,6 +259,17 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         String rotation_manager_json = prefs.getString(ROTATION_MANAGER, null);
         rotationMan.convertQueuesFromJson(rotation_manager_json);
+    }
+
+    private void setUpBackButton()
+    {
+        ImageView back = findViewById(R.id.imageViewBackButton_addEditChild);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
 }

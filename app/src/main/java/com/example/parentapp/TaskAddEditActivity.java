@@ -67,6 +67,7 @@ public class TaskAddEditActivity extends AppCompatActivity {
 
         setUpSaveButton();
         setUpDeleteButton();
+        setUpBackButton();
     }
 
     @Override
@@ -252,6 +253,17 @@ public class TaskAddEditActivity extends AppCompatActivity {
             public void onClick(View view) {
                 rotationMan.rotateQueueAtIndex(indexOfTaskClicked+1);
                 setUpCardViewWhoseTurn();
+            }
+        });
+    }
+
+    private void setUpBackButton()
+    {
+        ImageView back = findViewById(R.id.imageViewBackButton_addEditTask);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }

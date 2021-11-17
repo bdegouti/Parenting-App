@@ -73,6 +73,7 @@ public class FlipCoinActivity extends AppCompatActivity {
 
         setUpCoinFlipOnClick();
         setUpOnClickImageViewHistoryFlipCoin();
+        setUpBackButton();
 
         if(!gameQueue.isEmpty() && childrenModeOn)
         {
@@ -356,6 +357,17 @@ public class FlipCoinActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = GameHistoryActivity.makeLaunchIntent(FlipCoinActivity.this);
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void setUpBackButton()
+    {
+        ImageView back = findViewById(R.id.imageViewBackButton_flipCoin);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }
