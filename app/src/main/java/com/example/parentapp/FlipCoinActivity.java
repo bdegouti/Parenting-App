@@ -50,7 +50,7 @@ public class FlipCoinActivity extends AppCompatActivity {
     private FlipCoinGame flipGame;
     private RotationManager rotationMan;
     private ArrayList<Child> gameQueue;
-    private boolean childrenModeOn;
+    //private boolean childrenModeOn;
     private static final String APP_PREFERENCES = "app preferences";
     private static final String GAME_LIST = "game list";
     private static final String ROTATION_MANAGER = "rotation manager";
@@ -68,14 +68,13 @@ public class FlipCoinActivity extends AppCompatActivity {
         loadLastPickerDataToGameRotationManagerFromSharedPrefs();
         gameQueue = rotationMan.getQueueAtIndex(0);
 
-        childrenModeOn = true;
         gameAlreadySaved = false;
 
         setUpCoinFlipOnClick();
         setUpOnClickImageViewHistoryFlipCoin();
         setUpBackButton();
 
-        if(!gameQueue.isEmpty() && childrenModeOn)
+        if(!gameQueue.isEmpty())
         {
             setUpNewFlipCoinGame();
             displayDialogToAskForHeadTailChoice();
@@ -123,8 +122,10 @@ public class FlipCoinActivity extends AppCompatActivity {
             gameHistory.addNewFlipCoinGame(flipGame);
             Toast.makeText(FlipCoinActivity.this, getString(R.string.flip_coin_result_has_been_saved), Toast.LENGTH_SHORT).show();
             gameAlreadySaved = true;
-            //only when this coin flip is saved can we officially save this child as a last picker
-            rotationMan.rotateQueueAtIndex(0);
+
+            if(!flipGame.getPickerName().equals("Nobody")) {
+                rotationMan.rotateQueueAtIndex(0);
+            }
         }
     }
 
@@ -216,7 +217,7 @@ public class FlipCoinActivity extends AppCompatActivity {
 
                 if (clickedChild.getName().equals("Nobody"))
                 {
-                    childrenModeOn = false;
+                    flipGame.setPickerName("Nobody");
                     startAnimationCardViewFlipResult();
                 }
                 else
