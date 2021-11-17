@@ -23,6 +23,7 @@ public class HelpActivity extends AppCompatActivity {
         setUpHyperLink();
         startAnimationSideBar();
         startAnimationScrollView();
+        setUpBackButton();
     }
 
     public static Intent makeIntent(Context context){
@@ -49,5 +50,16 @@ public class HelpActivity extends AppCompatActivity {
         Animation drift = AnimationUtils.loadAnimation(HelpActivity.this, R.anim.drift_from_bottom);
         sv.setVisibility(View.VISIBLE);
         sv.startAnimation(drift);
+    }
+
+    private void setUpBackButton()
+    {
+        ImageView back = findViewById(R.id.imageViewBackButton_help);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }

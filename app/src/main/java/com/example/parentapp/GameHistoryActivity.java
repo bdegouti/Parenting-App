@@ -47,6 +47,7 @@ public class GameHistoryActivity extends AppCompatActivity {
         populateGameHistoryListView();
         setupClearHistoryButton();
         setClickableStatusForClearHistoryButton();
+        setUpBackButton();
 
         handleEmptyGameHistory();
     }
@@ -188,5 +189,16 @@ public class GameHistoryActivity extends AppCompatActivity {
 
             return gameView;
         }
+    }
+
+    private void setUpBackButton()
+    {
+        ImageView back = findViewById(R.id.imageViewBackButton_gameHistory);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }

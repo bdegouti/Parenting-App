@@ -70,6 +70,7 @@ public class TimerActivity extends AppCompatActivity {
         setUpStartCancelButton();
         updateTimer(timeLeft);
         startAnimationTimer();
+        setUpBackButton();
     }
 
     private void setUpChooseTimeButton() {
@@ -341,5 +342,16 @@ public class TimerActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void setUpBackButton()
+    {
+        ImageView back = findViewById(R.id.imageViewBackButton_timer);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }
