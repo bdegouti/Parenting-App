@@ -117,9 +117,11 @@ public class TaskListActivity extends AppCompatActivity {
             //fill up this view
             Task currentTask = taskManager.getTaskAtIndex(position);
 
+            //display task name
             TextView textViewName = taskView.findViewById(R.id.taskView_tvTaskName);
             textViewName.setText(currentTask.getName());
 
+            //display child name if children exist
             TextView textChildName = taskView.findViewById(R.id.taskView_tvChildName);
             ArrayList<Child> queueForThisTask = rotationManager.getQueueAtIndex(position+1);
             if(queueForThisTask.size() > 0) {

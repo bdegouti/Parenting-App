@@ -47,6 +47,7 @@ public class TaskAddEditActivity extends AppCompatActivity {
         Intent intentLeadingToMe = getIntent();
         indexOfTaskClicked = intentLeadingToMe.getIntExtra(TASK_INDEX, -1);
 
+        //if adding task, creates new task. if editing task, retrieves task from taskManager
         if(indexOfTaskClicked == -1)
         {
             task = new Task();
@@ -57,6 +58,7 @@ public class TaskAddEditActivity extends AppCompatActivity {
             setUpScreenTitle();
             prefillTaskInfo();
 
+            //only sets up task rotation card if there are children in children manager
             if(!rotationMan.isQueueEmpty(indexOfTaskClicked+1)) {
                 setUpCardViewWhoseTurn();
                 setUpMarkAsDoneButton();
@@ -236,6 +238,7 @@ public class TaskAddEditActivity extends AppCompatActivity {
         ImageView childImage = findViewById(R.id.imageViewChildImage_taskAddEdit);
         childImage.setImageResource(R.drawable.ice_cream);
 
+        //display child name stored in rotationManager
         ArrayList<Child> taskQ = rotationMan.getQueueAtIndex(indexOfTaskClicked+1);
         Child topChild = taskQ.get(0);
         TextView whoseTurnTv = findViewById(R.id.textViewItsSomebodysTurn_taskAddEdit);
