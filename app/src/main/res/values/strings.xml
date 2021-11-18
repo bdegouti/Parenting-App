@@ -9,7 +9,7 @@
     <string name="head">Head</string>
     <string name="tail">Tail</string>
     <string name="would_you_pick_head_or_tail">Would you pick head or tail?</string>
-    <string name="hi_its_someone_turn_to_pick">Hi %1$s, it\'s your turn to pick!</string>
+    <string name="hi_its_someone_turn_to_pick">Hi %1$s!</string>
     <string name="your_child_name">Your child name</string>
     <string name="add_a_new_child">Add a new child!</string>
     <string name="click_to_flip_the_coin_when_you_are_ready">Click to flip the coin when you are ready!</string>
@@ -75,7 +75,7 @@
     <string name="turn_of">Turn of: %1$s</string>
     <string name="all_my_tasks">All My Tasks</string>
     <string name="add_new_task">Add new task!</string>
-    <string name="its_somebody_turn">It\'s %1$s\'s turn!</string>
+    <string name="its_somebody_turn">It is %1$s\'s turn!</string>
     <string name="your_task_details">Your task details</string>
     <string name="my_tasks">My Tasks</string>
     <string name="no_kid_assigned">No kid assigned.</string>
