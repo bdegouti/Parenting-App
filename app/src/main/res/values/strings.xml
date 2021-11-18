@@ -75,7 +75,7 @@
     <string name="turn_of">Turn of: %1$s</string>
     <string name="all_my_tasks">All My Tasks</string>
     <string name="add_new_task">Add new task!</string>
-    <string name="its_somebody_turn">It is %1$s\'s turn!</string>
+    <string name="its_somebody_turn">%1$s\'s turn!</string>
     <string name="your_task_details">Your task details</string>
     <string name="my_tasks">My Tasks</string>
     <string name="no_kid_assigned">No kid assigned.</string>
