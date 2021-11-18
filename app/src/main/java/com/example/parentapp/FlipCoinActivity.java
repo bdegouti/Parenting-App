@@ -140,6 +140,7 @@ public class FlipCoinActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
         dialog.setContentView(R.layout.dialog_heads_tails);
 
         //set up picker name
@@ -188,6 +189,14 @@ public class FlipCoinActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = GameHistoryActivity.makeLaunchIntent(FlipCoinActivity.this);
                 startActivity(intent);
+            }
+        });
+
+        Button cancelBtn = dialog.findViewById(R.id.dialogHeadsTails_buttonCancel);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
