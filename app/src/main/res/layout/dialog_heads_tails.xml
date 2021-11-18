@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="300dp">
+    android:layout_height="310dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/dialogHeadsTails_cardView_askHeadsTails"
@@ -68,10 +68,11 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
                 android:width="30dp"
-                android:background="@drawable/rectangle_coral_pink_small_corner"
+                android:background="@drawable/rectangle_darkk_purple_small_corner"
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:text="@string/tail"
                 android:textAllCaps="false"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/dialogHeadsTails_textViewWhatYouWantToPick"
@@ -83,10 +84,11 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/rectangle_coral_pink_small_corner"
+                android:background="@drawable/rectangle_darkk_purple_small_corner"
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:text="@string/head"
                 android:textAllCaps="false"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/dialogHeadsTails_buttonTail"
@@ -97,7 +99,7 @@
                 android:layout_width="160dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/rectangle_coral_pink_small_corner"
+                android:background="@drawable/rectangle_light_orange_small_corner"
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:text="@string/select_another_kid"
                 android:textAllCaps="false"

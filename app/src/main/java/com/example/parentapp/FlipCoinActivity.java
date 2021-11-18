@@ -250,8 +250,7 @@ public class FlipCoinActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    int actualChildIndex = index + 1;
-                    rotationMan.moveKidAtThisIndexUpFront(0, actualChildIndex);
+                    rotationMan.moveKidAtThisIndexUpFront(0, index);
                     flipGame.setPickerName(gameQueue.get(0).getName());
                     displayDialogToAskForHeadTailChoice();
                 }
