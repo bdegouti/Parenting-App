@@ -156,6 +156,7 @@
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:text="@string/save"
                 android:textAllCaps="false"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/editTextNewChildName"

@@ -6,15 +6,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -131,40 +134,81 @@ public class FlipCoinActivity extends AppCompatActivity {
 
     private void displayDialogToAskForHeadTailChoice()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(FlipCoinActivity.this);
-        builder.setTitle(getString(R.string.hi_its_someone_turn_to_pick, flipGame.getPickerName()));
-        builder.setMessage(R.string.would_you_pick_head_or_tail);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(FlipCoinActivity.this);
+//        builder.setTitle(getString(R.string.hi_its_someone_turn_to_pick, flipGame.getPickerName()));
+//        builder.setMessage(R.string.would_you_pick_head_or_tail);
+//
+//        builder.setPositiveButton(R.string.head, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                flipGame.setPickerChoice(FlipCoinGame.FlipOptions.HEAD);
+//                startAnimationCardViewFlipResult();
+//            }
+//        });
+//
+//        builder.setNegativeButton(R.string.tail, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                flipGame.setPickerChoice(FlipCoinGame.FlipOptions.TAIL);
+//                startAnimationCardViewFlipResult();
+//            }
+//        });
+//
+//        builder.setNeutralButton(R.string.select_another_kid, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                CardView cv_select = findViewById(R.id.cardView_selectAnotherKid_flipCoin);
+//                populateChildrenQueueInsideCardView();
+//                Animation drift = AnimationUtils.loadAnimation(FlipCoinActivity.this, R.anim.drift_from_bottom);
+//                cv_select.setVisibility(View.VISIBLE);
+//                cv_select.startAnimation(drift);
+//            }
+//        });
+//
+//        AlertDialog dialog = builder.create();
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.show();
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        builder.setPositiveButton(R.string.head, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                flipGame.setPickerChoice(FlipCoinGame.FlipOptions.HEAD);
-                startAnimationCardViewFlipResult();
-            }
-        });
+        Dialog dialog = new Dialog(FlipCoinActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setContentView(R.layout.dialog_heads_tails);
+        dialog.show();
 
-        builder.setNegativeButton(R.string.tail, new DialogInterface.OnClickListener() {
+        Button tailBtn = dialog.findViewById(R.id.dialogHeadsTails_buttonTail);
+        tailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(View view) {
                 flipGame.setPickerChoice(FlipCoinGame.FlipOptions.TAIL);
+                dialog.dismiss();
                 startAnimationCardViewFlipResult();
             }
         });
 
-        builder.setNeutralButton(R.string.select_another_kid, new DialogInterface.OnClickListener() {
+        Button headBtn = dialog.findViewById(R.id.dialogHeadsTails_buttonHead);
+        headBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(View view) {
+                flipGame.setPickerChoice(FlipCoinGame.FlipOptions.HEAD);
+                dialog.dismiss();
+                startAnimationCardViewFlipResult();
+            }
+        });
+
+        Button selectAnotherKidBtn = dialog.findViewById(R.id.dialogHeadsTails_buttonSelectAnotherKid);
+        selectAnotherKidBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 CardView cv_select = findViewById(R.id.cardView_selectAnotherKid_flipCoin);
                 populateChildrenQueueInsideCardView();
                 Animation drift = AnimationUtils.loadAnimation(FlipCoinActivity.this, R.anim.drift_from_bottom);
+                dialog.dismiss();
                 cv_select.setVisibility(View.VISIBLE);
                 cv_select.startAnimation(drift);
             }
         });
-
-        AlertDialog dialog = builder.create();
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
     }
 
     private void populateChildrenQueueInsideCardView()

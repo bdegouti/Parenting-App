@@ -6,8 +6,8 @@
     <string name="dismiss">DISMISS</string>
     <string name="cancel">Cancel</string>
     <string name="dismiss_flip_result_without_saving">Dismiss flip coin result without saving?</string>
-    <string name="head">HEAD</string>
-    <string name="tail">TAIL</string>
+    <string name="head">Head</string>
+    <string name="tail">Tail</string>
     <string name="would_you_pick_head_or_tail">Would you pick head or tail?</string>
     <string name="hi_its_someone_turn_to_pick">Hi %1$s, it\'s your turn to pick!</string>
     <string name="your_child_name">Your child name</string>
