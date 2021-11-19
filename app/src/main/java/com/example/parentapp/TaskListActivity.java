@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,11 +49,13 @@ public class TaskListActivity extends AppCompatActivity {
         registerCallBackListenerForTaskListView();
         setupButtonAddNewTask();
         setUpBackButton();
+        handleEmptyState();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        startAnimOnAddChildButton();
         populateListView();
     }
 
@@ -98,6 +102,29 @@ public class TaskListActivity extends AppCompatActivity {
         ListView listview = findViewById(R.id.listView_taskList);
         listview.setAdapter(taskListAdapter);
         listview.setDivider(null);
+    }
+
+    private void handleEmptyState()
+    {
+        ImageView ivBigIceCream = findViewById(R.id.imageViewEmptyStateBigIceCream_taskList);
+        TextView tvNoChild = findViewById(R.id.textViewNoTasksToShow);
+        TextView tvInstruction = findViewById(R.id.textViewAddTaskInstruction);
+        if(taskManager.getSizeOfTaskList() == 0)
+        {
+            ivBigIceCream.setVisibility(View.VISIBLE);
+            tvNoChild.setVisibility(View.VISIBLE);
+            tvInstruction.setVisibility(View.VISIBLE);
+
+            Animation bounce = AnimationUtils.loadAnimation(TaskListActivity.this, R.anim.bounce);
+            ivBigIceCream.startAnimation(bounce);
+        }
+        else
+        {
+            ivBigIceCream.clearAnimation();
+            ivBigIceCream.setVisibility(View.INVISIBLE);
+            tvNoChild.setVisibility(View.INVISIBLE);
+            tvInstruction.setVisibility(View.INVISIBLE);
+        }
     }
 
     private class TaskListAdapter extends ArrayAdapter<Task>{
@@ -157,6 +184,13 @@ public class TaskListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void startAnimOnAddChildButton(){
+        Button button = findViewById(R.id.buttonAddTask_taskList);
+        Animation drift = AnimationUtils.loadAnimation(TaskListActivity.this, R.anim.drift_from_bottom);
+        button.setVisibility(View.VISIBLE);
+        button.startAnimation(drift);
     }
 
     public static Intent makeIntent(Context c){

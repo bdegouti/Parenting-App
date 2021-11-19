@@ -71,6 +71,10 @@
     <string name="resources_links">
         Ice cream image:\n<a href="https://www.subpng.com/png-6ih42k/">https://www.subpng.com/png-6ih42k/</a>\n
         Question mark icon:\n<a href="https://www.flaticon.com/free-icons/question-mark">https://www.flaticon.com/free-icons/question-mark</a>
+        Empty box image:\n<a href="https://www.flaticon.com/free-icon/open-box_869078">https://www.flaticon.com/free-icon/open-box_869078</a>
+        Task list icon:\n<a href="https://www.pngall.com/task-png/download/68562">https://www.pngall.com/task-png/download/68562</a>
+        Win icon:\n<a href="https://www.iconsdb.com/green-icons/ok-icon.html">https://www.iconsdb.com/green-icons/ok-icon.html</a>
+        Lose list icon:\n<a href="https://www.iconsdb.com/red-icons/x-mark-3-icon.html">https://www.iconsdb.com/red-icons/x-mark-3-icon.html</a>
     </string>
     <string name="turn_of">Turn of: %1$s</string>
     <string name="all_my_tasks">All My Tasks</string>
@@ -83,4 +87,6 @@
     <string name="adding_you_new_task">Adding you new task</string>
     <string name="your_task_name">Your task name</string>
     <string name="select_a_kid">Select a kid!</string>
+    <string name="no_tasks_added_yet">No tasks added yet</string>
+    <string name="you_can_add_tasks_by_clicking_the_button_below">You can add tasks by clicking the button below.</string>
 </resources>
