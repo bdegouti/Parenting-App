@@ -49,14 +49,14 @@ public class TaskListActivity extends AppCompatActivity {
         registerCallBackListenerForTaskListView();
         setupButtonAddNewTask();
         setUpBackButton();
-        handleEmptyState();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        startAnimOnAddChildButton();
         populateListView();
+        handleEmptyState();
+        startAnimOnAddChildButton();
     }
 
     @Override
@@ -107,12 +107,12 @@ public class TaskListActivity extends AppCompatActivity {
     private void handleEmptyState()
     {
         ImageView ivBigIceCream = findViewById(R.id.imageViewEmptyStateBigIceCream_taskList);
-        TextView tvNoChild = findViewById(R.id.textViewNoTasksToShow);
+        TextView tvNoTask = findViewById(R.id.textViewNoTasksToShow);
         TextView tvInstruction = findViewById(R.id.textViewAddTaskInstruction);
         if(taskManager.getSizeOfTaskList() == 0)
         {
             ivBigIceCream.setVisibility(View.VISIBLE);
-            tvNoChild.setVisibility(View.VISIBLE);
+            tvNoTask.setVisibility(View.VISIBLE);
             tvInstruction.setVisibility(View.VISIBLE);
 
             Animation bounce = AnimationUtils.loadAnimation(TaskListActivity.this, R.anim.bounce);
@@ -122,7 +122,7 @@ public class TaskListActivity extends AppCompatActivity {
         {
             ivBigIceCream.clearAnimation();
             ivBigIceCream.setVisibility(View.INVISIBLE);
-            tvNoChild.setVisibility(View.INVISIBLE);
+            tvNoTask.setVisibility(View.INVISIBLE);
             tvInstruction.setVisibility(View.INVISIBLE);
         }
     }
