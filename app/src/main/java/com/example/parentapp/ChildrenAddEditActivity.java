@@ -45,6 +45,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private ChildrenManager childrenManager;
     private RotationManager rotationMan;
     private Child child;
+    //variables used for child profile pic:
     private Uri imageUri;
     private ImageView portrait;
     private Bitmap bitmap;

@@ -10,6 +10,7 @@ public class Child {
     public Child()
     {
         name = "Nobody";
+        portrait = null;
     }
 
     public String getName()
