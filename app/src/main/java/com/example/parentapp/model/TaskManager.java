@@ -25,7 +25,10 @@ public class TaskManager {
     }
 
     public void addTask(Task t){
-        testNameExistence(t.getName());
+        int temp = getIndexOfTaskName(t.getName());
+        if(temp > -1) {
+            throw new IllegalArgumentException("This task name has already been taken");
+        }
         taskList.add(t);
     }
 
@@ -37,16 +40,17 @@ public class TaskManager {
         return taskList.get(index);
     }
 
-    public void testNameExistence(String name){
-        if(getIndexAtName(name) > -1){
+    public void testNameExistence(String name, int taskIndex) {
+        int temp = getIndexOfTaskName(name);
+        if(temp > -1 && temp != taskIndex) {
             throw new IllegalArgumentException("This task name has already been taken");
         }
     }
 
-    public int getIndexAtName(String name){
+    public int getIndexOfTaskName(String name){
         int index = -1;
         for(int i = 0; i < taskList.size(); i++){
-            if(taskList.get(i).getName().equals(name)){
+            if(taskList.get(i).getName().equals(name)) {
                 index = i;
                 break;
             }
