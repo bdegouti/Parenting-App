@@ -50,6 +50,53 @@
         app:layout_constraintTop_toTopOf="@+id/horizontal20_taskList"
         app:srcCompat="@drawable/rectangle_top_curve_dark_purple" />
 
+    <ImageView
+        android:id="@+id/imageViewEmptyStateBigIceCream_taskList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/textViewNoTasksToShow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontal20_taskList"
+        app:srcCompat="@drawable/ice_cream" />
+
+    <TextView
+        android:id="@+id/textViewNoTasksToShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/zenkurenaido_regular"
+        android:text="@string/no_tasks_added_yet"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddTask_taskList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontal20_taskList" />
+
+    <TextView
+        android:id="@+id/textViewAddTaskInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/zenkurenaido_regular"
+        android:text="@string/you_can_add_tasks_by_clicking_the_button_below"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNoTasksToShow" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/horizontal20_taskList"
         android:layout_width="wrap_content"
