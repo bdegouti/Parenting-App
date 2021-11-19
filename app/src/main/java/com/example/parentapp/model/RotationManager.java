@@ -97,7 +97,7 @@ public class RotationManager {
     {
         ArrayList<Child> targetQ = childrenQueues.get(queueIndex);
         ArrayList<Child> resultQ = new ArrayList<>();
-        for(int i=1; i < targetQ.size(); i++)
+        for(int i=0; i < targetQ.size(); i++)
         {
             resultQ.add(targetQ.get(i));
         }

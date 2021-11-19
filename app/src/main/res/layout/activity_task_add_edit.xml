@@ -10,29 +10,29 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_childTurn"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
         android:visibility="invisible"
         app:cardCornerRadius="35dp"
         app:cardElevation="10dp"
         app:cardMaxElevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal85_taskAddEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizontal50_taskAddEdit"
+        app:layout_constraintTop_toBottomOf="@+id/cardView_taskInfoAddEditTask"
         tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp">
 
             <Button
                 android:id="@+id/buttonMarkAsDone_taskAddEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/rectangle_gradient_green"
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:paddingHorizontal="15dp"
@@ -40,7 +40,6 @@
                 android:textAllCaps="false"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageViewChildImage_taskAddEdit"
                 app:layout_constraintStart_toStartOf="@+id/vertical35_cardViewChildTurn"
                 app:layout_constraintTop_toBottomOf="@+id/textViewItsSomebodysTurn_taskAddEdit" />
 
@@ -55,15 +54,12 @@
                 android:id="@+id/imageViewChildImage_taskAddEdit"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/buttonMarkAsDone_taskAddEdit"
                 app:layout_constraintEnd_toStartOf="@+id/vertical35_cardViewChildTurn"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars"/>
+                app:layout_constraintTop_toTopOf="@+id/textViewItsSomebodysTurn_taskAddEdit"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/textViewItsSomebodysTurn_taskAddEdit"
@@ -73,11 +69,11 @@
                 android:text="@string/its_somebody_turn"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
-                android:textSize="28sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/vertical35_cardViewChildTurn"
-                app:layout_constraintTop_toTopOf="@+id/imageViewChildImage_taskAddEdit" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -235,12 +231,12 @@
 
     <ImageView
         android:id="@+id/imageViewBackButton_addEditTask"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:maxWidth="40dp"
-        android:maxHeight="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:maxWidth="30dp"
+        android:maxHeight="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTitle_addEditTask"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_arrow_back_darkk_purple_24" />

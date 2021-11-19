@@ -157,6 +157,7 @@
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:text="@string/save"
                 android:textAllCaps="false"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/editTextNewChildName"
@@ -190,12 +191,12 @@
 
     <ImageView
         android:id="@+id/imageViewBackButton_addEditChild"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
         android:maxWidth="40dp"
         android:maxHeight="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTitleAddEditChild"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
