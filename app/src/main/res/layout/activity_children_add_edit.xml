@@ -74,8 +74,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_addEditChild"
-        android:layout_width="286dp"
-        android:layout_height="0dp"
+        android:layout_width="372dp"
+        android:layout_height="408dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="70dp"
         android:visibility="invisible"
@@ -122,7 +122,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/consLayout_cardView"
                 app:layout_constraintStart_toStartOf="@id/consLayout_cardView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.756" />
 
             <Button
                 android:id="@+id/buttonDeleteAddEditChild"
@@ -161,6 +162,29 @@
                 app:layout_constraintEnd_toEndOf="@+id/editTextNewChildName"
                 app:layout_constraintStart_toStartOf="@+id/vertial50_cardView_editChild"
                 app:layout_constraintTop_toBottomOf="@+id/editTextNewChildName" />
+
+            <Button
+                android:id="@+id/btnSelectPortrait"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Your Image"
+                app:layout_constraintBottom_toTopOf="@+id/textViewEnterChildName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewPortrait"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageViewPortrait"
+                android:layout_width="189dp"
+                android:layout_height="171dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnSelectPortrait"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_child_care_24" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

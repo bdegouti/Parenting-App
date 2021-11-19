@@ -5,6 +5,7 @@ package com.example.parentapp.model;
  */
 public class Child {
     private String name;
+    private String portrait;
 
     public Child()
     {
@@ -23,5 +24,13 @@ public class Child {
             throw new IllegalArgumentException("Child name cannot be empty!");
         }
         this.name = name;
+    }
+
+    public String getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        this.portrait = portrait;
     }
 }
