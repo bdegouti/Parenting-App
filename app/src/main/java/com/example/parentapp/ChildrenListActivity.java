@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,9 +58,9 @@ public class ChildrenListActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
         saveChildrenListToSharedPreferences();
-        super.onStop();
+        super.onPause();
     }
 
     private void saveChildrenListToSharedPreferences()
@@ -133,6 +134,12 @@ public class ChildrenListActivity extends AppCompatActivity {
             Child currentChild = childrenManager.getChildAtIndex(position);
             TextView textViewName = childView.findViewById(R.id.childView_textViewChildName);
             textViewName.setText(currentChild.getName());
+
+            if(currentChild.getPortrait() != null) {
+                ImageView avatar = childView.findViewById(R.id.childView_imageViewChildSymbol);
+                Bitmap bitmapPic = ChildrenAddEditActivity.decodeBase64(currentChild.getPortrait());
+                avatar.setImageBitmap(bitmapPic);
+            }
 
             return childView;
         }

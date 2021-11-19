@@ -384,7 +384,6 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
 
     public static Bitmap decodeBase64(String encodedImage) {
         byte[] decodedByte = Base64.decode(encodedImage, 0);
-        return BitmapFactory
-                .decodeByteArray(decodedByte, 0, decodedByte.length);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 }

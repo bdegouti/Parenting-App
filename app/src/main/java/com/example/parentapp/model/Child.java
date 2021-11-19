@@ -1,5 +1,9 @@
 package com.example.parentapp.model;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 /**
  * Child class represents a child entity with a name attribute in the app
  */
@@ -34,4 +38,5 @@ public class Child {
     public void setPortrait(String portrait) {
         this.portrait = portrait;
     }
+
 }
