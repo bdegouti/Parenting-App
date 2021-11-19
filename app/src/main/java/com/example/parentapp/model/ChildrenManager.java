@@ -50,64 +50,20 @@ public class ChildrenManager implements Iterable<Child>{
             throw new IllegalArgumentException("This name has already been taken!");
         }
         childrenList.add(newChild);
-        //System.out.println(childrenList.size());
     }
 
-    public void testNameExistence(String newName)
+    public void testNameExistence(String newName, int childIndex)
     {
         int temp = getIndexOfChildName(newName);
-        if(temp > -1)
+        if(temp > -1 && temp != childIndex)
         {
             throw new IllegalArgumentException("This name has already been taken!");
         }
-    }
-
-    public void replaceChild(int index, Child newChild)
-    {
-        int temp = getIndexOfChildName(newChild.getName());
-        if(temp != index && temp != -1)
-        {
-            throw new IllegalArgumentException("This name has already been taken!");
-        }
-
-        childrenList.remove(index);
-        childrenList.add(index, newChild);
     }
 
     public Child removeChild(int childIndex)
     {
         return childrenList.remove(childIndex);
-    }
-
-    public String getNameNextChildToPick(String lastPickChildName, int lastPickChildIndex)
-    {
-        int indexOfNextChild = -1;
-
-        int lastChildFound = getIndexOfChildName(lastPickChildName);
-        if(lastChildFound != -1)
-        {
-            indexOfNextChild = (lastChildFound + 1) % (childrenList.size());
-        }
-        else
-        {
-            if(childrenList.size() > 0)
-            {
-                if(lastPickChildIndex <= childrenList.size()) {
-                    indexOfNextChild = lastPickChildIndex % (childrenList.size());
-                }
-                else
-                {
-                    indexOfNextChild = 0;
-                }
-            }
-        }
-
-        if(indexOfNextChild > -1)
-        {
-            return childrenList.get(indexOfNextChild).getName();
-        }
-        else
-            return null;
     }
 
     public int getIndexOfChildName(String name)

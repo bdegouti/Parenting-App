@@ -155,7 +155,7 @@ public class TaskAddEditActivity extends AppCompatActivity {
             rotationMan.addNewTaskQueue(childrenMan);
         }
         else {
-            taskMan.testNameExistence(newTaskName);
+            taskMan.testNameExistence(newTaskName, indexOfTaskClicked);
             task.setName(newTaskName);
         }
     }
