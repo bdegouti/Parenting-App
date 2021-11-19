@@ -130,7 +130,8 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         etName.setText(childrenManager.getChildAtIndex(indexOfChildClicked).getName());
         etName.setSelection(etName.getText().length());
         if (childrenManager.getChildAtIndex(indexOfChildClicked).getPortrait() != null) {
-           // portrait.setImageBitmap(decodeBase64(childrenManager.getChildAtIndex(indexOfChildClicked).getPortrait()));
+            ImageView portraitIV = findViewById(R.id.imageViewPortrait);
+            portraitIV.setImageBitmap(decodeBase64(childrenManager.getChildAtIndex(indexOfChildClicked).getPortrait()));
         }
     }
 
