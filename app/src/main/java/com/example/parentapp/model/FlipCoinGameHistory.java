@@ -1,5 +1,7 @@
 package com.example.parentapp.model;
 
+import android.graphics.Bitmap;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,7 +39,9 @@ public class FlipCoinGameHistory {
         return this.gameList.get(index);
     }
 
-    public List<FlipCoinGame> getGameHistoryList(){ return gameList; }
+    public List<FlipCoinGame> getGameHistoryList() {
+        return gameList;
+    }
 
     public void addNewFlipCoinGame(FlipCoinGame game)
     {
@@ -69,6 +73,22 @@ public class FlipCoinGameHistory {
             Gson gson = new Gson();
             Type type = new TypeToken<ArrayList<FlipCoinGame>>(){}.getType();
             this.gameList = gson.fromJson(listAsJson, type);
+        }
+    }
+
+    public void updatePickerName(String oldName, String newName) {
+        for(FlipCoinGame flipGame: gameList) {
+            if(flipGame.getPickerName().equals(oldName)) {
+                flipGame.setPickerName(newName);
+            }
+        }
+    }
+
+    public void updatePickerPhoto(String name, Bitmap photo) {
+        for(FlipCoinGame flipGame: gameList){
+            if(flipGame.getPickerName().equals(name)) {
+                flipGame.setPickerPhoto(photo);
+            }
         }
     }
 }

@@ -143,6 +143,8 @@ public class FlipCoinActivity extends AppCompatActivity {
         pickerTv.setText(getString(R.string.hi_its_someone_turn_to_pick, flipGame.getPickerName()));
 
         //set up picker photo
+        ImageView pickerPhotoIV = dialog.findViewById(R.id.dialogHeadsTails_imageViewChildPhoto);
+        pickerPhotoIV.setImageBitmap(flipGame.getPickerPhoto());
 
         //set up buttons
         Button tailBtn = dialog.findViewById(R.id.dialogHeadsTails_buttonTail);
@@ -233,6 +235,11 @@ public class FlipCoinActivity extends AppCompatActivity {
             TextView textViewName = childView.findViewById(R.id.childView_textViewChildName);
             textViewName.setText(currentChild.getName());
 
+            if(currentChild.getPortrait() != null) {
+                ImageView ivPhoto = childView.findViewById(R.id.childView_imageViewChildSymbol);
+                ivPhoto.setImageBitmap(currentChild.getPortrait());
+            }
+
             return childView;
         }
     }
@@ -252,6 +259,7 @@ public class FlipCoinActivity extends AppCompatActivity {
                 if (clickedChild.getName().equals("Nobody"))
                 {
                     flipGame.setPickerName("Nobody");
+                    flipGame.setPickerPhoto(null);
                     dialogDecisionMade = true;
                     startAnimationCardViewFlipResult();
                 }
@@ -259,6 +267,7 @@ public class FlipCoinActivity extends AppCompatActivity {
                 {
                     rotationMan.moveKidAtThisIndexUpFront(0, index);
                     flipGame.setPickerName(gameQueue.get(0).getName());
+                    flipGame.setPickerPhoto(gameQueue.get(0).getPortrait());
                     displayDialogToAskForHeadTailChoice();
                 }
             }
@@ -287,6 +296,7 @@ public class FlipCoinActivity extends AppCompatActivity {
     {
         Child current = gameQueue.get(0);
         flipGame.setPickerName(current.getName());
+        flipGame.setPickerPhoto(current.getPortrait());
     }
 
     private void setUpCoinFlipOnClick()
