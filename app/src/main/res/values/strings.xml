@@ -89,4 +89,5 @@
     <string name="select_a_kid">Select a kid!</string>
     <string name="no_tasks_added_yet">No tasks added yet</string>
     <string name="you_can_add_tasks_by_clicking_the_button_below">You can add tasks by clicking the button below.</string>
+    <string name="no_kids_assigned">No kids assigned</string>
 </resources>

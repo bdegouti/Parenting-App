@@ -59,10 +59,9 @@ public class TaskAddEditActivity extends AppCompatActivity {
             prefillTaskInfo();
 
             //only sets up task rotation card if there are children in children manager
-            if(!rotationMan.isQueueEmpty(indexOfTaskClicked+1)) {
-                setUpCardViewWhoseTurn();
-                setUpMarkAsDoneButton();
-            }
+            setUpCardViewWhoseTurn();
+            setUpMarkAsDoneButton();
+            setClickableStatusForClearHistoryButton();
         }
 
         setUpSaveButton();
@@ -235,14 +234,22 @@ public class TaskAddEditActivity extends AppCompatActivity {
         CardView cv = findViewById(R.id.cardView_childTurn);
         cv.setVisibility(View.VISIBLE);
 
-        //display child name stored in rotationManager
-        ArrayList<Child> taskQ = rotationMan.getQueueAtIndex(indexOfTaskClicked+1);
-        Child topChild = taskQ.get(0);
         TextView whoseTurnTv = findViewById(R.id.textViewItsSomebodysTurn_taskAddEdit);
-        whoseTurnTv.setText(getString(R.string.its_somebody_turn, topChild.getName()));
-
         ImageView childImage = findViewById(R.id.imageViewChildImage_taskAddEdit);
-        childImage.setImageBitmap(topChild.getPortrait());
+
+        //if empty, display no kids assigned
+        if(rotationMan.isQueueEmpty(indexOfTaskClicked+1)){
+            whoseTurnTv.setText(R.string.no_kids_assigned);
+            childImage.setImageResource(R.drawable.question_mark);
+        }
+        else {
+            //display child name stored in rotationManager
+            ArrayList<Child> taskQ = rotationMan.getQueueAtIndex(indexOfTaskClicked + 1);
+            Child topChild = taskQ.get(0);
+
+            whoseTurnTv.setText(getString(R.string.its_somebody_turn, topChild.getName()));
+            childImage.setImageBitmap(topChild.getPortrait());
+        }
     }
 
     private void setUpMarkAsDoneButton() {
@@ -250,10 +257,20 @@ public class TaskAddEditActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rotationMan.rotateQueueAtIndex(indexOfTaskClicked+1);
+                rotationMan.rotateQueueAtIndex(indexOfTaskClicked + 1);
                 setUpCardViewWhoseTurn();
             }
         });
+    }
+
+    private void setClickableStatusForClearHistoryButton()
+    {
+        Button btn = findViewById(R.id.buttonMarkAsDone_taskAddEdit);
+        if(rotationMan.isQueueEmpty(indexOfTaskClicked+1))
+        {
+            btn.setClickable(false);
+            btn.setAlpha(0.4f);
+        }
     }
 
     private void setUpBackButton()
