@@ -38,5 +38,4 @@ public class Child {
     public void setPortrait(String portrait) {
         this.portrait = portrait;
     }
-
 }

@@ -376,10 +376,9 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     public static String encodeBitmapToString(Bitmap portrait) {
         Bitmap image = portrait;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        image.compress(Bitmap.CompressFormat.JPEG, 30, baos);
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-
         return imageEncoded;
     }
 
