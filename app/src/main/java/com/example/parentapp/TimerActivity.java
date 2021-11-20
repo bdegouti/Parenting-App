@@ -298,7 +298,7 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void stopVibration() {
-        this.vibrator.cancel();
+            this.vibrator.cancel();
     }
 
     private void sendNotification() {

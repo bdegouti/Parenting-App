@@ -8,7 +8,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,12 +25,16 @@ import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.RotationManager;
 
+import java.io.IOException;
+
 /**
  * ChildrenAddEditActivity represents the screen that support adding a new child, or editing information of an existing child.
  * This class saves the information of the new child (or changed information of an existing child) into ChildrenManager class,
  * which will be used throughout the app, including the FlipCoinActivity.
  */
 public class ChildrenAddEditActivity extends AppCompatActivity {
+    private static final int PICK_IMAGE_FROM_GALLERY = 1;
+    private static final int PICK_IMAGE_TAKING_PHOTO = 2;
     private static final String APP_PREFERENCES = "app preferences";
     private static final String ROTATION_MANAGER = "rotation manager";
     private static final String EXTRA_CHILD_INDEX = "child index";
@@ -35,6 +42,9 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private ChildrenManager childrenManager;
     private RotationManager rotationMan;
     private Child child;
+    //variables used for child profile pic:
+    private Bitmap bitmap;
+    private String result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +75,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         setUpDeleteButton();
         startAnimationInputCardViewAndSideBar();
         setUpBackButton();
+        setUpSelectPortraitButton();
     }
 
     @Override
@@ -83,6 +94,20 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_FROM_GALLERY && data != null) {
+            Uri imageUri = data.getData();
+            useImage(imageUri);
+        } else if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_TAKING_PHOTO && data != null) {
+            Bundle bundle = data.getExtras();
+            bitmap = (Bitmap) bundle.get("data");
+            ImageView portrait = findViewById(R.id.imageViewPortrait);
+            portrait.setImageBitmap(bitmap);
+        }
+    }
+
     public static Intent makeIntent(Context c)
     {
         return new Intent(c, ChildrenAddEditActivity.class);
@@ -97,9 +122,16 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
 
     private void prefillChildInfo()
     {
+        //pre-fill child's name
         EditText etName = findViewById(R.id.editTextNewChildName);
         etName.setText(childrenManager.getChildAtIndex(indexOfChildClicked).getName());
         etName.setSelection(etName.getText().length());
+
+        //prefill child's photo
+        if (childrenManager.getChildAtIndex(indexOfChildClicked).getPortrait() != null) {
+            ImageView portraitIV = findViewById(R.id.imageViewPortrait);
+            portraitIV.setImageBitmap(childrenManager.getChildAtIndex(indexOfChildClicked).getPortrait());
+        }
     }
 
     private void validateAndSaveChildInfo()
@@ -110,15 +142,26 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         if(indexOfChildClicked == -1)
         {
             child.setName(newChildName);
+            if (bitmap != null) {
+                child.setPortrait(bitmap);
+            }
             childrenManager.addChild(child);
             rotationMan.addChildToAllQueues(child);
         }
         else
         {
+            //update name
             childrenManager.testNameExistence(newChildName, indexOfChildClicked);
             String oldName = child.getName();
             child.setName(newChildName);
             rotationMan.renameChildInAllQueues(oldName, child.getName());
+
+            //update photo
+            if(bitmap != null)
+            {
+                child.setPortrait(bitmap);
+                rotationMan.updateChildPhotoOnAllQueues(child.getName(), child.getPortrait());
+            }
         }
     }
 
@@ -180,6 +223,10 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         {
             String oldName = childrenManager.getChildAtIndex(indexOfChildClicked).getName();
             if(!newName.equals(oldName))
+            {
+                changeDetected = true;
+            }
+            if(bitmap != null)
             {
                 changeDetected = true;
             }
@@ -272,4 +319,66 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         });
     }
 
+    private void setUpSelectPortraitButton() {
+        String[] portraitOptions = {"Pick from gallery", "Take a photo"};
+        Button selectPortrait = findViewById(R.id.btnSelectPortrait);
+
+        selectPortrait.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog optionDialog;
+                AlertDialog.Builder optionBuilder = new AlertDialog.Builder(ChildrenAddEditActivity.this);
+
+                optionBuilder.setSingleChoiceItems(portraitOptions, -1,
+                        (((dialogInterface, position) -> result = portraitOptions[position])));
+
+                optionBuilder.setPositiveButton("OK", (((dialogInterface, i) -> {
+                    switch (result) {
+                        case "Pick from gallery":
+                            openGallery();
+                            break;
+
+                        case "Take a photo":
+                            openCamera();
+                            break;
+
+                        default:
+                            break;
+                    }
+                })));
+
+                optionBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(ChildrenAddEditActivity.this, getString(R.string.cancelled), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                optionDialog = optionBuilder.create();
+                optionDialog.show();
+            }
+        });
+    }
+
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE_FROM_GALLERY);
+    }
+
+    private void openCamera() {
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (camera.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(camera, PICK_IMAGE_TAKING_PHOTO);
+        }
+    }
+
+    private void useImage(Uri uri) {
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ImageView portrait = findViewById(R.id.imageViewPortrait);
+        portrait.setImageBitmap(bitmap);
+    }
 }

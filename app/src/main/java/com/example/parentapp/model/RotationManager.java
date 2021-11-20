@@ -1,5 +1,7 @@
 package com.example.parentapp.model;
 
+import android.graphics.Bitmap;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -142,5 +144,14 @@ public class RotationManager {
     public void deleteTaskQueue(int queueIndex)
     {
         childrenQueues.remove(queueIndex);
+    }
+
+    public void updateChildPhotoOnAllQueues(String childName, Bitmap newBitmapPhoto) {
+        for(int i=0; i < childrenQueues.size(); i++) {
+            int childIndex = getIndexOfChildName(i, childName);
+            if(childIndex > -1) {
+                childrenQueues.get(i).get(childIndex).setPortrait(newBitmapPhoto);
+            }
+        }
     }
 }
