@@ -46,7 +46,6 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private RotationManager rotationMan;
     private Child child;
     //variables used for child profile pic:
-    private Uri imageUri;
     private ImageView portrait;
     private Bitmap bitmap;
     private String result;
@@ -103,7 +102,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_FROM_GALLERY && data != null) {
-            imageUri = data.getData();
+            Uri imageUri = data.getData();
             useImage(imageUri);
         } else if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_TAKING_PHOTO && data != null) {
             Bundle bundle = data.getExtras();
@@ -378,8 +377,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 30, baos);
         byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-        return imageEncoded;
+        return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
     public static Bitmap decodeBase64(String encodedImage) {
