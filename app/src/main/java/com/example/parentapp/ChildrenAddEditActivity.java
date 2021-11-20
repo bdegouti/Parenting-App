@@ -9,11 +9,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -27,7 +25,6 @@ import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.RotationManager;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**

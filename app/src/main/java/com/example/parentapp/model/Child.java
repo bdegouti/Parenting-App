@@ -44,9 +44,8 @@ public class Child {
     // The two method below I adapted from:
     // https://stackoverflow.com/questions/18072448/how-to-save-image-in-shared-preference-in-android-shared-preference-issue-in-a
     private String encodeBitmapToString(Bitmap portrait) {
-        Bitmap image = portrait;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 30, baos);
+        portrait.compress(Bitmap.CompressFormat.JPEG, 30, baos);
         byte[] b = baos.toByteArray();
         return Base64.encodeToString(b, Base64.DEFAULT);
     }

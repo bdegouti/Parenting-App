@@ -2,19 +2,16 @@ package com.example.parentapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,11 +26,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.parentapp.model.Child;
-import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.FlipCoinGame;
 import com.example.parentapp.model.FlipCoinGameHistory;
 import com.example.parentapp.model.RotationManager;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
