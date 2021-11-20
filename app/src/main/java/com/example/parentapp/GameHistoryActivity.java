@@ -177,11 +177,19 @@ public class GameHistoryActivity extends AppCompatActivity {
             if(currentGame.getPickerName().equals("Nobody")) {
                 //display flip result
                 tvResult.setText(getString(R.string.picked_vs_result, "N/A", currentGame.getResult().toString()));
-
                 //set up icon
                 resultIcon.setBackgroundResource(R.drawable.ic_baseline_sentiment_neutral_24);
             }
             else {
+                //display child's photo
+                ImageView ivChildPhoto = gameView.findViewById(R.id.gameViewCard_imageView_childPhoto);
+                if(currentGame.getPickerPhoto() != null) {
+                    ivChildPhoto.setImageBitmap(currentGame.getPickerPhoto());
+                }
+                else {
+                    ivChildPhoto.setBackgroundResource(R.drawable.ice_cream);
+                }
+
                 //display flip result
                 tvResult.setText(getString(R.string.picked_vs_result,
                         currentGame.getPickerChoice().toString(),
