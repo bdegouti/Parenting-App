@@ -43,8 +43,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private RotationManager rotationMan;
     private Child child;
     //variables used for child profile pic:
-    private ImageView portrait;
-    private Bitmap bitmap;
+    private Bitmap bitmap = null;
     private String result;
 
     @Override
@@ -104,6 +103,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         } else if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_TAKING_PHOTO && data != null) {
             Bundle bundle = data.getExtras();
             bitmap = (Bitmap) bundle.get("data");
+            ImageView portrait = findViewById(R.id.imageViewPortrait);
             portrait.setImageBitmap(bitmap);
         }
     }
@@ -122,9 +122,12 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
 
     private void prefillChildInfo()
     {
+        //pre-fill child's name
         EditText etName = findViewById(R.id.editTextNewChildName);
         etName.setText(childrenManager.getChildAtIndex(indexOfChildClicked).getName());
         etName.setSelection(etName.getText().length());
+
+        //prefill child's photo
         if (childrenManager.getChildAtIndex(indexOfChildClicked).getPortrait() != null) {
             ImageView portraitIV = findViewById(R.id.imageViewPortrait);
             portraitIV.setImageBitmap(childrenManager.getChildAtIndex(indexOfChildClicked).getPortrait());
@@ -147,10 +150,18 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         }
         else
         {
+            //update name
             childrenManager.testNameExistence(newChildName, indexOfChildClicked);
             String oldName = child.getName();
             child.setName(newChildName);
             rotationMan.renameChildInAllQueues(oldName, child.getName());
+
+            //update photo
+            if(bitmap != null)
+            {
+                child.setPortrait(bitmap);
+                rotationMan.updateChildPhotoOnAllQueues(child.getName(), child.getPortrait());
+            }
         }
     }
 
@@ -212,6 +223,10 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         {
             String oldName = childrenManager.getChildAtIndex(indexOfChildClicked).getName();
             if(!newName.equals(oldName))
+            {
+                changeDetected = true;
+            }
+            if(bitmap != null)
             {
                 changeDetected = true;
             }
@@ -307,7 +322,6 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private void setUpSelectPortraitButton() {
         String[] portraitOptions = {"Pick from gallery", "Take a photo"};
         Button selectPortrait = findViewById(R.id.btnSelectPortrait);
-        portrait = findViewById(R.id.imageViewPortrait);
 
         selectPortrait.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -364,6 +378,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ImageView portrait = findViewById(R.id.imageViewPortrait);
         portrait.setImageBitmap(bitmap);
     }
 }

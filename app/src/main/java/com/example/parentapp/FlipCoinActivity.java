@@ -142,6 +142,8 @@ public class FlipCoinActivity extends AppCompatActivity {
         TextView pickerTv = dialog.findViewById(R.id.dialogHeadsTails_textViewHiPicker);
         pickerTv.setText(getString(R.string.hi_its_someone_turn_to_pick, flipGame.getPickerName()));
 
+        //set up picker photo
+
         //set up buttons
         Button tailBtn = dialog.findViewById(R.id.dialogHeadsTails_buttonTail);
         tailBtn.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +193,7 @@ public class FlipCoinActivity extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
                 finish();
             }
         });

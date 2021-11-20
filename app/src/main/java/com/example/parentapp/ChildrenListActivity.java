@@ -137,10 +137,8 @@ public class ChildrenListActivity extends AppCompatActivity {
 
             if(currentChild.getPortrait() != null) {
                 ImageView avatar = childView.findViewById(R.id.childView_imageViewChildSymbol);
-                Bitmap bitmapPic = currentChild.getPortrait();
-                avatar.setImageBitmap(bitmapPic);
+                avatar.setImageBitmap(currentChild.getPortrait());
             }
-
             return childView;
         }
     }

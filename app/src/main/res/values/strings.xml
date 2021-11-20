@@ -45,7 +45,7 @@
     <string name="customize_your_duration_in_minutes">Customize your duration in minutes:</string>
     <string name="submit">SUBMIT</string>
     <string name="please_enter_a_positive_integer_for_minutes">Please enter a positive integer for minutes.</string>
-    <string name="cancelled">CANCELED</string>
+    <string name="cancelled">Cancelled</string>
     <string name="times_up">Times up!</string>
     <string name="click_on_this_message_to_return">Click on this message to return to that app screen and stop alarm sound.</string>
     <string name="are_you_sure_you_want_to_delete_this_child">Are you sure you want to delete this child?</string>
