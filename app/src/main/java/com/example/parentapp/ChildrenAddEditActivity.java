@@ -43,7 +43,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private RotationManager rotationMan;
     private Child child;
     //variables used for child profile pic:
-    private Bitmap bitmap = null;
+    private Bitmap bitmap;
     private String result;
 
     @Override
