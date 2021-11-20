@@ -34,11 +34,18 @@ public class Child {
     }
 
     public Bitmap getPortrait() {
-        return decodeBase64(portrait);
+        if (portrait != null) {
+             return decodeBase64(portrait);
+        }
+        return null;
     }
 
     public void setPortrait(Bitmap portrait) {
-        this.portrait = encodeBitmapToString(portrait);
+        if (portrait != null) {
+            this.portrait = encodeBitmapToString(portrait);
+        } else {
+            this.portrait = null;
+        }
     }
 
     // The two method below I adapted from:
