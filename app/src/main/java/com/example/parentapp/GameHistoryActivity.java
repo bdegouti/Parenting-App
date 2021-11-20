@@ -167,6 +167,7 @@ public class GameHistoryActivity extends AppCompatActivity {
             TextView tvDaT = gameView.findViewById(R.id.gameViewCard_textViewCreationTime);
             TextView tvResult = gameView.findViewById(R.id.gameViewCard_textViewResultFlip);
             ImageView resultIcon = gameView.findViewById(R.id.gameViewCard_imageViewWinningSymbol);
+            ImageView ivChildPhoto = gameView.findViewById(R.id.gameViewCard_imageView_childPhoto);
 
             //display datetime creation
             tvDaT.setText(currentGame.getCreationDateTimeString());
@@ -175,6 +176,8 @@ public class GameHistoryActivity extends AppCompatActivity {
             tvName.setText(currentGame.getPickerName());
 
             if(currentGame.getPickerName().equals("Nobody")) {
+                //display nobody face
+                ivChildPhoto.setBackgroundResource(R.drawable.ic_baseline_sentiment_neutral_24);
                 //display flip result
                 tvResult.setText(getString(R.string.picked_vs_result, "N/A", currentGame.getResult().toString()));
                 //set up icon
@@ -182,7 +185,6 @@ public class GameHistoryActivity extends AppCompatActivity {
             }
             else {
                 //display child's photo
-                ImageView ivChildPhoto = gameView.findViewById(R.id.gameViewCard_imageView_childPhoto);
                 if(currentGame.getPickerPhoto() != null) {
                     ivChildPhoto.setImageBitmap(currentGame.getPickerPhoto());
                 }

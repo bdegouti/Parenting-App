@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
+import com.example.parentapp.model.FlipCoinGameHistory;
 import com.example.parentapp.model.RotationManager;
 
 import java.io.IOException;
@@ -38,9 +39,11 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private static final String APP_PREFERENCES = "app preferences";
     private static final String ROTATION_MANAGER = "rotation manager";
     private static final String EXTRA_CHILD_INDEX = "child index";
+    private static final String GAME_LIST = "game list";
     private int indexOfChildClicked;
     private ChildrenManager childrenManager;
     private RotationManager rotationMan;
+    private FlipCoinGameHistory gameHistory;
     private Child child;
     //variables used for child profile pic:
     private Bitmap bitmap;
@@ -55,6 +58,8 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
 
         rotationMan = RotationManager.getInstance();
         loadRotationManagerFromSharedPreferences();
+
+        gameHistory = FlipCoinGameHistory.getInstance();
 
         //extract all extras
         Intent intentLeadingToMe = getIntent();
@@ -81,6 +86,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         saveRotationManagerToSharedPreferences();
+        saveGameHistoryToSharedPreferences();
         super.onPause();
     }
 
@@ -155,12 +161,14 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
             String oldName = child.getName();
             child.setName(newChildName);
             rotationMan.renameChildInAllQueues(oldName, child.getName());
+            gameHistory.updatePickerName(oldName, child.getName());
 
             //update photo
             if(bitmap != null)
             {
                 child.setPortrait(bitmap);
                 rotationMan.updateChildPhotoOnAllQueues(child.getName(), child.getPortrait());
+                gameHistory.updatePickerPhoto(child.getName(), child.getPortrait());
             }
         }
     }
@@ -380,5 +388,15 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         }
         ImageView portrait = findViewById(R.id.imageViewPortrait);
         portrait.setImageBitmap(bitmap);
+    }
+
+    private void saveGameHistoryToSharedPreferences()
+    {
+        String gameListJson = this.gameHistory.convertHistoryToJson();
+
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(GAME_LIST, gameListJson);
+        editor.apply();
     }
 }

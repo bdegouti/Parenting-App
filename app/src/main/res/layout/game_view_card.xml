@@ -85,8 +85,7 @@
                 android:maxHeight="25dp"
                 app:layout_constraintBottom_toBottomOf="@+id/gameViewCard_textViewPickerName"
                 app:layout_constraintStart_toEndOf="@+id/gameViewCard_textViewPickerName"
-                app:layout_constraintTop_toTopOf="@+id/gameViewCard_textViewPickerName"
-                app:srcCompat="@drawable/ic_baseline_sentiment_neutral_24" />
+                app:layout_constraintTop_toTopOf="@+id/gameViewCard_textViewPickerName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

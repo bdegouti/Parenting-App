@@ -144,7 +144,12 @@ public class FlipCoinActivity extends AppCompatActivity {
 
         //set up picker photo
         ImageView pickerPhotoIV = dialog.findViewById(R.id.dialogHeadsTails_imageViewChildPhoto);
-        pickerPhotoIV.setImageBitmap(flipGame.getPickerPhoto());
+        if(flipGame.getPickerPhoto() != null) {
+            pickerPhotoIV.setImageBitmap(flipGame.getPickerPhoto());
+        }
+        else {
+            pickerPhotoIV.setBackgroundResource(R.drawable.ice_cream);
+        }
 
         //set up buttons
         Button tailBtn = dialog.findViewById(R.id.dialogHeadsTails_buttonTail);
@@ -305,9 +310,12 @@ public class FlipCoinActivity extends AppCompatActivity {
         imageViewCoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //clean up result text view
                 TextView tvResult = findViewById(R.id.textViewFlipResult);
                 tvResult.setText(R.string.three_dots);
+
+                TextView clickCoinTV = findViewById(R.id.textViewClickCoin);
+                clickCoinTV.setVisibility(View.INVISIBLE);
+
                 //set datetime
                 flipGame.setLocalDateTime();
                 //generate random flip
@@ -321,7 +329,6 @@ public class FlipCoinActivity extends AppCompatActivity {
                 {
                     flipGame.setResult(FlipCoinGame.FlipOptions.TAIL);
                 }
-
                 performFlipCoin();
                 imageViewCoin.setOnClickListener(null);
             }
