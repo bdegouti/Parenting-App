@@ -148,7 +148,7 @@ public class FlipCoinActivity extends AppCompatActivity {
             pickerPhotoIV.setImageBitmap(flipGame.getPickerPhoto());
         }
         else {
-            pickerPhotoIV.setBackgroundResource(R.drawable.ice_cream);
+            pickerPhotoIV.setImageResource(R.drawable.ice_cream);
         }
 
         //set up buttons

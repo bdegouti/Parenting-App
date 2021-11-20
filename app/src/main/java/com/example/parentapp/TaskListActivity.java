@@ -157,7 +157,7 @@ public class TaskListActivity extends AppCompatActivity {
                 textChildName.setText(getString(R.string.turn_of, topChild.getName()));
             }
             else{
-                textChildName.setText(R.string.no_kid_assigned);
+                textChildName.setText(R.string.no_kids_assigned);
             }
 
             return taskView;

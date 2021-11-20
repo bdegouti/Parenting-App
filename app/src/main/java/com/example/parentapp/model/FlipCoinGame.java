@@ -14,7 +14,7 @@ import java.time.format.FormatStyle;
 public class FlipCoinGame {
     public enum FlipOptions {HEAD, TAIL}
     private String creationDateTimeString;
-    private Child picker;
+    private final Child picker;
     private FlipOptions pickerChoice;
     private FlipOptions result;
 

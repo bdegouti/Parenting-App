@@ -177,11 +177,11 @@ public class GameHistoryActivity extends AppCompatActivity {
 
             if(currentGame.getPickerName().equals("Nobody")) {
                 //display nobody face
-                ivChildPhoto.setBackgroundResource(R.drawable.ic_baseline_sentiment_neutral_24);
+                ivChildPhoto.setImageResource(R.drawable.ic_baseline_sentiment_neutral_24);
                 //display flip result
                 tvResult.setText(getString(R.string.picked_vs_result, "N/A", currentGame.getResult().toString()));
                 //set up icon
-                resultIcon.setBackgroundResource(R.drawable.ic_baseline_sentiment_neutral_24);
+                resultIcon.setImageResource(R.drawable.ic_baseline_sentiment_neutral_24);
             }
             else {
                 //display child's photo
@@ -189,7 +189,7 @@ public class GameHistoryActivity extends AppCompatActivity {
                     ivChildPhoto.setImageBitmap(currentGame.getPickerPhoto());
                 }
                 else {
-                    ivChildPhoto.setBackgroundResource(R.drawable.ice_cream);
+                    ivChildPhoto.setImageResource(R.drawable.ice_cream);
                 }
 
                 //display flip result
@@ -199,9 +199,9 @@ public class GameHistoryActivity extends AppCompatActivity {
 
                 //set up icon
                 if (currentGame.getPickerChoice() == currentGame.getResult()) {
-                    resultIcon.setBackgroundResource(R.drawable.win_icon);
+                    resultIcon.setImageResource(R.drawable.win_icon);
                 } else {
-                    resultIcon.setBackgroundResource(R.drawable.lose_icon);
+                    resultIcon.setImageResource(R.drawable.lose_icon);
                 }
             }
 
