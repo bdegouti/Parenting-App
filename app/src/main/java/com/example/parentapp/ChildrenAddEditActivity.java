@@ -130,7 +130,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         etName.setSelection(etName.getText().length());
         if (childrenManager.getChildAtIndex(indexOfChildClicked).getPortrait() != null) {
             ImageView portraitIV = findViewById(R.id.imageViewPortrait);
-            portraitIV.setImageBitmap(decodeBase64(childrenManager.getChildAtIndex(indexOfChildClicked).getPortrait()));
+            portraitIV.setImageBitmap(childrenManager.getChildAtIndex(indexOfChildClicked).getPortrait());
         }
     }
 
@@ -143,7 +143,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         {
             child.setName(newChildName);
             if (bitmap != null) {
-                child.setPortrait(encodeBitmapToString(bitmap));
+                child.setPortrait(bitmap);
             }
             childrenManager.addChild(child);
             rotationMan.addChildToAllQueues(child);
@@ -368,20 +368,5 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         portrait.setImageBitmap(bitmap);
-    }
-
-    // The two method below I adapted from:
-    // https://stackoverflow.com/questions/18072448/how-to-save-image-in-shared-preference-in-android-shared-preference-issue-in-a
-    public static String encodeBitmapToString(Bitmap portrait) {
-        Bitmap image = portrait;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 30, baos);
-        byte[] b = baos.toByteArray();
-        return Base64.encodeToString(b, Base64.DEFAULT);
-    }
-
-    public static Bitmap decodeBase64(String encodedImage) {
-        byte[] decodedByte = Base64.decode(encodedImage, 0);
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 }

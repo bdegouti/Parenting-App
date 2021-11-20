@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
+
 /**
  * Child class represents a child entity with a name attribute in the app
  */
@@ -31,11 +33,26 @@ public class Child {
         this.name = name;
     }
 
-    public String getPortrait() {
-        return portrait;
+    public Bitmap getPortrait() {
+        return decodeBase64(portrait);
     }
 
-    public void setPortrait(String portrait) {
-        this.portrait = portrait;
+    public void setPortrait(Bitmap portrait) {
+        this.portrait = encodeBitmapToString(portrait);
+    }
+
+    // The two method below I adapted from:
+    // https://stackoverflow.com/questions/18072448/how-to-save-image-in-shared-preference-in-android-shared-preference-issue-in-a
+    private String encodeBitmapToString(Bitmap portrait) {
+        Bitmap image = portrait;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 30, baos);
+        byte[] b = baos.toByteArray();
+        return Base64.encodeToString(b, Base64.DEFAULT);
+    }
+
+    private Bitmap decodeBase64(String encodedImage) {
+        byte[] decodedByte = Base64.decode(encodedImage, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 }

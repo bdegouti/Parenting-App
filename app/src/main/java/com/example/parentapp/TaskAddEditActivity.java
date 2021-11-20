@@ -235,15 +235,14 @@ public class TaskAddEditActivity extends AppCompatActivity {
         CardView cv = findViewById(R.id.cardView_childTurn);
         cv.setVisibility(View.VISIBLE);
 
-        //TODO: fill child image
-        ImageView childImage = findViewById(R.id.imageViewChildImage_taskAddEdit);
-        childImage.setImageResource(R.drawable.ice_cream);
-
         //display child name stored in rotationManager
         ArrayList<Child> taskQ = rotationMan.getQueueAtIndex(indexOfTaskClicked+1);
         Child topChild = taskQ.get(0);
         TextView whoseTurnTv = findViewById(R.id.textViewItsSomebodysTurn_taskAddEdit);
         whoseTurnTv.setText(getString(R.string.its_somebody_turn, topChild.getName()));
+
+        ImageView childImage = findViewById(R.id.imageViewChildImage_taskAddEdit);
+        childImage.setImageBitmap(topChild.getPortrait());
     }
 
     private void setUpMarkAsDoneButton() {
