@@ -51,6 +51,7 @@ public class TaskAddEditActivity extends AppCompatActivity {
         if(indexOfTaskClicked == -1)
         {
             task = new Task();
+            enableEditMode();
         }
         else
         {
@@ -263,7 +264,9 @@ public class TaskAddEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 rotationMan.rotateQueueAtIndex(indexOfTaskClicked + 1);
-                setUpCardViewWhoseTurn();
+                Child newTopKid = rotationMan.getQueueAtIndex(indexOfTaskClicked+1).get(0);
+                Toast.makeText(TaskAddEditActivity.this,  getString(R.string.task_is_now_assigned_to_somebody, newTopKid.getName()), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
@@ -297,16 +300,22 @@ public class TaskAddEditActivity extends AppCompatActivity {
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editBtn.setVisibility(View.INVISIBLE);
-
-                Button deleteBtn = findViewById(R.id.buttonDelete_cardViewTaskInfo);
-                deleteBtn.setVisibility(View.VISIBLE);
-
-                Button saveBtn = findViewById(R.id.buttonSave_cardViewTaskInfo);
-                saveBtn.setVisibility(View.VISIBLE);
-
-                etName.setEnabled(true);
+               enableEditMode();
             }
         });
+    }
+
+    public void enableEditMode() {
+        Button editBtn = findViewById(R.id.buttonEdit_taskAddEdit);
+        editBtn.setVisibility(View.INVISIBLE);
+
+        Button deleteBtn = findViewById(R.id.buttonDelete_cardViewTaskInfo);
+        deleteBtn.setVisibility(View.VISIBLE);
+
+        Button saveBtn = findViewById(R.id.buttonSave_cardViewTaskInfo);
+        saveBtn.setVisibility(View.VISIBLE);
+
+        EditText etName = findViewById(R.id.editTextTaskName_taskAddEdit);
+        etName.setEnabled(true);
     }
 }

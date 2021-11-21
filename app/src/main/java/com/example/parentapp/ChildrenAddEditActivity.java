@@ -40,6 +40,8 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private static final String ROTATION_MANAGER = "rotation manager";
     private static final String EXTRA_CHILD_INDEX = "child index";
     private static final String GAME_LIST = "game list";
+    private final String PICK_FROM_GALLERY = "Pick from gallery";
+    private final String TAKE_A_PHOTO = "Take a photo";
     private int indexOfChildClicked;
     private ChildrenManager childrenManager;
     private RotationManager rotationMan;
@@ -47,7 +49,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private Child child;
     //variables used for child profile pic:
     private Bitmap bitmap;
-    private String result;
+    private String result = TAKE_A_PHOTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,8 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         {
             child = childrenManager.getChildAtIndex(indexOfChildClicked);
             prefillChildInfo();
+            Button selectImageBtn = findViewById(R.id.btnSelectPortrait);
+            selectImageBtn.setText(R.string.edit_profile_photo);
         }
 
         setUpScreenTitle();
@@ -328,7 +332,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     }
 
     private void setUpSelectPortraitButton() {
-        String[] portraitOptions = {"Pick from gallery", "Take a photo"};
+        String[] portraitOptions = {PICK_FROM_GALLERY, TAKE_A_PHOTO};
         Button selectPortrait = findViewById(R.id.btnSelectPortrait);
 
         selectPortrait.setOnClickListener(new View.OnClickListener() {
@@ -337,16 +341,16 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
                 AlertDialog optionDialog;
                 AlertDialog.Builder optionBuilder = new AlertDialog.Builder(ChildrenAddEditActivity.this);
 
-                optionBuilder.setSingleChoiceItems(portraitOptions, -1,
+                optionBuilder.setSingleChoiceItems(portraitOptions, 1,
                         (((dialogInterface, position) -> result = portraitOptions[position])));
 
                 optionBuilder.setPositiveButton("OK", (((dialogInterface, i) -> {
                     switch (result) {
-                        case "Pick from gallery":
+                        case PICK_FROM_GALLERY:
                             openGallery();
                             break;
 
-                        case "Take a photo":
+                        case TAKE_A_PHOTO:
                             openCamera();
                             break;
 
