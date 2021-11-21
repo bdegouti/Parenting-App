@@ -56,15 +56,17 @@
     <string name="about_us">About us</string>
     <string name="the_parent_app">The Parent App</string>
     <string name="the_parent_app_explained">
-        The parent app is a utility app that helps parents handle kids\' everyday problems. Our app helps
+        The parent app is a utility app that helps parents handle kids\' everyday problems.\nOur app helps
         you to impose fairness between your kids by rotating turns to flip the coin. And don\'t worry,
-        all coin flip history of your kids will be saved! With our app, you can also use the timer to
-        set a countdown time for your kids to calm down (or for yourself to have some peace!).\nEnjoy the app!
+        all coin flip history of your kids will be saved!\nWith our app, you can also use the timer to
+        set a countdown time for your kids to calm down (or for yourself to have some peace!).\nThe
+        app also maintain a task list that helps you keep track of which kid is assigned to the task.\nEnjoy the app!
     </string>
 
     <string name="authors">Authors</string>
     <string name="authors_listing">
-        This app is created by team Scandium, our team includes:\nCheng Zhang (Oliver)\nNguyenAiVy Tran (Ivy)\nBen de Goutiere\nNick
+        This app is created by team Scandium, our team includes:\nCheng Zhang (Oliver)\nNguyenAiVy Tran (Ivy)\nBen de Goutiere\nJunhang Wu (Nick)\n
+        We are from Fall 2021 CMPT276: <a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home</a>
     </string>
 
     <string name="resources">Resources</string>
@@ -76,6 +78,7 @@
         Win icon:\n<a href="https://www.iconsdb.com/green-icons/ok-icon.html">https://www.iconsdb.com/green-icons/ok-icon.html</a>\n
         Lose list icon:\n<a href="https://www.iconsdb.com/red-icons/x-mark-3-icon.html">https://www.iconsdb.com/red-icons/x-mark-3-icon.html</a>
     </string>
+
     <string name="turn_of">Turn of: %1$s</string>
     <string name="all_my_tasks">All My Tasks</string>
     <string name="add_new_task">Add new task!</string>

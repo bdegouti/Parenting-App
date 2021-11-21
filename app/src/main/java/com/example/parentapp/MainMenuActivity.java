@@ -17,7 +17,8 @@ import com.example.parentapp.model.FlipCoinGameHistory;
 
 /**
  * MainMenuActivity class provides a means to navigate between all other activities.
- * It has button that leads user to a new flip coin game, to game history list, to the countdown timer, and to children list.
+ * It has button that leads user to a flip coin game, to the countdown timer, to the tasks list, and to children list.
+ * It also provides a question mark button in the corner to navigate to the Help screen.
  */
 public class MainMenuActivity extends AppCompatActivity {
     private ChildrenManager childrenManager;

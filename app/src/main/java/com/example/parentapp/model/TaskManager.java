@@ -6,6 +6,11 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * TaskManager class contains the list of all tasks in the app.
+ * TaskManager class can add a new task, remove a task, and allows editing and retrieving information of a task.
+ * This class can also convert itself to json and from json format.
+ */
 public class TaskManager {
     private ArrayList<Task> taskList;
     private static TaskManager instance;

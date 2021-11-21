@@ -13,6 +13,11 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+/**
+ * HelpActivity represents a screen that provides user with information about the Parent app.
+ * This screen introduces the functionalities that the app provides to users,
+ * it also displays information and links about the developers, and resources used in the app.
+ */
 public class HelpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,9 @@ public class HelpActivity extends AppCompatActivity {
     {
         TextView resourcesTv = findViewById(R.id.textViewResourceLinks);
         resourcesTv.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView authorsTv = findViewById(R.id.textViewAuthorList_help);
+        authorsTv.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void startAnimationSideBar()

@@ -26,8 +26,13 @@ import com.example.parentapp.model.TaskManager;
 
 import java.util.ArrayList;
 
+/**
+ * TaskListActivity class represents a screen that displays a list of all tasks in the app.
+ * This class allows user to click on to an existing task to edit that task's information,
+ * it also provides a button for user to add a new task.
+ * This class saves and loads the list of all tasks to and from SharedPreferences.
+ */
 public class TaskListActivity extends AppCompatActivity {
-
     private TaskManager taskManager;
     private RotationManager rotationManager;
     private static final String APP_PREFERENCES = "app preferences";

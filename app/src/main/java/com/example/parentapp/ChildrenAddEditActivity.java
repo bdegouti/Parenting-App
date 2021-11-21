@@ -30,6 +30,7 @@ import java.io.IOException;
 
 /**
  * ChildrenAddEditActivity represents the screen that support adding a new child, or editing information of an existing child.
+ * This class allows user to input name and select a profile image for the child.
  * This class saves the information of the new child (or changed information of an existing child) into ChildrenManager class,
  * which will be used throughout the app, including the FlipCoinActivity.
  */

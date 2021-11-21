@@ -38,9 +38,10 @@ import java.util.Random;
  * FlipCoinActivity class represents the screen that allows user to flip a coin.
  * This class personalizes the new coin-flip game to be associated with a particular child who chooses heads/tails,
  * and saves this new game into game history.
- * When there is no children in the system, this class will just flip the coin without asking user to pick heads/tails,
- * and without saving the new game into game history.
+ * This class allows user to override the default kid by selecting another kid from the queue of children waiting.
+ * When there is no children in the system, this class will just flip the coin without asking user to pick heads/tails.
  * FlipCoinActivity saves and loads coin-flip game history to and from SharedPreferences.
+ * This class allows user to navigate into Game History Activity by providing a "View game history" button.
  * It also saves the child who gets to pick into rotation manager, and saves that into SharedPreferences.
  */
 public class FlipCoinActivity extends AppCompatActivity {

@@ -1,5 +1,8 @@
 package com.example.parentapp.model;
 
+/**
+ * Task class represents a task with a name (string) attribute.
+ */
 public class Task {
     String name;
 

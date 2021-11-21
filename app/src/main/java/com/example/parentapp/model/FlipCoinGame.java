@@ -8,7 +8,7 @@ import java.time.format.FormatStyle;
 
 /**
  * FlipCoinGame class represents a flip of a coin, it consists of attributes like the date/time of the flip,
- * the name of the child who gets to pick and his/her choice of heads or tails, and the result of the flip.
+ * the child who gets to pick and his/her choice of heads or tails, and the result of the flip.
  * This class also consists of an inner Enum class FlipOptions that declares HEAD-TAIL.
  */
 public class FlipCoinGame {

@@ -25,7 +25,8 @@ import com.example.parentapp.model.FlipCoinGameHistory;
 
 /**
  * GameHistoryActivity class represents the screen that allows user to view all coin-flip games stored in FlipCoinGameHistory.
- * This class shows the each game's information, including: date/time of the coin-flip, the picker for that flip, the choice and result of heads/tails.
+ * This class shows the each game's information, including: date/time of the coin-flip,
+ * the picker for that flip (picker's name and portrait), the choice and result of heads/tails.
  * This class also has a button that allows user to clear all coin-flip game history.
  * This class supports saving and loading of game list to and from SharedPreferences.
  */

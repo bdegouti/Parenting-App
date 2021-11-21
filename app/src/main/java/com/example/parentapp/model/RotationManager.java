@@ -8,6 +8,14 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * RotationManager class is a utility class that handles the rotation of the children for the flip coin game and all the tasks.
+ * This class contains a list of all the queues of children for each activity (game/task/etc.) that needs rotation.
+ * This class supports adding/removing/editing children information like their names and photos.
+ * This class rotates a queue when the child has had his/her turn for a particular task.
+ * It also can add/remove queues on the adding/removing of tasks.
+ * This class converts its list of children queues from json and to json format.
+ */
 public class RotationManager {
     private ArrayList<ArrayList<Child>> childrenQueues;
 

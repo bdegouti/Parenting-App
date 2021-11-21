@@ -7,7 +7,7 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 
 /**
- * Child class represents a child entity with a name attribute in the app
+ * Child class represents a child entity with a name and a portrait attribute in the app.
  */
 public class Child {
     private String name;

@@ -24,6 +24,13 @@ import com.example.parentapp.model.TaskManager;
 
 import java.util.ArrayList;
 
+/**
+ * TaskAddEditActivity represents the screen that support adding a new task, or editing information of an existing task.
+ * This class allows user to input name for a task.
+ * This class saves the information of the new task (or changed information of an existing task) into TaskManager class,
+ * which will be used throughout the app.
+ * This class also allows user to confirm that a child has had his/her turn and rotate to the next child in its queue.
+ */
 public class TaskAddEditActivity extends AppCompatActivity {
     private static final String TASK_INDEX = "task index";
     private static final String APP_PREFERENCES = "app preferences";
