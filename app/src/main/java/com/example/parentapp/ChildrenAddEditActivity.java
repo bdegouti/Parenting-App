@@ -345,7 +345,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
                 optionBuilder.setSingleChoiceItems(portraitOptions, 1,
                         (((dialogInterface, position) -> result = portraitOptions[position])));
 
-                optionBuilder.setPositiveButton("OK", (((dialogInterface, i) -> {
+                optionBuilder.setPositiveButton(R.string.ok_capitalized, (((dialogInterface, i) -> {
                     switch (result) {
                         case PICK_FROM_GALLERY:
                             openGallery();

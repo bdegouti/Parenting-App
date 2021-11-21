@@ -175,7 +175,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/rectangle_purple_gradient"
                 android:fontFamily="@font/zenkurenaido_regular"
-                android:text="Edit"
+                android:text="@string/edit"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"
