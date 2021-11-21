@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.80" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_addEditChild"
@@ -98,15 +98,15 @@
                 android:id="@+id/textViewEnterChildName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:text="@string/your_child_name"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/consLayout_cardView"
                 app:layout_constraintStart_toStartOf="@id/consLayout_cardView"
-                app:layout_constraintTop_toBottomOf="@+id/btnSelectPortrait" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/editTextNewChildName"
@@ -131,6 +131,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/rectangle_red_to_lighter_red"
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:text="@string/delete"
@@ -154,6 +155,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/rectangle_purple_gradient"
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:text="@string/save"
@@ -169,11 +171,11 @@
                 android:id="@+id/btnSelectPortrait"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:text="Select Your Image"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textViewEnterChildName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/imageViewPortrait"
@@ -182,6 +184,7 @@
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="64dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/btnSelectPortrait"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
