@@ -58,6 +58,7 @@ public class TaskAddEditActivity extends AppCompatActivity {
             setUpScreenTitle();
             prefillTaskInfo();
 
+            setUpEditMode();
             setUpCardViewWhoseTurn();
             setUpMarkAsDoneButton();
             setClickableStatusForClearHistoryButton();
@@ -284,6 +285,27 @@ public class TaskAddEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+    }
+
+    private void setUpEditMode() {
+        EditText etName = findViewById(R.id.editTextTaskName_taskAddEdit);
+        etName.setEnabled(false);
+
+        Button editBtn = findViewById(R.id.buttonEdit_taskAddEdit);
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editBtn.setVisibility(View.INVISIBLE);
+
+                Button deleteBtn = findViewById(R.id.buttonDelete_cardViewTaskInfo);
+                deleteBtn.setVisibility(View.VISIBLE);
+
+                Button saveBtn = findViewById(R.id.buttonSave_cardViewTaskInfo);
+                saveBtn.setVisibility(View.VISIBLE);
+
+                etName.setEnabled(true);
             }
         });
     }
