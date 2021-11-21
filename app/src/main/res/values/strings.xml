@@ -82,12 +82,12 @@
     <string name="its_somebody_turn">%1$s\'s turn!</string>
     <string name="your_task_details">Your task details</string>
     <string name="my_tasks">My Tasks</string>
-    <string name="no_kid_assigned">No kid assigned.</string>
     <string name="mark_as_done">Mark as done</string>
     <string name="adding_you_new_task">Adding you new task</string>
     <string name="your_task_name">Your task name</string>
     <string name="select_a_kid">Select a kid!</string>
     <string name="no_tasks_added_yet">No tasks added yet</string>
     <string name="you_can_add_tasks_by_clicking_the_button_below">You can add tasks by clicking the button below.</string>
-    <string name="no_kids_assigned">No kids assigned</string>
+    <string name="no_kids_assigned">No kids assigned.</string>
+    <string name="are_you_sure_you_want_to_delete_this_task">Are you sure you want to delete this task?</string>
 </resources>

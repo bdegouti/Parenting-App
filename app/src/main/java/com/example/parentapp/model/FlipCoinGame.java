@@ -1,5 +1,7 @@
 package com.example.parentapp.model;
 
+import android.graphics.Bitmap;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -12,14 +14,14 @@ import java.time.format.FormatStyle;
 public class FlipCoinGame {
     public enum FlipOptions {HEAD, TAIL}
     private String creationDateTimeString;
-    private String pickerName;
+    private final Child picker;
     private FlipOptions pickerChoice;
     private FlipOptions result;
 
     public FlipCoinGame()
     {
         creationDateTimeString = "";
-        pickerName = "Nobody";
+        picker = new Child();
         pickerChoice = FlipOptions.HEAD;
         result = null;
     }
@@ -29,7 +31,12 @@ public class FlipCoinGame {
     }
 
     public String getPickerName() {
-        return pickerName;
+        return picker.getName();
+    }
+
+    public Bitmap getPickerPhoto()
+    {
+        return picker.getPortrait();
     }
 
     public FlipOptions getPickerChoice()
@@ -44,7 +51,12 @@ public class FlipCoinGame {
 
     public void setPickerName(String name)
     {
-        this.pickerName = name;
+        this.picker.setName(name);
+    }
+
+    public void setPickerPhoto(Bitmap photo)
+    {
+        this.picker.setPortrait(photo);
     }
 
     public void setPickerChoice(FlipOptions choice)

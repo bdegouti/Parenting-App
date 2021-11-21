@@ -167,6 +167,7 @@ public class GameHistoryActivity extends AppCompatActivity {
             TextView tvDaT = gameView.findViewById(R.id.gameViewCard_textViewCreationTime);
             TextView tvResult = gameView.findViewById(R.id.gameViewCard_textViewResultFlip);
             ImageView resultIcon = gameView.findViewById(R.id.gameViewCard_imageViewWinningSymbol);
+            ImageView ivChildPhoto = gameView.findViewById(R.id.gameViewCard_imageView_childPhoto);
 
             //display datetime creation
             tvDaT.setText(currentGame.getCreationDateTimeString());
@@ -175,13 +176,22 @@ public class GameHistoryActivity extends AppCompatActivity {
             tvName.setText(currentGame.getPickerName());
 
             if(currentGame.getPickerName().equals("Nobody")) {
+                //display nobody face
+                ivChildPhoto.setImageResource(R.drawable.ic_baseline_sentiment_neutral_24);
                 //display flip result
                 tvResult.setText(getString(R.string.picked_vs_result, "N/A", currentGame.getResult().toString()));
-
                 //set up icon
-                resultIcon.setBackgroundResource(R.drawable.ic_baseline_sentiment_neutral_24);
+                resultIcon.setImageResource(R.drawable.ic_baseline_sentiment_neutral_24);
             }
             else {
+                //display child's photo
+                if(currentGame.getPickerPhoto() != null) {
+                    ivChildPhoto.setImageBitmap(currentGame.getPickerPhoto());
+                }
+                else {
+                    ivChildPhoto.setImageResource(R.drawable.ice_cream);
+                }
+
                 //display flip result
                 tvResult.setText(getString(R.string.picked_vs_result,
                         currentGame.getPickerChoice().toString(),
@@ -189,9 +199,9 @@ public class GameHistoryActivity extends AppCompatActivity {
 
                 //set up icon
                 if (currentGame.getPickerChoice() == currentGame.getResult()) {
-                    resultIcon.setBackgroundResource(R.drawable.win_icon);
+                    resultIcon.setImageResource(R.drawable.win_icon);
                 } else {
-                    resultIcon.setBackgroundResource(R.drawable.lose_icon);
+                    resultIcon.setImageResource(R.drawable.lose_icon);
                 }
             }
 

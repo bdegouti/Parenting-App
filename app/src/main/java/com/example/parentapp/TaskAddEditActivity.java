@@ -58,7 +58,6 @@ public class TaskAddEditActivity extends AppCompatActivity {
             setUpScreenTitle();
             prefillTaskInfo();
 
-            //only sets up task rotation card if there are children in children manager
             setUpCardViewWhoseTurn();
             setUpMarkAsDoneButton();
             setClickableStatusForClearHistoryButton();
@@ -186,7 +185,7 @@ public class TaskAddEditActivity extends AppCompatActivity {
     private void displayConfirmDialogOnDeletion()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(TaskAddEditActivity.this);
-        builder.setTitle("Are you sure you want to delete this task?");
+        builder.setTitle(R.string.are_you_sure_you_want_to_delete_this_task);
 
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             @Override
@@ -248,7 +247,12 @@ public class TaskAddEditActivity extends AppCompatActivity {
             Child topChild = taskQ.get(0);
 
             whoseTurnTv.setText(getString(R.string.its_somebody_turn, topChild.getName()));
-            childImage.setImageBitmap(topChild.getPortrait());
+            if(topChild.getPortrait() != null) {
+                childImage.setImageBitmap(topChild.getPortrait());
+            }
+            else {
+                childImage.setImageResource(R.drawable.ice_cream);
+            }
         }
     }
 
@@ -269,7 +273,7 @@ public class TaskAddEditActivity extends AppCompatActivity {
         if(rotationMan.isQueueEmpty(indexOfTaskClicked+1))
         {
             btn.setClickable(false);
-            btn.setAlpha(0.4f);
+            btn.setAlpha(0.2f);
         }
     }
 

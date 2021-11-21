@@ -8,10 +8,6 @@ public class Task {
         this.name = null;
     }
 
-    public Task(String name){
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }
