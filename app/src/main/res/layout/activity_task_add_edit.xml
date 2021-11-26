@@ -28,6 +28,36 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp">
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:maxWidth="80dp"
+                android:maxHeight="80dp"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="5dp"
+                app:cardMaxElevation="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonMarkAsDone_taskAddEdit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewItsSomebodysTurn_taskAddEdit">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageViewChildImage_taskAddEdit"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:maxWidth="120dp"
+                        android:maxHeight="120dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@tools:sample/avatars" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
             <Button
                 android:id="@+id/buttonMarkAsDone_taskAddEdit"
                 android:layout_width="wrap_content"
@@ -49,17 +79,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.35" />
-
-            <ImageView
-                android:id="@+id/imageViewChildImage_taskAddEdit"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@id/buttonMarkAsDone_taskAddEdit"
-                app:layout_constraintEnd_toStartOf="@+id/vertical35_cardViewChildTurn"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textViewItsSomebodysTurn_taskAddEdit"
-                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/textViewItsSomebodysTurn_taskAddEdit"
@@ -271,4 +290,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_arrow_back_darkk_purple_24" />
+
+    <ImageView
+        android:id="@+id/imageview_ViewTaskHistory_taskAddEdit"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:maxWidth="40dp"
+        android:maxHeight="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTitle_addEditTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_history_toggle_off_24_darkk_purple" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -75,6 +75,23 @@ public class TaskAddEditActivity extends AppCompatActivity {
         setUpSaveButton();
         setUpDeleteButton();
         setUpBackButton();
+        setUpViewTaskHistoryButton();
+    }
+
+    private void setUpViewTaskHistoryButton() {
+        ImageView ivViewTaskHistory = findViewById(R.id.imageview_ViewTaskHistory_taskAddEdit);
+        if(indexOfTaskClicked == -1){
+            ivViewTaskHistory.setVisibility(View.INVISIBLE);
+        }
+        else {
+            ivViewTaskHistory.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = TaskHistoryActivity.makeIntent(TaskAddEditActivity.this, indexOfTaskClicked);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override
@@ -270,9 +287,15 @@ public class TaskAddEditActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //save whoseTurn to taskHistory
+                Child currentChild = rotationMan.getQueueAtIndex(indexOfTaskClicked+1).get(0);
+                task.addTurn(currentChild);
+
+
                 rotationMan.rotateQueueAtIndex(indexOfTaskClicked + 1);
                 Child newTopKid = rotationMan.getQueueAtIndex(indexOfTaskClicked+1).get(0);
                 Toast.makeText(TaskAddEditActivity.this,  getString(R.string.task_is_now_assigned_to_somebody, newTopKid.getName()), Toast.LENGTH_SHORT).show();
+
                 finish();
             }
         });
