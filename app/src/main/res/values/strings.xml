@@ -99,4 +99,5 @@
     <string name="edit">Edit</string>
     <string name="view_coin_flip_history">View coin flip history</string>
     <string name="ok_capitalized">OK</string>
+    <string name="historyOfSomeTask">History of %1$s</string>
 </resources>

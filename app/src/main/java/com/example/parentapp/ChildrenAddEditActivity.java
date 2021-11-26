@@ -25,6 +25,7 @@ import com.example.parentapp.model.Child;
 import com.example.parentapp.model.ChildrenManager;
 import com.example.parentapp.model.FlipCoinGameHistory;
 import com.example.parentapp.model.RotationManager;
+import com.example.parentapp.model.TaskManager;
 
 import java.io.IOException;
 
@@ -38,6 +39,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_FROM_GALLERY = 1;
     private static final int PICK_IMAGE_TAKING_PHOTO = 2;
     private static final String APP_PREFERENCES = "app preferences";
+    private static final String TASK_LIST = "task list";
     private static final String ROTATION_MANAGER = "rotation manager";
     private static final String EXTRA_CHILD_INDEX = "child index";
     private static final String GAME_LIST = "game list";
@@ -47,6 +49,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     private ChildrenManager childrenManager;
     private RotationManager rotationMan;
     private FlipCoinGameHistory gameHistory;
+    private TaskManager taskManager;
     private Child child;
     //variables used for child profile pic:
     private Bitmap bitmap;
@@ -63,6 +66,8 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         loadRotationManagerFromSharedPreferences();
 
         gameHistory = FlipCoinGameHistory.getInstance();
+
+        taskManager = TaskManager.getInstance();
 
         //extract all extras
         Intent intentLeadingToMe = getIntent();
@@ -92,6 +97,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
     protected void onPause() {
         saveRotationManagerToSharedPreferences();
         saveGameHistoryToSharedPreferences();
+        saveTaskListToSharedPreferences();
         super.onPause();
     }
 
@@ -167,6 +173,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
             child.setName(newChildName);
             rotationMan.renameChildInAllQueues(oldName, child.getName());
             gameHistory.updatePickerName(oldName, child.getName());
+            taskManager.updateChildName(oldName, child.getName());
 
             //update photo
             if(bitmap != null)
@@ -174,6 +181,7 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
                 child.setPortrait(bitmap);
                 rotationMan.updateChildPhotoOnAllQueues(child.getName(), child.getPortrait());
                 gameHistory.updatePickerPhoto(child.getName(), child.getPortrait());
+                taskManager.updateChildPortrait(child.getName(), child.getPortrait());
             }
         }
     }
@@ -402,6 +410,15 @@ public class ChildrenAddEditActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(GAME_LIST, gameListJson);
+        editor.apply();
+    }
+
+    private void saveTaskListToSharedPreferences() {
+        String taskListJSON = taskManager.convertTaskListToJSON();
+
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(TASK_LIST, taskListJSON);
         editor.apply();
     }
 }

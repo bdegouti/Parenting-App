@@ -76,16 +76,35 @@
                 app:layout_constraintStart_toEndOf="@+id/gameViewCard_imageViewWinningSymbol"
                 app:layout_constraintTop_toBottomOf="@+id/gameViewCard_textViewPickerName" />
 
-            <ImageView
-                android:id="@+id/gameViewCard_imageView_childPhoto"
+            <androidx.cardview.widget.CardView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="8dp"
                 android:maxWidth="25dp"
                 android:maxHeight="25dp"
+                app:cardCornerRadius="12.5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp"
                 app:layout_constraintBottom_toBottomOf="@+id/gameViewCard_textViewPickerName"
                 app:layout_constraintStart_toEndOf="@+id/gameViewCard_textViewPickerName"
-                app:layout_constraintTop_toTopOf="@+id/gameViewCard_textViewPickerName" />
+                app:layout_constraintTop_toTopOf="@+id/gameViewCard_textViewPickerName">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/gameViewCard_imageView_childPhoto"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:maxWidth="35dp"
+                        android:maxHeight="35dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

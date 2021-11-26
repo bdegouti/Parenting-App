@@ -1,5 +1,7 @@
 package com.example.parentapp.model;
 
+import android.graphics.Bitmap;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -81,6 +83,18 @@ public class TaskManager {
             Gson gson = new Gson();
             Type type = new TypeToken<ArrayList<Task>>() {}.getType();
             taskList = gson.fromJson(jsonString, type);
+        }
+    }
+
+    public void updateChildName(String oldName, String newName){
+        for(Task task : taskList){
+            task.updateChildName(oldName, newName);
+        }
+    }
+
+    public void updateChildPortrait(String name, Bitmap childPortrait){
+        for(Task task : taskList){
+            task.updateChildPortrait(name, childPortrait);
         }
     }
 }
