@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".TakeBreathActivity"
+            android:exported="true" />
+        <activity
             android:name=".TaskHistoryActivity"
             android:exported="true" />
         <activity
