@@ -2,6 +2,7 @@ package com.example.parentapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +14,8 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,14 +58,18 @@ public class TakeBreathActivity extends AppCompatActivity {
         @Override
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "READY TO START STATE", Toast.LENGTH_SHORT).show();
-            renameButton(R.id.button_takeBreath, "Begin");
+
+            CardView cv = findViewById(R.id.cardView_chooseNumberOfBreaths_takeBreaths);
+            cv.setVisibility(View.VISIBLE);
             setUpButtonChooseNumberOfBreaths();
+
+            renameButton(R.id.button_takeBreath, "Begin");
         }
 
         @Override
         void handleExit() {
-            Button btn = findViewById(R.id.buttonChooseNumberOfBreaths_takeBreath);
-            btn.setVisibility(View.INVISIBLE);
+            CardView cv = findViewById(R.id.cardView_chooseNumberOfBreaths_takeBreaths);
+            cv.setVisibility(View.INVISIBLE);
         }
 
         @Override
@@ -74,8 +81,6 @@ public class TakeBreathActivity extends AppCompatActivity {
         void handleButtonActionUp() {
             setState(state_waitingToInhale);
         }
-
-
     }
 
     //////////// WAITING TO INHALE ////////////////////////////////////////////////////////
@@ -113,11 +118,13 @@ public class TakeBreathActivity extends AppCompatActivity {
             Toast.makeText(TakeBreathActivity.this, "INHALING STATE", Toast.LENGTH_SHORT).show();
             handlerInhalingState.postDelayed(switchToInhaleFor3s, 3000);
             //TODO: start animation and sound
+            startAnimationForBigButton(R.anim.scale_up);
         }
 
         @Override
         void handleExit() {
             handlerInhalingState.removeCallbacks(switchToInhaleFor3s);
+            clearAnimationForBigButton();
         }
 
         @Override
@@ -171,8 +178,6 @@ public class TakeBreathActivity extends AppCompatActivity {
             //change text view
             TextView tv = findViewById(R.id.textView_takeBreath);
             tv.setText("Release button and breathe out.");
-
-            //TODO: stop animation and sound
         }
 
         @Override
@@ -213,6 +218,7 @@ public class TakeBreathActivity extends AppCompatActivity {
             Toast.makeText(TakeBreathActivity.this, "EXHALE STATE", Toast.LENGTH_SHORT).show();
             renameButton(R.id.button_takeBreath, "OUT");
             //TODO: start exhale animation and sound
+            startAnimationForBigButton(R.anim.scale_down);
             handlerExhaleState.postDelayed(switchToExhale3s, 3000);
         }
 
@@ -233,8 +239,8 @@ public class TakeBreathActivity extends AppCompatActivity {
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "EXHALE FOR 3S STATE", Toast.LENGTH_SHORT).show();
             numOfBreathsLeft--;
-            String temp = "" + numOfBreathsLeft + " breaths left!";
-            Toast.makeText(TakeBreathActivity.this, temp, Toast.LENGTH_SHORT).show();
+            TextView tv = findViewById(R.id.textView_takeBreath);
+            tv.setText(getString(R.string.you_have_some_breaths_left, numOfBreathsLeft));
 
             if(numOfBreathsLeft > 0)
             {
@@ -261,6 +267,7 @@ public class TakeBreathActivity extends AppCompatActivity {
         @Override
         void handleEnter() {
             //TODO: stop exhale animation and sound
+            clearAnimationForBigButton();
             Toast.makeText(TakeBreathActivity.this, "DONE EXHALE STATE", Toast.LENGTH_SHORT).show();
 
             if(numOfBreathsLeft > 0)
@@ -334,8 +341,8 @@ public class TakeBreathActivity extends AppCompatActivity {
     {
         String[] breaths_options = getResources().getStringArray(R.array.number_of_breaths);
 
-        Button btn = findViewById(R.id.buttonChooseNumberOfBreaths_takeBreath);
-        btn.setOnClickListener(new View.OnClickListener() {
+        CardView cv = findViewById(R.id.cardView_chooseNumberOfBreaths_takeBreaths);
+        cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder breathsOptionsBuilder = new AlertDialog.Builder(TakeBreathActivity.this);
@@ -362,5 +369,18 @@ public class TakeBreathActivity extends AppCompatActivity {
                 breathsOptionsDialog.show();
             }
         });
+    }
+
+    private void startAnimationForBigButton(int animID)
+    {
+        Button bigBtn = findViewById(R.id.button_takeBreath);
+        Animation anim = AnimationUtils.loadAnimation(TakeBreathActivity.this, animID);
+        bigBtn.startAnimation(anim);
+    }
+
+    private void clearAnimationForBigButton()
+    {
+        Button bigBtn = findViewById(R.id.button_takeBreath);
+        bigBtn.clearAnimation();
     }
 }

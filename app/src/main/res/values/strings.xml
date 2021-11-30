@@ -100,4 +100,5 @@
     <string name="view_coin_flip_history">View coin flip history</string>
     <string name="ok_capitalized">OK</string>
     <string name="historyOfSomeTask">History of %1$s</string>
+    <string name="you_have_some_breaths_left">You have %1$d breaths left!</string>
 </resources>
