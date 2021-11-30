@@ -261,12 +261,14 @@ public class TimerActivity extends AppCompatActivity {
     // Some of the code below was adapted from the Youtube video linked:
     // https://www.youtube.com/watch?v=MDuGwI6P-X8
     private void startTimer() {
-        double timeLeft = timeManager.getMinuteInMillis();
-        timeLeft /= rate;
-        countDownTimer = new CountDownTimer((long) timeLeft, (long) rate*1000) {
+        final double[] timeLeft = {timeManager.getMinuteInMillis()};
+        double timeLeftRated = timeManager.getMinuteInMillis();
+        timeLeftRated /= rate;
+        countDownTimer = new CountDownTimer((long) timeLeftRated, (long) 1000) {
             @Override
             public void onTick(long milliSecUntilFinished) {
-                updateTimer(milliSecUntilFinished);
+                timeLeft[0] = timeLeft[0] - (rate * 1000);
+                updateTimer(timeLeft[0]);
             }
 
             @Override
