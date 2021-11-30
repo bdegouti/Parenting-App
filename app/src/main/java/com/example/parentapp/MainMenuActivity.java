@@ -39,6 +39,7 @@ public class MainMenuActivity extends AppCompatActivity {
         setUpButtonMyTasks();
         setUpButtonConfigureChildren();
         setUpOnClickOfQuestionMark();
+        setUpButtonTakeBreaths();
     }
 
     @Override
@@ -155,6 +156,18 @@ public class MainMenuActivity extends AppCompatActivity {
                 icon.startAnimation(anim);
             }
         }, 950);
+    }
+
+    private void setUpButtonTakeBreaths()
+    {
+        Button btn = findViewById(R.id.buttonTakeBreaths_mainMenu);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = TakeBreathActivity.makeIntent(MainMenuActivity.this);
+                startActivity(intent);
+            }
+        });
     }
 }
 
