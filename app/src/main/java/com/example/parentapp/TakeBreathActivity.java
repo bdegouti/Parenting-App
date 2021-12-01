@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -24,7 +25,7 @@ import android.widget.Toast;
 public class TakeBreathActivity extends AppCompatActivity {
     private static final String APP_PREFERENCES = "app preferences";
     private static final String NUMBER_OF_BREATHS = "number of breaths";
-    private int totalNumOfBreaths_g; //TODO: LOAD THIS FROM SHARED PREFS
+    private int totalNumOfBreaths_g;
     private int numOfBreathsLeft;
     int tempNumOfBreaths = totalNumOfBreaths_g;
     private final State state_readyToStart = new ReadyToStartState();
@@ -37,6 +38,8 @@ public class TakeBreathActivity extends AppCompatActivity {
     private final State state_exhale3s = new Exhale3sState();
     private final State state_doneExhale = new DoneExhaleState();
     private State currentState = new IdleState();
+    MediaPlayer inhaleMusic;
+    MediaPlayer exhaleMusic;
 
     // ************************************************************
     // State Pattern states
@@ -67,6 +70,10 @@ public class TakeBreathActivity extends AppCompatActivity {
 
             //set up big button
             renameButton(R.id.button_takeBreath, "Begin");
+
+            //set up sound effects
+            inhaleMusic = MediaPlayer.create(TakeBreathActivity.this, R.raw.inhale_music);
+            exhaleMusic = MediaPlayer.create(TakeBreathActivity.this, R.raw.exhale_music);
         }
 
         @Override
@@ -110,7 +117,8 @@ public class TakeBreathActivity extends AppCompatActivity {
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "INHALING STATE", Toast.LENGTH_SHORT).show();
             handlerInhalingState.postDelayed(switchToInhaleFor3s, 3000);
-            //TODO: start animation and sound
+            //start sound & animation
+            startInhaleMusic();
             startAnimationForBigButton(R.anim.scale_up);
         }
 
@@ -122,6 +130,7 @@ public class TakeBreathActivity extends AppCompatActivity {
         @Override
         void handleButtonActionUp() {
             setState(state_waitingToInhale);
+            stopInhaleMusic();
             clearAnimationForBigButton();
         }
     }
@@ -175,8 +184,8 @@ public class TakeBreathActivity extends AppCompatActivity {
         @Override
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "DONE INHALE STATE", Toast.LENGTH_SHORT).show();
-            //TODO: top animation and sound
             clearAnimationForBigButton();
+            stopInhaleMusic();
             setState(state_exhale);
         }
     }
@@ -195,8 +204,10 @@ public class TakeBreathActivity extends AppCompatActivity {
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "EXHALE STATE", Toast.LENGTH_SHORT).show();
             renameButton(R.id.button_takeBreath, getString(R.string.out_capitalized));
-            //TODO: start exhale animation and sound
+            //start exhale sound & animation
+            startExhaleMusic();
             startAnimationForBigButton(R.anim.scale_down);
+
             handlerExhaleState.postDelayed(switchToExhale3s, 3000);
         }
     }
@@ -237,23 +248,23 @@ public class TakeBreathActivity extends AppCompatActivity {
         }
     }
 
-
     /////////////////// STATE: DONE EXHALE //////////////////////////////////////
     private class DoneExhaleState extends State {
         @Override
         void handleEnter() {
-            //TODO: stop exhale animation and sound
             clearAnimationForBigButton();
+            stopExhaleMusic();
+
             Toast.makeText(TakeBreathActivity.this, "DONE EXHALE STATE", Toast.LENGTH_SHORT).show();
 
-            if(numOfBreathsLeft > 0)
-            {
+            if(numOfBreathsLeft > 0) {
                 setState(state_waitingToInhale);
             }
             else {
                 renameButton(R.id.button_takeBreath, getString(R.string.done));
                 Button bigBtn = findViewById(R.id.button_takeBreath);
                 bigBtn.setClickable(false);
+                releaseAllMediaPlayers();
             }
         }
     }
@@ -378,21 +389,49 @@ public class TakeBreathActivity extends AppCompatActivity {
         });
     }
 
-    private void startAnimationForBigButton(int animID)
-    {
+    private void startAnimationForBigButton(int animID) {
         Button bigBtn = findViewById(R.id.button_takeBreath);
         Animation anim = AnimationUtils.loadAnimation(TakeBreathActivity.this, animID);
         bigBtn.startAnimation(anim);
     }
 
-    private void clearAnimationForBigButton()
-    {
+    private void clearAnimationForBigButton() {
         Button bigBtn = findViewById(R.id.button_takeBreath);
         bigBtn.clearAnimation();
     }
 
-    private void setUpBackButton()
+    private void startInhaleMusic()
     {
+        inhaleMusic.start();
+    }
+
+    private void stopInhaleMusic()
+    {
+        inhaleMusic.pause();
+        inhaleMusic.seekTo(2000);
+    }
+
+    private void startExhaleMusic()
+    {
+        exhaleMusic.start();
+    }
+
+    private void stopExhaleMusic()
+    {
+        exhaleMusic.pause();
+        exhaleMusic.seekTo(0);
+    }
+
+    private void releaseAllMediaPlayers()
+    {
+        //release media players
+        inhaleMusic.release();
+        inhaleMusic = null;
+        exhaleMusic.release();
+        exhaleMusic = null;
+    }
+
+    private void setUpBackButton() {
         ImageView back = findViewById(R.id.imageView_backButton_takeBreaths);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
