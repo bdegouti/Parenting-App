@@ -4,9 +4,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -14,12 +16,15 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class TakeBreathActivity extends AppCompatActivity {
-    private int totalNumOfBreaths_g = 3; //TODO: LOAD THIS FROM SHARED PREFS
+    private static final String APP_PREFERENCES = "app preferences";
+    private static final String NUMBER_OF_BREATHS = "number of breaths";
+    private int totalNumOfBreaths_g; //TODO: LOAD THIS FROM SHARED PREFS
     private int numOfBreathsLeft;
     int tempNumOfBreaths = totalNumOfBreaths_g;
     private final State state_readyToStart = new ReadyToStartState();
@@ -71,11 +76,6 @@ public class TakeBreathActivity extends AppCompatActivity {
         }
 
         @Override
-        void handleButtonActionDown() {
-            //do nothing
-        }
-
-        @Override
         void handleButtonActionUp() {
             setState(state_waitingToInhale);
         }
@@ -93,11 +93,6 @@ public class TakeBreathActivity extends AppCompatActivity {
         @Override
         void handleButtonActionDown() {
             setState(state_inhaling);
-        }
-
-        @Override
-        void handleButtonActionUp() {
-            //do nothing
         }
     }
 
@@ -122,10 +117,6 @@ public class TakeBreathActivity extends AppCompatActivity {
         @Override
         void handleExit() {
             handlerInhalingState.removeCallbacks(switchToInhaleFor3s);
-        }
-
-        @Override
-        void handleButtonActionDown() {
         }
 
         @Override
@@ -158,11 +149,6 @@ public class TakeBreathActivity extends AppCompatActivity {
         }
 
         @Override
-        void handleButtonActionDown() {
-
-        }
-
-        @Override
         void handleButtonActionUp() {
             setState(state_doneInhale);
         }
@@ -192,10 +178,6 @@ public class TakeBreathActivity extends AppCompatActivity {
             //TODO: top animation and sound
             clearAnimationForBigButton();
             setState(state_exhale);
-        }
-
-        @Override
-        void handleExit() {
         }
     }
 
@@ -276,23 +258,50 @@ public class TakeBreathActivity extends AppCompatActivity {
         }
     }
 
-    //////////////// IDLE ////////////////////////////////////////////////////////////////////
-    private class IdleState extends State{};
+    //////////////// STATE: IDLE ////////////////////////////////////////////////////////////////////
+    private class IdleState extends State{}
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// PLAIN OLD JAVA CODE //////////////////////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_breath);
 
+        loadNumOfBreathsFromSharedPreferences();
         numOfBreathsLeft = totalNumOfBreaths_g;
 
         setState(state_readyToStart);
-        setUpButtonsG();
+        setUpBigButton();
+        setUpBackButton();
     }
 
-    private void setUpButtonsG()
+    @Override
+    protected void onPause() {
+        saveNumOfBreathsToSharedPreferences();
+        setState(state_readyToStart);
+        super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    private void loadNumOfBreathsFromSharedPreferences() {
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        totalNumOfBreaths_g = prefs.getInt(NUMBER_OF_BREATHS, 3);
+    }
+
+    private void saveNumOfBreathsToSharedPreferences(){
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(NUMBER_OF_BREATHS, totalNumOfBreaths_g);
+        editor.apply();
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void setUpBigButton()
     {
         Button mainBtn = findViewById(R.id.button_takeBreath);
         mainBtn.setOnTouchListener(new View.OnTouchListener() {
@@ -380,5 +389,16 @@ public class TakeBreathActivity extends AppCompatActivity {
     {
         Button bigBtn = findViewById(R.id.button_takeBreath);
         bigBtn.clearAnimation();
+    }
+
+    private void setUpBackButton()
+    {
+        ImageView back = findViewById(R.id.imageView_backButton_takeBreaths);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }
