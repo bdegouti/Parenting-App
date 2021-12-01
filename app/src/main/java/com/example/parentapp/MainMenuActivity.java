@@ -77,7 +77,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        startAnimationOnButton(R.id.buttonFlipCoin, 100);
+        startAnimationOnButton(R.id.buttonFlipCoin, 300);
     }
 
     private void setUpButtonTimer()
@@ -91,7 +91,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        startAnimationOnButton(R.id.buttonTimer, 300);
+        startAnimationOnButton(R.id.buttonTimer, 500);
     }
 
     private void setUpButtonMyTasks()
@@ -104,7 +104,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        startAnimationOnButton(R.id.buttonTaskList, 500);
+        startAnimationOnButton(R.id.buttonTaskList, 700);
     }
 
     private void setUpButtonTakeBreaths()
@@ -118,7 +118,7 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        startAnimationOnButton(R.id.buttonTakeBreaths_mainMenu, 700);
+        startAnimationOnButton(R.id.buttonTakeBreaths_mainMenu, 900);
     }
 
     private void setUpButtonConfigureChildren()
@@ -131,13 +131,13 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        startAnimationOnButton(R.id.buttonConfigureChildren, 900);
+        startAnimationOnButton(R.id.buttonConfigureChildren, 1100);
     }
 
     private void startAnimationOnButton(int resId, int delayedTime)
     {
         Button btn = findViewById(resId);
-        Animation anim = AnimationUtils.loadAnimation(MainMenuActivity.this, R.anim.drift_from_bottom);
+        Animation anim = AnimationUtils.loadAnimation(MainMenuActivity.this, R.anim.drift_from_bottom_fast);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -169,7 +169,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 icon.setVisibility(View.VISIBLE);
                 icon.startAnimation(anim);
             }
-        }, 1100);
+        }, 1300);
     }
 }
 
