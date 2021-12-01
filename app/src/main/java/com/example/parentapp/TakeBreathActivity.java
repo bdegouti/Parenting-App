@@ -27,7 +27,7 @@ public class TakeBreathActivity extends AppCompatActivity {
     private static final String NUMBER_OF_BREATHS = "number of breaths";
     private int totalNumOfBreaths_g;
     private int numOfBreathsLeft;
-    int tempNumOfBreaths = totalNumOfBreaths_g;
+    int tempNumOfBreaths;
     private final State state_readyToStart = new ReadyToStartState();
     private final State state_waitingToInhale = new WaitingToInhale();
     private final State state_inhaling = new InhalingState();
@@ -355,6 +355,7 @@ public class TakeBreathActivity extends AppCompatActivity {
     private void setUpButtonChooseNumberOfBreaths()
     {
         String[] breaths_options = getResources().getStringArray(R.array.number_of_breaths);
+        tempNumOfBreaths = totalNumOfBreaths_g;
 
         CardView cv = findViewById(R.id.cardView_chooseNumberOfBreaths_takeBreaths);
         cv.setOnClickListener(new View.OnClickListener() {
@@ -363,7 +364,7 @@ public class TakeBreathActivity extends AppCompatActivity {
                 AlertDialog.Builder breathsOptionsBuilder = new AlertDialog.Builder(TakeBreathActivity.this);
                 breathsOptionsBuilder.setTitle("Choose number of breaths:");
 
-                breathsOptionsBuilder.setSingleChoiceItems(R.array.number_of_breaths, 2, new DialogInterface.OnClickListener() {
+                breathsOptionsBuilder.setSingleChoiceItems(R.array.number_of_breaths, tempNumOfBreaths-1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int positionClicked) {
                         tempNumOfBreaths = Integer.parseInt(breaths_options[positionClicked]);
@@ -408,7 +409,7 @@ public class TakeBreathActivity extends AppCompatActivity {
     private void stopInhaleMusic()
     {
         inhaleMusic.pause();
-        inhaleMusic.seekTo(2000);
+        inhaleMusic.seekTo(1000);
     }
 
     private void startExhaleMusic()

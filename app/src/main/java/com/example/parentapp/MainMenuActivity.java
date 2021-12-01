@@ -91,7 +91,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        startAnimationOnButton(R.id.buttonTimer, 500);
+        startAnimationOnButton(R.id.buttonTimer, 300);
     }
 
     private void setUpButtonMyTasks()
@@ -104,7 +104,21 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        startAnimationOnButton(R.id.buttonTaskList, 700);
+        startAnimationOnButton(R.id.buttonTaskList, 500);
+    }
+
+    private void setUpButtonTakeBreaths()
+    {
+        Button btn = findViewById(R.id.buttonTakeBreaths_mainMenu);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = TakeBreathActivity.makeIntent(MainMenuActivity.this);
+                startActivity(intent);
+            }
+        });
+
+        startAnimationOnButton(R.id.buttonTakeBreaths_mainMenu, 700);
     }
 
     private void setUpButtonConfigureChildren()
@@ -155,19 +169,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 icon.setVisibility(View.VISIBLE);
                 icon.startAnimation(anim);
             }
-        }, 950);
-    }
-
-    private void setUpButtonTakeBreaths()
-    {
-        Button btn = findViewById(R.id.buttonTakeBreaths_mainMenu);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = TakeBreathActivity.makeIntent(MainMenuActivity.this);
-                startActivity(intent);
-            }
-        });
+        }, 1100);
     }
 }
 

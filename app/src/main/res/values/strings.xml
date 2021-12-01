@@ -13,7 +13,7 @@
     <string name="your_child_name">Your child name</string>
     <string name="add_a_new_child">Add a new child!</string>
     <string name="click_to_flip_the_coin_when_you_are_ready">Click to flip the coin when you are ready!</string>
-    <string name="countdown_timer">Countdown Timer</string>
+    <string name="countdown_timer">Timer</string>
     <string name="flip_coin">Flip Coin</string>
     <string name="history_of_coin_flips">History of Coin Flips</string>
     <string name="configure_my_children">My children</string>
@@ -108,4 +108,5 @@
     <string name="release_button_and_breath_out">Release button and breathe out.</string>
     <string name="good_job">Good job!</string>
     <string name="done">Done!</string>
+    <string name="breathe">Breathe</string>
 </resources>
