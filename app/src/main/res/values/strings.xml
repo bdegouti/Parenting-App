@@ -101,4 +101,11 @@
     <string name="ok_capitalized">OK</string>
     <string name="historyOfSomeTask">History of %1$s</string>
     <string name="you_have_some_breaths_left">You have %1$d breaths left!</string>
+    <string name="lets_take_n_breaths_together">Let\'s take %1$d breaths together!</string>
+    <string name="in_capitalized">IN</string>
+    <string name="hold_button_and_breath_in">Hold button and breath in.</string>
+    <string name="out_capitalized">OUT</string>
+    <string name="release_button_and_breath_out">Release button and breathe out.</string>
+    <string name="good_job">Good job!</string>
+    <string name="done">Done!</string>
 </resources>

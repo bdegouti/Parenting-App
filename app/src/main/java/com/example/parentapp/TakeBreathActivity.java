@@ -4,14 +4,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.nfc.cardemulation.HostNfcFService;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -20,13 +17,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class TakeBreathActivity extends AppCompatActivity {
-    private int totalNumOfBreaths_g = 3;
+    private int totalNumOfBreaths_g = 3; //TODO: LOAD THIS FROM SHARED PREFS
     private int numOfBreathsLeft;
     int tempNumOfBreaths = totalNumOfBreaths_g;
     private final State state_readyToStart = new ReadyToStartState();
@@ -43,7 +36,6 @@ public class TakeBreathActivity extends AppCompatActivity {
     // ************************************************************
     // State Pattern states
     // ************************************************************
-    // State Pattern's base states
     private abstract class State {
         // Empty implementations, so derived class don't need to
         // override methods they don't care about.
@@ -53,16 +45,22 @@ public class TakeBreathActivity extends AppCompatActivity {
         void handleButtonActionUp(){}
     }
 
-    /////// READY TO START //////////////////////////////////////////
+    /////// STATE: READY TO START //////////////////////////////////////////
     private class ReadyToStartState extends State {
         @Override
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "READY TO START STATE", Toast.LENGTH_SHORT).show();
 
+            //set up card view to customize number of breaths
             CardView cv = findViewById(R.id.cardView_chooseNumberOfBreaths_takeBreaths);
             cv.setVisibility(View.VISIBLE);
             setUpButtonChooseNumberOfBreaths();
 
+            //set up text
+            TextView introTV = findViewById(R.id.textView_takeBreath);
+            introTV.setText(getString(R.string.lets_take_n_breaths_together, totalNumOfBreaths_g));
+
+            //set up big button
             renameButton(R.id.button_takeBreath, "Begin");
         }
 
@@ -83,13 +81,13 @@ public class TakeBreathActivity extends AppCompatActivity {
         }
     }
 
-    //////////// WAITING TO INHALE ////////////////////////////////////////////////////////
+    //////////// STATE: WAITING TO INHALE ////////////////////////////////////////////////////////
     private class WaitingToInhale extends State {
         @Override
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "WAITING TO INHALE STATE", Toast.LENGTH_SHORT).show();
-            renameButton(R.id.button_takeBreath, "IN");
-            resetText(R.id.textView_takeBreath, "Hold button and breath in.");
+            renameButton(R.id.button_takeBreath, getString(R.string.in_capitalized));
+            resetText(R.id.textView_takeBreath, getString(R.string.hold_button_and_breath_in));
         }
 
         @Override
@@ -103,7 +101,7 @@ public class TakeBreathActivity extends AppCompatActivity {
         }
     }
 
-    ///////////////// INHALING ///////////////////////////////////
+    ///////////////// STATE: INHALING ///////////////////////////////////
     private class InhalingState extends State{
         Handler handlerInhalingState = new Handler();
         Runnable switchToInhaleFor3s = new Runnable() {
@@ -124,21 +122,20 @@ public class TakeBreathActivity extends AppCompatActivity {
         @Override
         void handleExit() {
             handlerInhalingState.removeCallbacks(switchToInhaleFor3s);
-            clearAnimationForBigButton();
         }
 
         @Override
         void handleButtonActionDown() {
-
         }
 
         @Override
         void handleButtonActionUp() {
             setState(state_waitingToInhale);
+            clearAnimationForBigButton();
         }
     }
 
-    /////////////// INHALE FOR 3S //////////////////////////////////////////////
+    /////////////// STATE: INHALE FOR 3S //////////////////////////////////////////////
     private class InhaleFor3s extends State{
         Handler handlerInhaleFor3s = new Handler();
         Runnable switchToInhaleFor10s = new Runnable() {
@@ -152,6 +149,7 @@ public class TakeBreathActivity extends AppCompatActivity {
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "INHALE FOR 3S STATE", Toast.LENGTH_SHORT).show();
             handlerInhaleFor3s.postDelayed(switchToInhaleFor10s, 7000);
+            renameButton(R.id.button_takeBreath, getString(R.string.out_capitalized));
         }
 
         @Override
@@ -170,14 +168,14 @@ public class TakeBreathActivity extends AppCompatActivity {
         }
     }
 
-    /////////////// INHALE FOR 10S //////////////////////////////////////////////
+    /////////////// STATE: INHALE FOR 10S //////////////////////////////////////////////
     private class InhaleFor10s extends State{
         @Override
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "INHALE FOR 10S STATE", Toast.LENGTH_SHORT).show();
             //change text view
             TextView tv = findViewById(R.id.textView_takeBreath);
-            tv.setText("Release button and breathe out.");
+            tv.setText(getString(R.string.release_button_and_breath_out));
         }
 
         @Override
@@ -186,24 +184,22 @@ public class TakeBreathActivity extends AppCompatActivity {
         }
     }
 
-
-    /////////////// DONE INHALE ///////////////////////////////////////////////////////
+    /////////////// STATE: DONE INHALE ///////////////////////////////////////////////////////
     private class DoneInhale extends State {
         @Override
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "DONE INHALE STATE", Toast.LENGTH_SHORT).show();
             //TODO: top animation and sound
+            clearAnimationForBigButton();
             setState(state_exhale);
         }
 
         @Override
         void handleExit() {
-            super.handleExit();
         }
     }
 
-
-    /////////////// EXHALE ////////////////////////////////////////////
+    /////////////// STATE: EXHALE ////////////////////////////////////////////
     private class ExhaleState extends State {
         Handler handlerExhaleState = new Handler();
         Runnable switchToExhale3s = new Runnable() {
@@ -216,16 +212,14 @@ public class TakeBreathActivity extends AppCompatActivity {
         @Override
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "EXHALE STATE", Toast.LENGTH_SHORT).show();
-            renameButton(R.id.button_takeBreath, "OUT");
+            renameButton(R.id.button_takeBreath, getString(R.string.out_capitalized));
             //TODO: start exhale animation and sound
             startAnimationForBigButton(R.anim.scale_down);
             handlerExhaleState.postDelayed(switchToExhale3s, 3000);
         }
-
     }
 
-
-    //////////////// EXHALE 3S //////////////////////////////////////
+    //////////////// STATE: EXHALE 3S //////////////////////////////////////
     private class Exhale3sState extends State{
         Handler handlerExhale3sState = new Handler();
         Runnable switchToDoneExhale = new Runnable() {
@@ -244,11 +238,11 @@ public class TakeBreathActivity extends AppCompatActivity {
 
             if(numOfBreathsLeft > 0)
             {
-                renameButton(R.id.button_takeBreath, "IN");
+                renameButton(R.id.button_takeBreath, getString(R.string.in_capitalized));
             }
             else
             {
-                renameButton(R.id.button_takeBreath, "Good job!");
+                renameButton(R.id.button_takeBreath, getString(R.string.good_job));
             }
 
             handlerExhale3sState.postDelayed(switchToDoneExhale, 7000);
@@ -275,8 +269,9 @@ public class TakeBreathActivity extends AppCompatActivity {
                 setState(state_waitingToInhale);
             }
             else {
-                Toast.makeText(TakeBreathActivity.this, "YOU DONE!", Toast.LENGTH_SHORT).show();
-                setState(state_readyToStart);
+                renameButton(R.id.button_takeBreath, getString(R.string.done));
+                Button bigBtn = findViewById(R.id.button_takeBreath);
+                bigBtn.setClickable(false);
             }
         }
     }
@@ -360,6 +355,9 @@ public class TakeBreathActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         totalNumOfBreaths_g = tempNumOfBreaths;
                         numOfBreathsLeft = totalNumOfBreaths_g;
+                        //update the text
+                        TextView introTV = findViewById(R.id.textView_takeBreath);
+                        introTV.setText(getString(R.string.lets_take_n_breaths_together, totalNumOfBreaths_g));
                     }
                 });
 
