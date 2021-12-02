@@ -63,6 +63,8 @@ public class TimerActivity extends AppCompatActivity {
 
     private NotificationHelper notificationHelper;
 
+    private int tempRate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -225,13 +227,13 @@ public class TimerActivity extends AppCompatActivity {
                 TextView txtRate = rateDialog.findViewById(R.id.txtRate);
                 SeekBar seekBarRate = rateDialog.findViewById(R.id.seekBarRate);
                 Button saveButton = rateDialog.findViewById(R.id.btnSaveRate);
-
+                Button standardRateButton = rateDialog.findViewById(R.id.btnCustomRate);
 
                 final double[] rateTemp = {100};
                 seekBarRate.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                        txtRate.setText(progress +"%");
+                        txtRate.setText(progress +  "%");
                         rateTemp[0] = progress;
                         rate = (double) progress / 100;
                     }
@@ -241,6 +243,36 @@ public class TimerActivity extends AppCompatActivity {
 
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) { }
+
+                });
+
+                standardRateButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int standardRate[] = getResources().getIntArray(R.array.standard_rate);
+                        String standardRateString[] = getResources().getStringArray(R.array.standard_rate_string);
+                        AlertDialog standardRateDialog;
+                        AlertDialog.Builder standardRateBuilder = new AlertDialog.Builder(TimerActivity.this);
+
+                        standardRateBuilder.setTitle("Choose standard rate");
+                        standardRateBuilder.setSingleChoiceItems(standardRateString, -1, ((dialogInterface, position) -> {
+                            tempRate = standardRate[position];
+                        }));
+
+                        standardRateBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                txtRate.setText(tempRate +"%");
+                                rateTemp[0] = tempRate;
+                                rate = (double) tempRate / 100;
+                                seekBarRate.setProgress(tempRate);
+                            }
+                        });
+
+                        standardRateDialog = standardRateBuilder.create();
+                        standardRateDialog.show();
+
+                    }
                 });
 
                 saveButton.setOnClickListener(new View.OnClickListener() {
@@ -261,13 +293,14 @@ public class TimerActivity extends AppCompatActivity {
     // Some of the code below was adapted from the Youtube video linked:
     // https://www.youtube.com/watch?v=MDuGwI6P-X8
     private void startTimer() {
-        final double[] timeLeft = {timeManager.getMinuteInMillis()};
-        double timeLeftRated = timeManager.getMinuteInMillis();
+        final double timeLeft[] = {timeManager.getMinuteInMillis()}; // 60  sec
+        double timeLeftRated = timeManager.getMinuteInMillis(); // 15 sec
         timeLeftRated /= rate;
-        countDownTimer = new CountDownTimer((long) timeLeftRated, (long) 1000) {
+        final int[] i = {1000};
+        countDownTimer = new CountDownTimer((long) timeLeftRated, (long) (1000 / rate)) {
             @Override
             public void onTick(long milliSecUntilFinished) {
-                timeLeft[0] = timeLeft[0] - (rate * 1000);
+                timeLeft[0] -= 1000;
                 updateTimer(timeLeft[0]);
             }
 
