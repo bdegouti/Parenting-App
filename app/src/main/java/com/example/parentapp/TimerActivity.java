@@ -5,20 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.NotificationCompat;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,12 +56,14 @@ public class TimerActivity extends AppCompatActivity {
 
     private CountDownTimer countDownTimer;
     private boolean isRunning;
-    private long timeLeft = timeManager.getMinuteInMillis();
+    private double rate = timeManager.getRateOfSpeed();
 
     private MediaPlayer musicPlayer;
     private Vibrator vibrator;
 
     private NotificationHelper notificationHelper;
+
+    private int tempRate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +75,21 @@ public class TimerActivity extends AppCompatActivity {
 
         setUpChooseTimeButton();
         setUpStartCancelButton();
-        updateTimer(timeLeft);
+        setUpRateOfSpeedButton();
+        updateTimer(timeManager.getMinuteInMillis());
         startAnimationTimer();
         setUpBackButton();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isRunning) {
+            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     private void setUpChooseTimeButton() {
@@ -94,33 +113,28 @@ public class TimerActivity extends AppCompatActivity {
                     switch (results) {
                         case "1 minute":
                             timeManager.setMinuteInMillis(MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
-                            timeLeft = MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
                             cancelTimer();
-                            updateTimer(timeLeft);
+                            updateTimer(timeManager.getMinuteInMillis());
                             break;
                         case "2 minutes":
                             timeManager.setMinuteInMillis(2 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
-                            timeLeft = 2 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
                             cancelTimer();
-                            updateTimer(timeLeft);
+                            updateTimer(timeManager.getMinuteInMillis());
                             break;
                         case "3 minutes":
                             timeManager.setMinuteInMillis(3 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
-                            timeLeft = 3 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
                             cancelTimer();
-                            updateTimer(timeLeft);
+                            updateTimer(timeManager.getMinuteInMillis());
                             break;
                         case "5 minutes":
                             timeManager.setMinuteInMillis(5 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
-                            timeLeft = 5 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
                             cancelTimer();
-                            updateTimer(timeLeft);
+                            updateTimer(timeManager.getMinuteInMillis());
                             break;
                         case "10 minutes":
                             timeManager.setMinuteInMillis(10 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
-                            timeLeft = 10 * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
                             cancelTimer();
-                            updateTimer(timeLeft);
+                            updateTimer(timeManager.getMinuteInMillis());
                             break;
 
                         case "Others":
@@ -142,7 +156,6 @@ public class TimerActivity extends AppCompatActivity {
                                             throw new IllegalArgumentException();
                                         }
                                         timeManager.setMinuteInMillis((long) duration * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
-                                        timeLeft = (long) duration * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS;
                                         updateTimer(timeManager.getMinuteInMillis());
                                     } catch (Exception e) {
                                         Toast.makeText(TimerActivity.this, getString(R.string.please_enter_a_positive_integer_for_minutes), Toast.LENGTH_LONG).show();
@@ -161,7 +174,7 @@ public class TimerActivity extends AppCompatActivity {
                             customDurationDialog.show();
 
                             cancelTimer();
-                            updateTimer(timeLeft);
+                            updateTimer(timeManager.getMinuteInMillis());
                             break;
                     }
                     updateTimer(timeManager.getMinuteInMillis());
@@ -201,21 +214,100 @@ public class TimerActivity extends AppCompatActivity {
         });
     }
 
+    private void setUpRateOfSpeedButton() {
+        Button rateOfSpeed = findViewById(R.id.btnRateOfSpeed);
+        rateOfSpeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog rateDialog = new Dialog(TimerActivity.this);
+
+                rateDialog.setContentView(R.layout.rate_of_speed_custom_dialog);
+                rateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                TextView txtRate = rateDialog.findViewById(R.id.txtRate);
+                SeekBar seekBarRate = rateDialog.findViewById(R.id.seekBarRate);
+                Button saveButton = rateDialog.findViewById(R.id.btnSaveRate);
+                Button standardRateButton = rateDialog.findViewById(R.id.btnCustomRate);
+
+                final double[] rateTemp = {100};
+                seekBarRate.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                        txtRate.setText(progress +  "%");
+                        rateTemp[0] = progress;
+                        rate = (double) progress / 100;
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) { }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) { }
+
+                });
+
+                standardRateButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int standardRate[] = getResources().getIntArray(R.array.standard_rate);
+                        String standardRateString[] = getResources().getStringArray(R.array.standard_rate_string);
+                        AlertDialog standardRateDialog;
+                        AlertDialog.Builder standardRateBuilder = new AlertDialog.Builder(TimerActivity.this);
+
+                        standardRateBuilder.setTitle("Choose standard rate");
+                        standardRateBuilder.setSingleChoiceItems(standardRateString, -1, ((dialogInterface, position) -> {
+                            tempRate = standardRate[position];
+                        }));
+
+                        standardRateBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                txtRate.setText(tempRate +"%");
+                                rateTemp[0] = tempRate;
+                                rate = (double) tempRate / 100;
+                                seekBarRate.setProgress(tempRate);
+                            }
+                        });
+
+                        standardRateDialog = standardRateBuilder.create();
+                        standardRateDialog.show();
+
+                    }
+                });
+
+                saveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rateDialog.dismiss();
+                        timeManager.setRateOfSpeed(rateTemp[0] / 100);
+                        TextView rateDisplay = findViewById(R.id.txtRateDisplay);
+                        rateDisplay.setText("" + rate * 100 + "%");
+                    }
+                });
+
+                rateDialog.show();
+            }
+        });
+    }
+
     // Some of the code below was adapted from the Youtube video linked:
     // https://www.youtube.com/watch?v=MDuGwI6P-X8
     private void startTimer() {
-        countDownTimer = new CountDownTimer(timeLeft, MINUTES_TO_SECONDS) {
+        final double timeLeft[] = {timeManager.getMinuteInMillis()}; // 60  sec
+        double timeLeftRated = timeManager.getMinuteInMillis(); // 15 sec
+        timeLeftRated /= rate;
+        final int[] i = {1000};
+        countDownTimer = new CountDownTimer((long) timeLeftRated, (long) (1000 / rate)) {
             @Override
             public void onTick(long milliSecUntilFinished) {
-                timeLeft = milliSecUntilFinished;
-                updateTimer(timeLeft);
+                timeLeft[0] -= 1000;
+                updateTimer(timeLeft[0]);
             }
 
             @Override
             public void onFinish() {
                 isRunning = false;
-                timeLeft = timeManager.getMinuteInMillis();
-                updateTimer(timeLeft);
+                updateTimer(timeManager.getMinuteInMillis());
                 startCount.setText(R.string.start);
 
                 startVibration();
@@ -256,12 +348,11 @@ public class TimerActivity extends AppCompatActivity {
             countDownTimer.cancel();
         }
         isRunning = false;
-        timeLeft = timeManager.getMinuteInMillis();
-        updateTimer(timeLeft);
+        updateTimer(timeManager.getMinuteInMillis());
         startCount.setText(R.string.start);
     }
 
-    private void updateTimer(long time) {
+    private void updateTimer(double time) {
         int minutes = (int) (time / MILLISECOND_TO_SECOND) / MINUTES_TO_SECONDS;
         int seconds = (int) (time / MILLISECOND_TO_SECOND) % MINUTES_TO_SECONDS;
 
@@ -298,7 +389,7 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void stopVibration() {
-            this.vibrator.cancel();
+        this.vibrator.cancel();
     }
 
     private void sendNotification() {
@@ -332,17 +423,6 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     public static Intent makeLaunchIntent(Context c) { return new Intent(c, TimerActivity.class); }
-
-    @Override
-    public void onBackPressed() {
-        if (isRunning) {
-            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivity(intent);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
     private void setUpBackButton()
     {

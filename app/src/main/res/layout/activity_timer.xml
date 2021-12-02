@@ -199,4 +199,27 @@
         app:layout_constraintTop_toTopOf="@+id/horizontal90_timer"
         app:srcCompat="@drawable/ic_baseline_arrow_back_darkk_purple_24" />
 
+    <Button
+        android:id="@+id/btnRateOfSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rate of Speed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintStart_toEndOf="@+id/imageViewBackButton_timer"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewGradientBox"
+        app:layout_constraintVertical_bias="0.675" />
+
+    <TextView
+        android:id="@+id/txtRateDisplay"
+        android:layout_width="103dp"
+        android:layout_height="30dp"
+        android:text="100%"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnRateOfSpeed"
+        app:layout_constraintTop_toTopOf="@+id/horizontal90_timer" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
