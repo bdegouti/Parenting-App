@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 public class TakeBreathActivity extends AppCompatActivity {
     private static final String APP_PREFERENCES = "app preferences";
     private static final String NUMBER_OF_BREATHS = "number of breaths";
