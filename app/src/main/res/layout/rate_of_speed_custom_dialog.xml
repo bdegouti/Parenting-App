@@ -23,7 +23,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
-                android:max="400"
+                android:max="401"
                 android:min="1"
                 android:progress="100"
                 app:layout_constraintBottom_toBottomOf="parent"
