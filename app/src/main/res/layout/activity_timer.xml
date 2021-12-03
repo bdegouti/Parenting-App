@@ -157,20 +157,32 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ProgressBar
+                android:id="@+id/progressBar_timer"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="24dp"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/circular_progress_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:progress="60" />
+
             <TextView
                 android:id="@+id/txtTimeRemaining"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:fontFamily="@font/zenkurenaido_regular"
                 android:gravity="center|center_horizontal|center_vertical"
-                android:text=""
                 android:textAlignment="center"
-                android:textSize="100sp"
+                android:textSize="34sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/consLayout_cardview_timer"
                 app:layout_constraintEnd_toEndOf="@+id/consLayout_cardview_timer"
                 app:layout_constraintStart_toStartOf="@+id/consLayout_cardview_timer"
-                app:layout_constraintTop_toTopOf="@+id/consLayout_cardview_timer" />
+                app:layout_constraintTop_toBottomOf="@+id/progressBar_timer" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -203,23 +215,33 @@
         android:id="@+id/btnRateOfSpeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rate of Speed"
+        android:background="@drawable/rectangle_darkk_purple"
+        android:fontFamily="@font/zenkurenaido_regular"
+        android:paddingHorizontal="20dp"
+        android:text="@string/set_timer_speed"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.369"
-        app:layout_constraintStart_toEndOf="@+id/imageViewBackButton_timer"
+        app:layout_constraintEnd_toStartOf="@+id/vertical50_timer"
+        app:layout_constraintStart_toStartOf="@+id/vertical50_timer"
         app:layout_constraintTop_toBottomOf="@+id/imageViewGradientBox"
         app:layout_constraintVertical_bias="0.675" />
 
     <TextView
         android:id="@+id/txtRateDisplay"
-        android:layout_width="103dp"
-        android:layout_height="30dp"
-        android:text="100%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/zenkurenaido_regular"
         android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/time_at_100_percent"
+        android:textColor="@color/darkk_purple"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRateOfSpeed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnRateOfSpeed"
-        app:layout_constraintTop_toTopOf="@+id/horizontal90_timer" />
+        app:layout_constraintTop_toTopOf="@+id/btnRateOfSpeed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

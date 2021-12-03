@@ -13,7 +13,7 @@
     <string name="your_child_name">Your child name</string>
     <string name="add_a_new_child">Add a new child!</string>
     <string name="click_to_flip_the_coin_when_you_are_ready">Click to flip the coin when you are ready!</string>
-    <string name="countdown_timer">Timer</string>
+    <string name="countdown_timer">Countdown Timer</string>
     <string name="flip_coin">Flip Coin</string>
     <string name="history_of_coin_flips">History of Coin Flips</string>
     <string name="configure_my_children">My children</string>
@@ -76,8 +76,7 @@
         Empty box image:\n<a href="https://www.flaticon.com/free-icon/open-box_869078">https://www.flaticon.com/free-icon/open-box_869078</a>\n
         Task list icon:\n<a href="https://www.pngall.com/task-png/download/68562">https://www.pngall.com/task-png/download/68562</a>\n
         Win icon:\n<a href="https://www.iconsdb.com/green-icons/ok-icon.html">https://www.iconsdb.com/green-icons/ok-icon.html</a>\n
-        Lose list icon:\n<a href="https://www.iconsdb.com/red-icons/x-mark-3-icon.html">https://www.iconsdb.com/red-icons/x-mark-3-icon.html</a>\n
-        Inhale and exhale sound effects:\n<a href="https://pixabay.com/sound-effects/">https://pixabay.com/sound-effects/</a>
+        Lose list icon:\n<a href="https://www.iconsdb.com/red-icons/x-mark-3-icon.html">https://www.iconsdb.com/red-icons/x-mark-3-icon.html</a>
     </string>
 
     <string name="turn_of">Turn of: %1$s</string>
@@ -101,14 +100,4 @@
     <string name="view_coin_flip_history">View coin flip history</string>
     <string name="ok_capitalized">OK</string>
     <string name="historyOfSomeTask">History of %1$s</string>
-    <string name="you_have_some_breaths_left">You have %1$d breaths left!</string>
-    <string name="lets_take_n_breaths_together">Let\'s take %1$d breaths together!</string>
-    <string name="in_capitalized">IN</string>
-    <string name="hold_button_and_breath_in">Hold button and breath in.</string>
-    <string name="out_capitalized">OUT</string>
-    <string name="release_button_and_breath_out">Release button and breathe out.</string>
-    <string name="good_job">Good job!</string>
-    <string name="done">Done!</string>
-    <string name="breathe">Breathe</string>
-    <string name="slowly_breathe_out">Slowly breathe out…</string>
 </resources>
