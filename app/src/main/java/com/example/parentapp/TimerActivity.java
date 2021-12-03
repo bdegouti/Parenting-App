@@ -281,7 +281,8 @@ public class TimerActivity extends AppCompatActivity {
                         rateDialog.dismiss();
                         timeManager.setRateOfSpeed(rateTemp[0] / 100);
                         TextView rateDisplay = findViewById(R.id.txtRateDisplay);
-                        rateDisplay.setText("" + rate * 100 + "%");
+                        //rateDisplay.setText("" + rate * 100 + "%");
+                        rateDisplay.setText(getString(R.string.time_at_some_percent, (int)(rate*100)));
                     }
                 });
 

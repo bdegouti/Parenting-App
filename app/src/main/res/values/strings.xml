@@ -100,4 +100,6 @@
     <string name="view_coin_flip_history">View coin flip history</string>
     <string name="ok_capitalized">OK</string>
     <string name="historyOfSomeTask">History of %1$s</string>
+    <string name="time_at_some_percent">Time @%1$d%%</string>
+    <string name="some_percent">%1$d%%</string>
 </resources>
