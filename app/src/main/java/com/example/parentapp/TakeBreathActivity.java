@@ -421,24 +421,32 @@ public class TakeBreathActivity extends AppCompatActivity {
 
     private void startInhaleMusic()
     {
-        inhaleMusic.start();
+        if(inhaleMusic != null) {
+            inhaleMusic.start();
+        }
     }
 
     private void stopInhaleMusic()
     {
-        inhaleMusic.pause();
-        inhaleMusic.seekTo(1000);
+        if(inhaleMusic != null) {
+            inhaleMusic.pause();
+            inhaleMusic.seekTo(1000);
+        }
     }
 
     private void startExhaleMusic()
     {
-        exhaleMusic.start();
+        if(exhaleMusic != null) {
+            exhaleMusic.start();
+        }
     }
 
     private void stopExhaleMusic()
     {
-        exhaleMusic.pause();
-        exhaleMusic.seekTo(0);
+        if(exhaleMusic != null) {
+            exhaleMusic.pause();
+            exhaleMusic.seekTo(0);
+        }
     }
 
     private void releaseAllMediaPlayers()
