@@ -56,6 +56,8 @@ public class TimerActivity extends AppCompatActivity {
 
     private CountDownTimer countDownTimer;
     private boolean isRunning;
+    private double timeLeft = timeManager.getMinuteInMillis();
+    private double timeLeftRated = timeManager.getMinuteInMillis();
     private double rate = timeManager.getRateOfSpeed();
 
     private MediaPlayer musicPlayer;
@@ -295,17 +297,15 @@ public class TimerActivity extends AppCompatActivity {
     // Some of the code below was adapted from the Youtube video linked:
     // https://www.youtube.com/watch?v=MDuGwI6P-X8
     private void startTimer() {
-        final double timeLeft[] = {timeManager.getMinuteInMillis()}; // 60  sec
-        double timeLeftRated = timeManager.getMinuteInMillis(); // 15 sec
         timeLeftRated /= rate;
         final int[] i = {1000};
         countDownTimer = new CountDownTimer((long) timeLeftRated, (long) (1000 / rate)) {
             @Override
             public void onTick(long milliSecUntilFinished) {
-                timeLeft[0] -= 1000;
-                updateTimer(timeLeft[0]);
+                timeLeft -= 1000;
+                updateTimer(timeLeft);
 
-                int progressPercentage = (int)((timeLeft[0] / timeManager.getMinuteInMillis()) * 100);
+                int progressPercentage = (int)((timeLeft / timeManager.getMinuteInMillis()) * 100);
                 ProgressBar pieChart = findViewById(R.id.progressBar_timer);
                 pieChart.setProgress(progressPercentage);
             }
