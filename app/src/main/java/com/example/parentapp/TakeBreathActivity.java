@@ -422,6 +422,7 @@ public class TakeBreathActivity extends AppCompatActivity {
     private void startInhaleMusic()
     {
         if(inhaleMusic != null) {
+            inhaleMusic.seekTo(3500);
             inhaleMusic.start();
         }
     }
@@ -430,13 +431,13 @@ public class TakeBreathActivity extends AppCompatActivity {
     {
         if(inhaleMusic != null) {
             inhaleMusic.pause();
-            inhaleMusic.seekTo(1000);
         }
     }
 
     private void startExhaleMusic()
     {
         if(exhaleMusic != null) {
+            exhaleMusic.seekTo(0);
             exhaleMusic.start();
         }
     }
@@ -445,7 +446,6 @@ public class TakeBreathActivity extends AppCompatActivity {
     {
         if(exhaleMusic != null) {
             exhaleMusic.pause();
-            exhaleMusic.seekTo(0);
         }
     }
 
