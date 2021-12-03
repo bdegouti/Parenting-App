@@ -58,6 +58,10 @@ public class TakeBreathActivity extends AppCompatActivity {
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "READY TO START STATE", Toast.LENGTH_SHORT).show();
 
+            //set up sound effects
+            inhaleMusic = MediaPlayer.create(TakeBreathActivity.this, R.raw.inhale_music);
+            exhaleMusic = MediaPlayer.create(TakeBreathActivity.this, R.raw.exhale_music);
+
             //start over number of breaths
             numOfBreathsLeft = totalNumOfBreaths_g;
 
@@ -71,12 +75,9 @@ public class TakeBreathActivity extends AppCompatActivity {
             introTV.setText(getString(R.string.lets_take_n_breaths_together, totalNumOfBreaths_g));
 
             //set up big button
+            clearAnimationForBigButton();
             renameButton(R.id.button_takeBreath, "Begin");
             changeBackgroundColorBigButton(R.drawable.circle_teal);
-
-            //set up sound effects
-            inhaleMusic = MediaPlayer.create(TakeBreathActivity.this, R.raw.inhale_music);
-            exhaleMusic = MediaPlayer.create(TakeBreathActivity.this, R.raw.exhale_music);
         }
 
         @Override
@@ -215,6 +216,7 @@ public class TakeBreathActivity extends AppCompatActivity {
             TextView tv = findViewById(R.id.textView_takeBreath);
             tv.setText(getString(R.string.slowly_breathe_out));
             renameButton(R.id.button_takeBreath, getString(R.string.out_capitalized));
+
             //start exhale sound & animation
             startExhaleMusic();
             startAnimationForBigButton(R.anim.scale_down);
@@ -298,8 +300,8 @@ public class TakeBreathActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         setState(state_readyToStart);
     }
 
