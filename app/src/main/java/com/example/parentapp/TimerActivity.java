@@ -16,13 +16,13 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,6 +79,7 @@ public class TimerActivity extends AppCompatActivity {
         updateTimer(timeManager.getMinuteInMillis());
         startAnimationTimer();
         setUpBackButton();
+        resetProgressPieChart();
     }
 
     @Override
@@ -281,7 +282,8 @@ public class TimerActivity extends AppCompatActivity {
                         rateDialog.dismiss();
                         timeManager.setRateOfSpeed(rateTemp[0] / 100);
                         TextView rateDisplay = findViewById(R.id.txtRateDisplay);
-                        rateDisplay.setText("" + rate * 100 + "%");
+                        //rateDisplay.setText("" + rate * 100 + "%");
+                        rateDisplay.setText(getString(R.string.time_at_some_percent, (int)(rate*100)));
                     }
                 });
 
@@ -302,10 +304,16 @@ public class TimerActivity extends AppCompatActivity {
             public void onTick(long milliSecUntilFinished) {
                 timeLeft[0] -= 1000;
                 updateTimer(timeLeft[0]);
+
+                int progressPercentage = (int)((timeLeft[0] / timeManager.getMinuteInMillis()) * 100);
+                ProgressBar pieChart = findViewById(R.id.progressBar_timer);
+                pieChart.setProgress(progressPercentage);
             }
 
             @Override
             public void onFinish() {
+                resetProgressPieChart();
+
                 isRunning = false;
                 updateTimer(timeManager.getMinuteInMillis());
                 startCount.setText(R.string.start);
@@ -350,6 +358,8 @@ public class TimerActivity extends AppCompatActivity {
         isRunning = false;
         updateTimer(timeManager.getMinuteInMillis());
         startCount.setText(R.string.start);
+
+        resetProgressPieChart();
     }
 
     private void updateTimer(double time) {
@@ -433,5 +443,11 @@ public class TimerActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    private void resetProgressPieChart()
+    {
+        ProgressBar pieChart = findViewById(R.id.progressBar_timer);
+        pieChart.setProgress(100);
     }
 }
