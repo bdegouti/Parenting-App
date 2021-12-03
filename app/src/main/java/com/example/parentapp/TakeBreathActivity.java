@@ -59,6 +59,9 @@ public class TakeBreathActivity extends AppCompatActivity {
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "READY TO START STATE", Toast.LENGTH_SHORT).show();
 
+            //start over number of breaths
+            numOfBreathsLeft = totalNumOfBreaths_g;
+
             //set up card view to customize number of breaths
             CardView cv = findViewById(R.id.cardView_chooseNumberOfBreaths_takeBreaths);
             cv.setVisibility(View.VISIBLE);
@@ -70,6 +73,7 @@ public class TakeBreathActivity extends AppCompatActivity {
 
             //set up big button
             renameButton(R.id.button_takeBreath, "Begin");
+            changeBackgroundColorBigButton(R.drawable.circle_teal);
 
             //set up sound effects
             inhaleMusic = MediaPlayer.create(TakeBreathActivity.this, R.raw.inhale_music);
@@ -95,6 +99,7 @@ public class TakeBreathActivity extends AppCompatActivity {
             Toast.makeText(TakeBreathActivity.this, "WAITING TO INHALE STATE", Toast.LENGTH_SHORT).show();
             renameButton(R.id.button_takeBreath, getString(R.string.in_capitalized));
             resetText(R.id.textView_takeBreath, getString(R.string.hold_button_and_breath_in));
+            changeBackgroundColorBigButton(R.drawable.circle_teal);
         }
 
         @Override
@@ -120,6 +125,7 @@ public class TakeBreathActivity extends AppCompatActivity {
             //start sound & animation
             startInhaleMusic();
             startAnimationForBigButton(R.anim.scale_up);
+            changeBackgroundColorBigButton(R.drawable.circle_green);
         }
 
         @Override
@@ -171,6 +177,9 @@ public class TakeBreathActivity extends AppCompatActivity {
             //change text view
             TextView tv = findViewById(R.id.textView_takeBreath);
             tv.setText(getString(R.string.release_button_and_breath_out));
+
+            clearAnimationForBigButton();
+            stopInhaleMusic();
         }
 
         @Override
@@ -203,10 +212,14 @@ public class TakeBreathActivity extends AppCompatActivity {
         @Override
         void handleEnter() {
             Toast.makeText(TakeBreathActivity.this, "EXHALE STATE", Toast.LENGTH_SHORT).show();
+
+            TextView tv = findViewById(R.id.textView_takeBreath);
+            tv.setText(getString(R.string.slowly_breathe_out));
             renameButton(R.id.button_takeBreath, getString(R.string.out_capitalized));
             //start exhale sound & animation
             startExhaleMusic();
             startAnimationForBigButton(R.anim.scale_down);
+            changeBackgroundColorBigButton(R.drawable.circle_blue);
 
             handlerExhaleState.postDelayed(switchToExhale3s, 3000);
         }
@@ -254,6 +267,7 @@ public class TakeBreathActivity extends AppCompatActivity {
         void handleEnter() {
             clearAnimationForBigButton();
             stopExhaleMusic();
+            changeBackgroundColorBigButton(R.drawable.circle_teal);
 
             Toast.makeText(TakeBreathActivity.this, "DONE EXHALE STATE", Toast.LENGTH_SHORT).show();
 
@@ -264,7 +278,6 @@ public class TakeBreathActivity extends AppCompatActivity {
                 renameButton(R.id.button_takeBreath, getString(R.string.done));
                 Button bigBtn = findViewById(R.id.button_takeBreath);
                 bigBtn.setClickable(false);
-                releaseAllMediaPlayers();
             }
         }
     }
@@ -280,17 +293,21 @@ public class TakeBreathActivity extends AppCompatActivity {
         setContentView(R.layout.activity_take_breath);
 
         loadNumOfBreathsFromSharedPreferences();
-        numOfBreathsLeft = totalNumOfBreaths_g;
 
-        setState(state_readyToStart);
         setUpBigButton();
         setUpBackButton();
     }
 
     @Override
-    protected void onPause() {
-        saveNumOfBreathsToSharedPreferences();
+    protected void onResume() {
+        super.onResume();
         setState(state_readyToStart);
+    }
+
+    @Override
+    protected void onPause() {
+        releaseAllMediaPlayers();
+        saveNumOfBreathsToSharedPreferences();
         super.onPause();
     }
 
@@ -440,5 +457,11 @@ public class TakeBreathActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    private void changeBackgroundColorBigButton(int drawableResID)
+    {
+        Button btn = findViewById(R.id.button_takeBreath);
+        btn.setBackgroundResource(drawableResID);
     }
 }

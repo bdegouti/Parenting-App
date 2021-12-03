@@ -110,4 +110,5 @@
     <string name="good_job">Good job!</string>
     <string name="done">Done!</string>
     <string name="breathe">Breathe</string>
+    <string name="slowly_breathe_out">Slowly breathe out…</string>
 </resources>

@@ -92,7 +92,7 @@
         android:id="@+id/button_takeBreath"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/circle_teal"
         android:elevation="10dp"
         android:fontFamily="@font/zenkurenaido_regular"
         android:padding="30dp"
