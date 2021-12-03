@@ -100,6 +100,10 @@
     <string name="view_coin_flip_history">View coin flip history</string>
     <string name="ok_capitalized">OK</string>
     <string name="historyOfSomeTask">History of %1$s</string>
+    <string name="time_at_some_percent">Time @%1$d%%</string>
+    <string name="time_at_100_percent">Time @100%</string>
+    <string name="some_percent">%1$d%%</string>
+    <string name="set_timer_speed">Set timer speed</string>
     <string name="you_have_some_breaths_left">You have %1$d breaths left!</string>
     <string name="lets_take_n_breaths_together">Let\'s take %1$d breaths together!</string>
     <string name="in_capitalized">IN</string>
@@ -110,8 +114,4 @@
     <string name="done">Done!</string>
     <string name="breathe">Breathe</string>
     <string name="slowly_breathe_out">Slowly breathe out…</string>
-    <string name="time_at_some_percent">Time @%1$d%%</string>
-    <string name="time_at_100_percent">Time @100%</string>
-    <string name="some_percent">%1$d%%</string>
-    <string name="set_timer_speed">Set timer speed</string>
 </resources>
