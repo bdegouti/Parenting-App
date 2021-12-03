@@ -43,6 +43,7 @@ import java.util.Locale;
 public class TimerActivity extends AppCompatActivity {
     private final int MILLISECOND_TO_SECOND = 1000;
     private final int MINUTES_TO_SECONDS = 60;
+    private final int DEFAULT_RATE = 1;
 
     // default time is set to 1 minute in milliseconds
     private final TimeManager timeManager = new TimeManager(MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
@@ -290,7 +291,7 @@ public class TimerActivity extends AppCompatActivity {
                         rateDialog.dismiss();
                         timeManager.setRateOfSpeed(rateTemp[0] / 100);
                         rateDisplay.setText(getString(R.string.time_at_some_percent, (int)(rate*100)));
-                        cancelTimer();
+                        pauseTimer();
                         startTimer();
                     }
                 });
@@ -322,11 +323,14 @@ public class TimerActivity extends AppCompatActivity {
             public void onFinish() {
                 resetProgressPieChart();
 
+                timeLeft = timeManager.getMinuteInMillis();
+                rate = DEFAULT_RATE;
                 isRunning = false;
                 updateTimer(timeManager.getMinuteInMillis());
                 startCount.setText(R.string.start);
                 rateOfSpeed.setVisibility(View.INVISIBLE);
                 rateDisplay.setVisibility(View.INVISIBLE);
+                rateDisplay.setText("100%");
 
                 startVibration();
                 playMusic();
@@ -372,6 +376,8 @@ public class TimerActivity extends AppCompatActivity {
         isRunning = false;
         updateTimer(timeManager.getMinuteInMillis());
         startCount.setText(R.string.start);
+        timeLeft = timeManager.getMinuteInMillis();
+        rate = DEFAULT_RATE;
 
         resetProgressPieChart();
     }
