@@ -4,8 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rectangle_white"
+    android:background="@drawable/rectangle_sharp_white"
     tools:context=".MainMenuActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal80_mainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal60_mainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal40_mainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical50_mainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
     <ImageView
         android:id="@+id/imageViewQuestionMarkIcon"
@@ -23,19 +51,20 @@
         android:id="@+id/imageView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal30"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rectangle_bottom_curve_purple" />
+        app:srcCompat="@drawable/rectangle_sharp_darkk_purple" />
 
     <Button
         android:id="@+id/buttonTimer"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/rectangle_coral_pink"
         android:fontFamily="@font/zenkurenaido_regular"
         android:paddingTop="20dp"
@@ -47,18 +76,21 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal40_mainMenu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonFlipCoin"
+        app:layout_constraintStart_toStartOf="@+id/vertical50_mainMenu"
+        app:layout_constraintTop_toTopOf="@+id/horizontal15"
         tools:visibility="visible" />
 
     <Button
         android:id="@+id/buttonFlipCoin"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/rectangle_light_orange"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rectangle_turkish_rose"
         android:fontFamily="@font/zenkurenaido_regular"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
@@ -69,20 +101,21 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal40_mainMenu"
+        app:layout_constraintEnd_toStartOf="@+id/vertical50_mainMenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizontal20"
+        app:layout_constraintTop_toTopOf="@+id/horizontal15"
         tools:visibility="visible" />
 
     <Button
         android:id="@+id/buttonConfigureChildren"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/rectangle_purple"
         android:fontFamily="@font/zenkurenaido_regular"
+        android:paddingHorizontal="20dp"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:text="@string/configure_my_children"
@@ -92,19 +125,19 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonTaskList"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal80_mainMenu"
+        app:layout_constraintEnd_toEndOf="@+id/buttonTakeBreaths_mainMenu"
+        app:layout_constraintStart_toStartOf="@+id/buttonTaskList"
+        app:layout_constraintTop_toTopOf="@+id/horizontal60_mainMenu"
         tools:visibility="visible" />
 
     <Button
         android:id="@+id/buttonTaskList"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/rectangle_pink"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rectangle_light_orange"
         android:fontFamily="@font/zenkurenaido_regular"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
@@ -115,9 +148,30 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonTimer"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal60_mainMenu"
+        app:layout_constraintEnd_toEndOf="@+id/buttonFlipCoin"
+        app:layout_constraintStart_toStartOf="@+id/buttonFlipCoin"
+        app:layout_constraintTop_toTopOf="@+id/horizontal40_mainMenu"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/buttonTakeBreaths_mainMenu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rectangle_pink"
+        android:fontFamily="@font/zenkurenaido_regular"
+        android:paddingVertical="20dp"
+        android:text="@string/breathe"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal60_mainMenu"
+        app:layout_constraintEnd_toEndOf="@+id/buttonTimer"
+        app:layout_constraintStart_toStartOf="@+id/buttonTimer"
+        app:layout_constraintTop_toTopOf="@+id/horizontal40_mainMenu"
         tools:visibility="visible" />
 
     <TextView
@@ -137,17 +191,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/horizontal30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/horizontal20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

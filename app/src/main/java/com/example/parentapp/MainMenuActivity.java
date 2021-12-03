@@ -39,6 +39,7 @@ public class MainMenuActivity extends AppCompatActivity {
         setUpButtonMyTasks();
         setUpButtonConfigureChildren();
         setUpOnClickOfQuestionMark();
+        setUpButtonTakeBreaths();
     }
 
     @Override
@@ -76,7 +77,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        startAnimationOnButton(R.id.buttonFlipCoin, 100);
+        startAnimationOnButton(R.id.buttonFlipCoin, 300);
     }
 
     private void setUpButtonTimer()
@@ -106,6 +107,20 @@ public class MainMenuActivity extends AppCompatActivity {
         startAnimationOnButton(R.id.buttonTaskList, 700);
     }
 
+    private void setUpButtonTakeBreaths()
+    {
+        Button btn = findViewById(R.id.buttonTakeBreaths_mainMenu);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = TakeBreathActivity.makeIntent(MainMenuActivity.this);
+                startActivity(intent);
+            }
+        });
+
+        startAnimationOnButton(R.id.buttonTakeBreaths_mainMenu, 900);
+    }
+
     private void setUpButtonConfigureChildren()
     {
         Button btn = findViewById(R.id.buttonConfigureChildren);
@@ -116,13 +131,13 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        startAnimationOnButton(R.id.buttonConfigureChildren, 900);
+        startAnimationOnButton(R.id.buttonConfigureChildren, 1100);
     }
 
     private void startAnimationOnButton(int resId, int delayedTime)
     {
         Button btn = findViewById(resId);
-        Animation anim = AnimationUtils.loadAnimation(MainMenuActivity.this, R.anim.drift_from_bottom);
+        Animation anim = AnimationUtils.loadAnimation(MainMenuActivity.this, R.anim.drift_from_bottom_fast);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -154,7 +169,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 icon.setVisibility(View.VISIBLE);
                 icon.startAnimation(anim);
             }
-        }, 950);
+        }, 1300);
     }
 }
 

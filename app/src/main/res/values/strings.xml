@@ -13,7 +13,7 @@
     <string name="your_child_name">Your child name</string>
     <string name="add_a_new_child">Add a new child!</string>
     <string name="click_to_flip_the_coin_when_you_are_ready">Click to flip the coin when you are ready!</string>
-    <string name="countdown_timer">Countdown Timer</string>
+    <string name="countdown_timer">Timer</string>
     <string name="flip_coin">Flip Coin</string>
     <string name="history_of_coin_flips">History of Coin Flips</string>
     <string name="configure_my_children">My children</string>
@@ -39,7 +39,7 @@
     <string name="you_can_make_history_by_flipping_a_coin">You can make history by flipping a coin!</string>
     <string name="counting_down">Counting down…</string>
     <string name="textview">TextView</string>
-    <string name="count_down_timer">Count Down Timer</string>
+    <string name="count_down_timer">Timer</string>
     <string name="choose_your_duration">Choose your duration:</string>
     <string name="minutes">Minutes</string>
     <string name="customize_your_duration_in_minutes">Customize your duration in minutes:</string>
@@ -104,4 +104,14 @@
     <string name="time_at_100_percent">Time @100%</string>
     <string name="some_percent">%1$d%%</string>
     <string name="set_timer_speed">Set timer speed</string>
+    <string name="you_have_some_breaths_left">You have %1$d breaths left!</string>
+    <string name="lets_take_n_breaths_together">Let\'s take %1$d breaths together!</string>
+    <string name="in_capitalized">IN</string>
+    <string name="hold_button_and_breath_in">Hold button and breath in.</string>
+    <string name="out_capitalized">OUT</string>
+    <string name="release_button_and_breath_out">Release button and breathe out.</string>
+    <string name="good_job">Good job!</string>
+    <string name="done">Done!</string>
+    <string name="breathe">Breathe</string>
+    <string name="slowly_breathe_out">Slowly breathe out…</string>
 </resources>
