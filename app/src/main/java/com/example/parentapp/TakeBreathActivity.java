@@ -56,7 +56,6 @@ public class TakeBreathActivity extends AppCompatActivity {
     private class ReadyToStartState extends State {
         @Override
         void handleEnter() {
-            Toast.makeText(TakeBreathActivity.this, "READY TO START STATE", Toast.LENGTH_SHORT).show();
 
             //set up sound effects
             inhaleMusic = MediaPlayer.create(TakeBreathActivity.this, R.raw.inhale_music);
@@ -96,7 +95,6 @@ public class TakeBreathActivity extends AppCompatActivity {
     private class WaitingToInhale extends State {
         @Override
         void handleEnter() {
-            Toast.makeText(TakeBreathActivity.this, "WAITING TO INHALE STATE", Toast.LENGTH_SHORT).show();
             renameButton(R.id.button_takeBreath, getString(R.string.in_capitalized));
             resetText(R.id.textView_takeBreath, getString(R.string.hold_button_and_breath_in));
             changeBackgroundColorBigButton(R.drawable.circle_teal);
@@ -120,7 +118,6 @@ public class TakeBreathActivity extends AppCompatActivity {
 
         @Override
         void handleEnter() {
-            Toast.makeText(TakeBreathActivity.this, "INHALING STATE", Toast.LENGTH_SHORT).show();
             handlerInhalingState.postDelayed(switchToInhaleFor3s, 3000);
             //start sound & animation
             startInhaleMusic();
@@ -153,7 +150,6 @@ public class TakeBreathActivity extends AppCompatActivity {
 
         @Override
         void handleEnter() {
-            Toast.makeText(TakeBreathActivity.this, "INHALE FOR 3S STATE", Toast.LENGTH_SHORT).show();
             handlerInhaleFor3s.postDelayed(switchToInhaleFor10s, 7000);
             renameButton(R.id.button_takeBreath, getString(R.string.out_capitalized));
         }
@@ -173,7 +169,6 @@ public class TakeBreathActivity extends AppCompatActivity {
     private class InhaleFor10s extends State{
         @Override
         void handleEnter() {
-            Toast.makeText(TakeBreathActivity.this, "INHALE FOR 10S STATE", Toast.LENGTH_SHORT).show();
             //change text view
             TextView tv = findViewById(R.id.textView_takeBreath);
             tv.setText(getString(R.string.release_button_and_breath_out));
@@ -192,7 +187,6 @@ public class TakeBreathActivity extends AppCompatActivity {
     private class DoneInhale extends State {
         @Override
         void handleEnter() {
-            Toast.makeText(TakeBreathActivity.this, "DONE INHALE STATE", Toast.LENGTH_SHORT).show();
             clearAnimationForBigButton();
             stopInhaleMusic();
             setState(state_exhale);
@@ -211,7 +205,6 @@ public class TakeBreathActivity extends AppCompatActivity {
 
         @Override
         void handleEnter() {
-            Toast.makeText(TakeBreathActivity.this, "EXHALE STATE", Toast.LENGTH_SHORT).show();
 
             TextView tv = findViewById(R.id.textView_takeBreath);
             tv.setText(getString(R.string.slowly_breathe_out));
@@ -238,7 +231,6 @@ public class TakeBreathActivity extends AppCompatActivity {
 
         @Override
         void handleEnter() {
-            Toast.makeText(TakeBreathActivity.this, "EXHALE FOR 3S STATE", Toast.LENGTH_SHORT).show();
             numOfBreathsLeft--;
             TextView tv = findViewById(R.id.textView_takeBreath);
             tv.setText(getString(R.string.you_have_some_breaths_left, numOfBreathsLeft));
@@ -270,7 +262,6 @@ public class TakeBreathActivity extends AppCompatActivity {
             stopExhaleMusic();
             changeBackgroundColorBigButton(R.drawable.circle_teal);
 
-            Toast.makeText(TakeBreathActivity.this, "DONE EXHALE STATE", Toast.LENGTH_SHORT).show();
 
             if(numOfBreathsLeft > 0) {
                 setState(state_waitingToInhale);
