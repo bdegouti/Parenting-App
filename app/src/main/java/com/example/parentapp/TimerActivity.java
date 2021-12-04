@@ -17,6 +17,7 @@ import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -208,6 +209,7 @@ public class TimerActivity extends AppCompatActivity {
                     pauseTimer();
                 } else {
                     startTimer();
+                    getWindow(). addFlags (WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 }
             }
         });
