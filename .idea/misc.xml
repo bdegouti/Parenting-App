@@ -6,11 +6,9 @@
         <entry key="..\:/cmpt-265/Assignments/ParentApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22314814814814815" />
         <entry key="..\:/cmpt-265/Assignments/ParentApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22314814814814815" />
         <entry key="..\:/cmpt-265/Assignments/ParentApp/app/src/main/res/layout/activity_count_down_timer.xml" value="0.33" />
-        <entry key="..\:/cmpt-265/Assignments/ParentApp/app/src/main/res/layout/activity_help.xml" value="0.32019927536231885" />
         <entry key="..\:/cmpt-265/Assignments/ParentApp/app/src/main/res/layout/activity_main.xml" value="0.2644927536231884" />
         <entry key="..\:/cmpt-265/Assignments/ParentApp/app/src/main/res/layout/activity_timer.xml" value="0.33" />
         <entry key="..\:/cmpt-265/Assignments/ParentApp/app/src/main/res/layout/custom_dialog.xml" value="0.33" />
-        <entry key="..\:/cmpt-265/Assignments/ParentApp/app/src/main/res/layout/rate_of_speed_custom_dialog.xml" value="0.2164855072463768" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.36615384615384616" />
         <entry key="app/src/main/res/drawable-v24/rectangle_gradient_green.xml" value="0.2708333333333333" />
         <entry key="app/src/main/res/drawable-v24/rectangle_purple_gradient.xml" value="0.2708333333333333" />
@@ -59,7 +57,7 @@
         <entry key="app/src/main/res/layout/activity_task_add_edit.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_task_history.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_task_list.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_timer.xml" value="0.271286231884058" />
+        <entry key="app/src/main/res/layout/activity_timer.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_ui_main_menu.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/child_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/custom_dialog.xml" value="0.375" />

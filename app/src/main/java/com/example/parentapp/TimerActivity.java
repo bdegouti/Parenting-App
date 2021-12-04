@@ -17,6 +17,7 @@ import android.os.CountDownTimer;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -43,12 +44,15 @@ import java.util.Locale;
 public class TimerActivity extends AppCompatActivity {
     private final int MILLISECOND_TO_SECOND = 1000;
     private final int MINUTES_TO_SECONDS = 60;
+    private final int DEFAULT_RATE = 1;
 
     // default time is set to 1 minute in milliseconds
     private final TimeManager timeManager = new TimeManager(MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
 
     private Button startCount;
     private TextView timeRemaining;
+    private Button rateOfSpeed;
+    private TextView rateDisplay;
 
     // storing the result of duration that the  user selected and
     // the default is set to 1 minute
@@ -159,6 +163,7 @@ public class TimerActivity extends AppCompatActivity {
                                             throw new IllegalArgumentException();
                                         }
                                         timeManager.setMinuteInMillis((long) duration * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
+                                        cancelTimer();
                                         updateTimer(timeManager.getMinuteInMillis());
                                     } catch (Exception e) {
                                         Toast.makeText(TimerActivity.this, getString(R.string.please_enter_a_positive_integer_for_minutes), Toast.LENGTH_LONG).show();
@@ -181,6 +186,8 @@ public class TimerActivity extends AppCompatActivity {
                             break;
                     }
                     updateTimer(timeManager.getMinuteInMillis());
+                    rateDisplay = findViewById(R.id.txtRateDisplay);
+                    rateDisplay.setText(getString(R.string.time_at_100_percent));
                 }));
 
                 durationBuilder.setNegativeButton(R.string.cancel, ((dialogInterface, i) -> {
@@ -205,6 +212,7 @@ public class TimerActivity extends AppCompatActivity {
                     pauseTimer();
                 } else {
                     startTimer();
+                    getWindow(). addFlags (WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 }
             }
         });
@@ -218,7 +226,11 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void setUpRateOfSpeedButton() {
-        Button rateOfSpeed = findViewById(R.id.btnRateOfSpeed);
+        rateOfSpeed = findViewById(R.id.btnRateOfSpeed);
+        rateOfSpeed.setVisibility(View.INVISIBLE);
+        rateDisplay = findViewById(R.id.txtRateDisplay);
+        rateDisplay.setVisibility(View.INVISIBLE);
+
         rateOfSpeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -283,9 +295,9 @@ public class TimerActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         rateDialog.dismiss();
                         timeManager.setRateOfSpeed(rateTemp[0] / 100);
-                        TextView rateDisplay = findViewById(R.id.txtRateDisplay);
-                        //rateDisplay.setText("" + rate * 100 + "%");
                         rateDisplay.setText(getString(R.string.time_at_some_percent, (int)(rate*100)));
+                        pauseTimer();
+                        startTimer();
                     }
                 });
 
@@ -297,11 +309,13 @@ public class TimerActivity extends AppCompatActivity {
     // Some of the code below was adapted from the Youtube video linked:
     // https://www.youtube.com/watch?v=MDuGwI6P-X8
     private void startTimer() {
+        timeLeftRated = timeLeft;
         timeLeftRated /= rate;
-        final int[] i = {1000};
         countDownTimer = new CountDownTimer((long) timeLeftRated, (long) (1000 / rate)) {
             @Override
             public void onTick(long milliSecUntilFinished) {
+                rateOfSpeed.setVisibility(View.VISIBLE);
+                rateDisplay.setVisibility(View.VISIBLE);
                 timeLeft -= 1000;
                 updateTimer(timeLeft);
 
@@ -314,9 +328,14 @@ public class TimerActivity extends AppCompatActivity {
             public void onFinish() {
                 resetProgressPieChart();
 
+                timeLeft = timeManager.getMinuteInMillis();
+                rate = DEFAULT_RATE;
                 isRunning = false;
                 updateTimer(timeManager.getMinuteInMillis());
                 startCount.setText(R.string.start);
+                rateOfSpeed.setVisibility(View.INVISIBLE);
+                rateDisplay.setVisibility(View.INVISIBLE);
+                rateDisplay.setText(getString(R.string.time_at_100_percent));
 
                 startVibration();
                 playMusic();
@@ -346,6 +365,8 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void pauseTimer() {
+        rateOfSpeed.setVisibility(View.INVISIBLE);
+        rateDisplay.setVisibility(View.INVISIBLE);
         countDownTimer.cancel();
         isRunning = false;
         startCount.setText(R.string.start);
@@ -355,9 +376,13 @@ public class TimerActivity extends AppCompatActivity {
         if (isRunning) {
             countDownTimer.cancel();
         }
+        rateOfSpeed.setVisibility(View.INVISIBLE);
+        rateDisplay.setVisibility(View.INVISIBLE);
         isRunning = false;
         updateTimer(timeManager.getMinuteInMillis());
         startCount.setText(R.string.start);
+        timeLeft = timeManager.getMinuteInMillis();
+        rate = DEFAULT_RATE;
 
         resetProgressPieChart();
     }

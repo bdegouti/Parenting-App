@@ -13,8 +13,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/horizontal30_timer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/rectangle_bottom_curve_light_orange" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -223,25 +225,25 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/vertical50_timer"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewGradientBox"
+        app:layout_constraintEnd_toEndOf="@+id/imageView9"
         app:layout_constraintStart_toStartOf="@+id/vertical50_timer"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewGradientBox"
-        app:layout_constraintVertical_bias="0.675" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewGradientBox"
+        app:layout_constraintVertical_bias="0.51" />
 
     <TextView
         android:id="@+id/txtRateDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/zenkurenaido_regular"
         android:gravity="center_horizontal"
         android:text="@string/time_at_100_percent"
         android:textColor="@color/darkk_purple"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btnRateOfSpeed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnRateOfSpeed"
-        app:layout_constraintTop_toTopOf="@+id/btnRateOfSpeed" />
+        app:layout_constraintEnd_toEndOf="@+id/imageViewGradientBox"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewGradientBox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
