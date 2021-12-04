@@ -163,6 +163,7 @@ public class TimerActivity extends AppCompatActivity {
                                             throw new IllegalArgumentException();
                                         }
                                         timeManager.setMinuteInMillis((long) duration * MILLISECOND_TO_SECOND * MINUTES_TO_SECONDS);
+                                        cancelTimer();
                                         updateTimer(timeManager.getMinuteInMillis());
                                     } catch (Exception e) {
                                         Toast.makeText(TimerActivity.this, getString(R.string.please_enter_a_positive_integer_for_minutes), Toast.LENGTH_LONG).show();
@@ -185,6 +186,8 @@ public class TimerActivity extends AppCompatActivity {
                             break;
                     }
                     updateTimer(timeManager.getMinuteInMillis());
+                    rateDisplay = findViewById(R.id.txtRateDisplay);
+                    rateDisplay.setText(getString(R.string.time_at_100_percent));
                 }));
 
                 durationBuilder.setNegativeButton(R.string.cancel, ((dialogInterface, i) -> {
@@ -332,7 +335,7 @@ public class TimerActivity extends AppCompatActivity {
                 startCount.setText(R.string.start);
                 rateOfSpeed.setVisibility(View.INVISIBLE);
                 rateDisplay.setVisibility(View.INVISIBLE);
-                rateDisplay.setText("100%");
+                rateDisplay.setText(getString(R.string.time_at_100_percent));
 
                 startVibration();
                 playMusic();
